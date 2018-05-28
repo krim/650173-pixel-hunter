@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Pavel Rodionov](https://up.htmlacademy.ru/ecmascript/5/user/650173).
-* Наставник: `Неизвестно`.
+* Наставник: [Борис Ванюшин](https://htmlacademy.ru/profile/id62080).
 
 ---
 
