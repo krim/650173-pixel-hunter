@@ -1,6 +1,6 @@
 import {getElementFromTemplate, showSlide} from '../util';
 import {rulesElement, rulesSubmitClickHandler} from './rules';
-import {footer} from '../footer';
+import {footerElement} from '../footer';
 
 export const greetingElement = getElementFromTemplate(`<div class="greeting central--blur">
   <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -15,7 +15,7 @@ export const greetingElement = getElementFromTemplate(`<div class="greeting cent
   </div>
   <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
 </div>
-${footer}`);
+${footerElement}`);
 
 export const greetingContinueClickHandler = () => {
   const greetingContinue = document.querySelector(`.greeting__continue`);

@@ -1,7 +1,7 @@
 import {getElementFromTemplate, showSlide} from '../util';
 import {gameFirstElement, gameFirstAnswersCheckedHandler} from './game-1';
 import {backButtonElement, backButtonHandler} from '../back_button';
-import {footer} from '../footer';
+import {footerElement} from '../footer';
 
 export const rulesElement = getElementFromTemplate(`<header class="header">
   ${backButtonElement}
@@ -22,7 +22,7 @@ export const rulesElement = getElementFromTemplate(`<header class="header">
     <button class="rules__button  continue" type="submit" disabled>Go!</button>
   </form>
 </div>
-${footer}`);
+${footerElement}`);
 
 export const rulesSubmitClickHandler = () => {
   const rulesSubmitButton = document.querySelector(`.rules__button`);

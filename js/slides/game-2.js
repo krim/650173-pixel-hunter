@@ -1,7 +1,7 @@
 import {getElementFromTemplate, showSlide} from '../util';
 import {gameThirdElement, gameThirdAnswerCheckedHandler} from './game-3';
 import {backButtonElement, backButtonHandler} from '../back_button';
-import {footer} from '../footer';
+import {footerElement} from '../footer';
 
 export const gameSecondElement = getElementFromTemplate(`<header class="header">
   ${backButtonElement}
@@ -42,7 +42,7 @@ export const gameSecondElement = getElementFromTemplate(`<header class="header">
     </ul>
   </div>
 </div>
-${footer}`);
+${footerElement}`);
 
 export const gameSecondAnswerCheckedHandler = () => {
   backButtonHandler();
