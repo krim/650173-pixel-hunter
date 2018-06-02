@@ -24,19 +24,36 @@ export const rulesElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
+const rulesSubmitButtonClickListener = () => {
+  removeRulesListeners();
+  showSlide(gameFirstElement);
+  gameFirstAnswersCheckedHandler();
+};
+
+const rulesButtons = function () {
+  return {
+    rulesSubmitButton: document.querySelector(`.rules__button`),
+    rulesNameInput: document.querySelector(`.rules__input`)
+  };
+};
+
+const rulesNameInputOnChangeListener = () => {
+  const buttons = rulesButtons();
+  buttons.rulesSubmitButton.disabled = buttons.rulesNameInput.value.length === 0;
+
+  return;
+};
+
+const removeRulesListeners = () => {
+  const buttons = rulesButtons();
+  buttons.rulesNameInput.removeEventListener(`input`, rulesNameInputOnChangeListener);
+  buttons.rulesSubmitButton.removeEventListener(`click`, rulesSubmitButtonClickListener);
+};
+
 export const rulesSubmitClickHandler = () => {
-  const rulesSubmitButton = document.querySelector(`.rules__button`);
-  const rulesNameInput = document.querySelector(`.rules__input`);
-
-  const rulesNameInputOnChangeListener = () => {
-    rulesSubmitButton.disabled = rulesNameInput.value.length === 0;
-  };
-  rulesNameInput.addEventListener(`input`, rulesNameInputOnChangeListener);
-
-  const rulesSubmitButtonClickHandler = () => {
-    showSlide(gameFirstElement);
-    gameFirstAnswersCheckedHandler();
-  };
-  rulesSubmitButton.addEventListener(`click`, rulesSubmitButtonClickHandler);
   backButtonHandler();
+
+  const buttons = rulesButtons();
+  buttons.rulesNameInput.addEventListener(`input`, rulesNameInputOnChangeListener);
+  buttons.rulesSubmitButton.addEventListener(`click`, rulesSubmitButtonClickListener);
 };

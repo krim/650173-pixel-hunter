@@ -17,12 +17,18 @@ export const greetingElement = getElementFromTemplate(`<div class="greeting cent
 </div>
 ${footerElement}`);
 
+const greetingContinueClickListener = () => {
+  removeGreetingContinueClickListener();
+  showSlide(rulesElement);
+  rulesSubmitClickHandler();
+};
+
+const removeGreetingContinueClickListener = () => {
+  const greetingContinue = document.querySelector(`.greeting__continue`);
+  greetingContinue.removeEventListener(`click`, greetingContinueClickListener);
+};
+
 export const greetingContinueClickHandler = () => {
   const greetingContinue = document.querySelector(`.greeting__continue`);
-  const greetingContinueClickListener = () => {
-    showSlide(rulesElement);
-    rulesSubmitClickHandler();
-  };
-
   greetingContinue.addEventListener(`click`, greetingContinueClickListener);
 };

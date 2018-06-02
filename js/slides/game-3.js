@@ -42,13 +42,20 @@ export const gameThirdElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
+const gameOptionsClickListener = () => {
+  removeGameFormListener();
+  showSlide(statsElement);
+  statsInitialize();
+};
+
+const removeGameFormListener = () => {
+  const gameOptions = document.querySelectorAll(`.game__option`);
+  gameOptions.forEach((it) => it.removeEventListener(`click`, gameOptionsClickListener));
+};
+
 export const gameThirdAnswerCheckedHandler = () => {
   backButtonHandler();
-  const gameOptions = document.querySelectorAll(`.game__option`);
 
-  const gameOptionsClickListener = () => {
-    showSlide(statsElement);
-    statsInitialize();
-  };
+  const gameOptions = document.querySelectorAll(`.game__option`);
   gameOptions.forEach((it) => it.addEventListener(`click`, gameOptionsClickListener));
 };

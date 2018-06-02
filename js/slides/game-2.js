@@ -44,13 +44,20 @@ export const gameSecondElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
+const answersCheckedListener = () => {
+  removeGameFormListener();
+  showSlide(gameThirdElement);
+  gameThirdAnswerCheckedHandler();
+};
+
+const removeGameFormListener = () => {
+  const gameForm = document.querySelector(`.game__content`);
+  gameForm.removeEventListener(`change`, answersCheckedListener);
+};
+
 export const gameSecondAnswerCheckedHandler = () => {
   backButtonHandler();
-  const gameForm = document.querySelector(`.game__content`);
 
-  const answersCheckedListener = () => {
-    showSlide(gameThirdElement);
-    gameThirdAnswerCheckedHandler();
-  };
+  const gameForm = document.querySelector(`.game__content`);
   gameForm.addEventListener(`change`, answersCheckedListener);
 };

@@ -6,12 +6,18 @@ export const introElement = getElementFromTemplate(`<div id="intro" class="intro
   <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
 </div>`);
 
+const introAsteriskClickListener = () => {
+  removeAsteriskClickListener();
+  showSlide(greetingElement);
+  greetingContinueClickHandler();
+};
+
+const removeAsteriskClickListener = () => {
+  const introAsterisk = document.querySelector(`#intro h1.intro__asterisk`);
+  introAsterisk.removeEventListener(`click`, introAsteriskClickListener);
+};
+
 export const asteriskClickHandler = () => {
   const introAsterisk = document.querySelector(`#intro h1.intro__asterisk`);
-  const introAsteriskClickListener = () => {
-    showSlide(greetingElement);
-    greetingContinueClickHandler();
-  };
-
   introAsterisk.addEventListener(`click`, introAsteriskClickListener);
 };

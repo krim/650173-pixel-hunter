@@ -55,16 +55,23 @@ export const gameFirstElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
+const answersCheckedListener = () => {
+  const answers = document.querySelectorAll(`input:checked`);
+  if (answers.length === 2) {
+    removeGameFormListener();
+    showSlide(gameSecondElement);
+    gameSecondAnswerCheckedHandler();
+  }
+};
+
+const removeGameFormListener = () => {
+  const gameForm = document.querySelector(`.game__content`);
+  gameForm.removeEventListener(`change`, answersCheckedListener);
+};
+
 export const gameFirstAnswersCheckedHandler = () => {
   backButtonHandler();
-  const gameForm = document.querySelector(`.game__content`);
 
-  const answersCheckedListener = () => {
-    const answers = document.querySelectorAll(`input:checked`);
-    if (answers.length === 2) {
-      showSlide(gameSecondElement);
-      gameSecondAnswerCheckedHandler();
-    }
-  };
+  const gameForm = document.querySelector(`.game__content`);
   gameForm.addEventListener(`change`, answersCheckedListener);
 };
