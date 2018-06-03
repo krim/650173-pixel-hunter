@@ -1,6 +1,6 @@
 import {getElementFromTemplate, showSlide} from '../util';
-import {gameSecondElement, gameSecondAnswerCheckedHandler} from './game-2';
-import {backButtonElement, backButtonHandler} from '../back_button';
+import {gameSecondElement, gameSecondInit} from './game-2';
+import {backButtonElement, backButtonInit} from '../back_button';
 import {footerElement} from '../footer';
 
 export const gameFirstElement = getElementFromTemplate(`<header class="header">
@@ -55,23 +55,23 @@ export const gameFirstElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
-const answersCheckedListener = () => {
+const answersCheckedHandler = () => {
   const answers = document.querySelectorAll(`input:checked`);
   if (answers.length === 2) {
-    removeGameFormListener();
+    removeGameFormHandler();
     showSlide(gameSecondElement);
-    gameSecondAnswerCheckedHandler();
+    gameSecondInit();
   }
 };
 
-const removeGameFormListener = () => {
+const removeGameFormHandler = () => {
   const gameForm = document.querySelector(`.game__content`);
-  gameForm.removeEventListener(`change`, answersCheckedListener);
+  gameForm.removeEventListener(`change`, answersCheckedHandler);
 };
 
-export const gameFirstAnswersCheckedHandler = () => {
-  backButtonHandler();
+export const gameFirstInit = () => {
+  backButtonInit();
 
   const gameForm = document.querySelector(`.game__content`);
-  gameForm.addEventListener(`change`, answersCheckedListener);
+  gameForm.addEventListener(`change`, answersCheckedHandler);
 };

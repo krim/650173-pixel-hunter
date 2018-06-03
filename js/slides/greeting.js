@@ -1,5 +1,5 @@
 import {getElementFromTemplate, showSlide} from '../util';
-import {rulesElement, rulesSubmitClickHandler} from './rules';
+import {rulesElement, rulesInit} from './rules';
 import {footerElement} from '../footer';
 
 export const greetingElement = getElementFromTemplate(`<div class="greeting central--blur">
@@ -17,18 +17,18 @@ export const greetingElement = getElementFromTemplate(`<div class="greeting cent
 </div>
 ${footerElement}`);
 
-const greetingContinueClickListener = () => {
-  removeGreetingContinueClickListener();
+const greetingContinueClickHandler = () => {
+  removeGreetingContinueClickHandler();
   showSlide(rulesElement);
-  rulesSubmitClickHandler();
+  rulesInit();
 };
 
-const removeGreetingContinueClickListener = () => {
+const removeGreetingContinueClickHandler = () => {
   const greetingContinue = document.querySelector(`.greeting__continue`);
-  greetingContinue.removeEventListener(`click`, greetingContinueClickListener);
+  greetingContinue.removeEventListener(`click`, greetingContinueClickHandler);
 };
 
-export const greetingContinueClickHandler = () => {
+export const greetingInit = () => {
   const greetingContinue = document.querySelector(`.greeting__continue`);
-  greetingContinue.addEventListener(`click`, greetingContinueClickListener);
+  greetingContinue.addEventListener(`click`, greetingContinueClickHandler);
 };

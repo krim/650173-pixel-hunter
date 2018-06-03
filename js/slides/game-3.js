@@ -1,6 +1,6 @@
 import {getElementFromTemplate, showSlide} from '../util';
-import {statsElement, statsInitialize} from './stats';
-import {backButtonElement, backButtonHandler} from '../back_button';
+import {statsElement, statsInit} from './stats';
+import {backButtonElement, backButtonInit} from '../back_button';
 import {footerElement} from '../footer';
 
 export const gameThirdElement = getElementFromTemplate(`<header class="header">
@@ -42,20 +42,20 @@ export const gameThirdElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
-const gameOptionsClickListener = () => {
-  removeGameFormListener();
+const gameOptionsClickHandler = () => {
+  removeGameFormHandler();
   showSlide(statsElement);
-  statsInitialize();
+  statsInit();
 };
 
-const removeGameFormListener = () => {
+const removeGameFormHandler = () => {
   const gameOptions = document.querySelectorAll(`.game__option`);
-  gameOptions.forEach((it) => it.removeEventListener(`click`, gameOptionsClickListener));
+  gameOptions.forEach((it) => it.removeEventListener(`click`, gameOptionsClickHandler));
 };
 
-export const gameThirdAnswerCheckedHandler = () => {
-  backButtonHandler();
+export const gameThirdInit = () => {
+  backButtonInit();
 
   const gameOptions = document.querySelectorAll(`.game__option`);
-  gameOptions.forEach((it) => it.addEventListener(`click`, gameOptionsClickListener));
+  gameOptions.forEach((it) => it.addEventListener(`click`, gameOptionsClickHandler));
 };

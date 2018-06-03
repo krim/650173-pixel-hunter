@@ -1,6 +1,6 @@
 import {getElementFromTemplate, showSlide} from '../util';
-import {gameFirstElement, gameFirstAnswersCheckedHandler} from './game-1';
-import {backButtonElement, backButtonHandler} from '../back_button';
+import {gameFirstElement, gameFirstInit} from './game-1';
+import {backButtonElement, backButtonInit} from '../back_button';
 import {footerElement} from '../footer';
 
 export const rulesElement = getElementFromTemplate(`<header class="header">
@@ -24,10 +24,10 @@ export const rulesElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
-const rulesSubmitButtonClickListener = () => {
-  removeRulesListeners();
+const rulesSubmitButtonClickHandler = () => {
+  removeRulesHandlers();
   showSlide(gameFirstElement);
-  gameFirstAnswersCheckedHandler();
+  gameFirstInit();
 };
 
 const rulesButtons = function () {
@@ -37,23 +37,23 @@ const rulesButtons = function () {
   };
 };
 
-const rulesNameInputOnChangeListener = () => {
+const rulesNameInputOnChangeHandler = () => {
   const buttons = rulesButtons();
   buttons.rulesSubmitButton.disabled = buttons.rulesNameInput.value.length === 0;
 
   return;
 };
 
-const removeRulesListeners = () => {
+const removeRulesHandlers = () => {
   const buttons = rulesButtons();
-  buttons.rulesNameInput.removeEventListener(`input`, rulesNameInputOnChangeListener);
-  buttons.rulesSubmitButton.removeEventListener(`click`, rulesSubmitButtonClickListener);
+  buttons.rulesNameInput.removeEventListener(`input`, rulesNameInputOnChangeHandler);
+  buttons.rulesSubmitButton.removeEventListener(`click`, rulesSubmitButtonClickHandler);
 };
 
-export const rulesSubmitClickHandler = () => {
-  backButtonHandler();
+export const rulesInit = () => {
+  backButtonInit();
 
   const buttons = rulesButtons();
-  buttons.rulesNameInput.addEventListener(`input`, rulesNameInputOnChangeListener);
-  buttons.rulesSubmitButton.addEventListener(`click`, rulesSubmitButtonClickListener);
+  buttons.rulesNameInput.addEventListener(`input`, rulesNameInputOnChangeHandler);
+  buttons.rulesSubmitButton.addEventListener(`click`, rulesSubmitButtonClickHandler);
 };

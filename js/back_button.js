@@ -1,5 +1,5 @@
 import {showSlide} from './util';
-import {greetingElement, greetingContinueClickHandler} from './slides/greeting';
+import {greetingElement, greetingInit} from './slides/greeting';
 
 export const backButtonElement = `<div class="header__back">
   <button class="back">
@@ -8,18 +8,18 @@ export const backButtonElement = `<div class="header__back">
   </button>
 </div>`;
 
-const backButtonClickListener = () => {
-  removeBackButtonEventListener();
+const backButtonClickHandler = () => {
+  removeBackButtonEventHandler();
   showSlide(greetingElement);
-  greetingContinueClickHandler();
+  greetingInit();
 };
 
-const removeBackButtonEventListener = () => {
+const removeBackButtonEventHandler = () => {
   const backButton = document.querySelector(`button.back`);
-  backButton.removeEventListener(`click`, backButtonClickListener);
+  backButton.removeEventListener(`click`, backButtonClickHandler);
 };
 
-export const backButtonHandler = () => {
+export const backButtonInit = () => {
   const backButton = document.querySelector(`button.back`);
-  backButton.addEventListener(`click`, backButtonClickListener);
+  backButton.addEventListener(`click`, backButtonClickHandler);
 };

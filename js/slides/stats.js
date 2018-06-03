@@ -1,5 +1,5 @@
 import {getElementFromTemplate} from '../util';
-import {backButtonElement, backButtonHandler} from '../back_button';
+import {backButtonElement, backButtonInit} from '../back_button';
 import {footerElement} from '../footer';
 
 export const statsElement = getElementFromTemplate(`<header class="header">
@@ -107,6 +107,6 @@ export const statsElement = getElementFromTemplate(`<header class="header">
 </div>
 ${footerElement}`);
 
-export const statsInitialize = () => {
-  backButtonHandler();
+export const statsInit = () => {
+  backButtonInit();
 };
