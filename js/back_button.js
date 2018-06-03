@@ -9,12 +9,17 @@ export const backButtonElement = `<div class="header__back">
 </div>`;
 
 const backButtonClickListener = () => {
+  removeBackButtonEventListener();
   showSlide(greetingElement);
   greetingContinueClickHandler();
 };
 
-export const backButtonHandler = () => {
+const removeBackButtonEventListener = () => {
   const backButton = document.querySelector(`button.back`);
   backButton.removeEventListener(`click`, backButtonClickListener);
+};
+
+export const backButtonHandler = () => {
+  const backButton = document.querySelector(`button.back`);
   backButton.addEventListener(`click`, backButtonClickListener);
 };
