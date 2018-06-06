@@ -3,10 +3,10 @@ import {calculatePoints} from './points';
 
 describe(`calculatePoints`, () => {
   it(`should return -1 when user answered less than 10 questions`, () => {
-    const answers = Array(10);
+    const answers = Array(9);
     const leftLives = 3;
 
-    answers.fill({variant: false, seconds: 10}, 0, 10);
+    answers.fill({variant: false, seconds: 10}, 0, 9);
 
     expect(calculatePoints(answers, leftLives)).to.equal(-1);
   });

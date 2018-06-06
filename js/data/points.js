@@ -6,6 +6,10 @@ const isSlowAnswer = (seconds) => seconds > 20;
 export const calculatePoints = (answers, leftLives) => {
   let points = 0;
 
+  if (answers.length < 10) {
+    return -1;
+  }
+
   answers.forEach((answer) => {
     if (answer.variant === true) {
       points += 100;
@@ -24,8 +28,6 @@ export const calculatePoints = (answers, leftLives) => {
 
   if (leftLives > 0) {
     points += leftLives * BONUS_POINTS;
-  } else {
-    points = -1;
   }
 
   return points;
