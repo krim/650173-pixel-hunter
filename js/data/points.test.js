@@ -20,7 +20,7 @@ describe(`calculatePoints`, () => {
     expect(calculatePoints(answers, leftLives)).to.equal(1150);
   });
 
-  it(`should return 1050 when user answered correctly for 8 questions and 2 with errors`, () => {
+  it(`should return 1050 when user answered correctly for 8 questions and with 2 errors`, () => {
     const answers = Array(10);
     const leftLives = 3;
 
