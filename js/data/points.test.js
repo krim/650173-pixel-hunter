@@ -1,50 +1,53 @@
 import {expect} from 'chai';
-import {calculatePoints} from './points';
+import {beforeEach} from 'mocha';
+import {calculatePoints, GAME_FAILED} from './points';
+
+const INITIAL_LIVES = 3;
+const INITIAL_QUESTIONS = 10;
+const MAXIMUM_POINTS = 1650;
+const MINIMUM_POINT_FOR_SLOW_ANSWERS = 650;
+const POINTS_FOR_ALL_ANSWERS = 1150;
+const POINTS_FOR_ALL_ANSWERS_WITH_TWO_ERRORS = 850;
+const INVALID_QUESTIONS = 9;
+
+let answers;
+let leftLives;
 
 describe(`calculatePoints`, () => {
-  it(`should return -1 when user answered less than 10 questions`, () => {
-    const answers = Array(9);
-    const leftLives = 3;
-
-    answers.fill({variant: false, seconds: 10}, 0, 9);
-
-    expect(calculatePoints(answers, leftLives)).to.equal(-1);
+  beforeEach(() => {
+    answers = Array(INITIAL_QUESTIONS);
+    leftLives = INITIAL_LIVES;
   });
 
-  it(`should return 1150 when user answered correctly for 10 questions`, () => {
-    const answers = Array(10);
-    const leftLives = 3;
+  it(`should return -1 when user answered less than initial game questions count`, () => {
+    answers = Array(INVALID_QUESTIONS);
+    answers.fill({variant: false, seconds: 10}, 0, INVALID_QUESTIONS);
 
-    answers.fill({variant: true, seconds: 15}, 0, 10);
-
-    expect(calculatePoints(answers, leftLives)).to.equal(1150);
+    expect(calculatePoints(answers, leftLives)).to.equal(GAME_FAILED);
   });
 
-  it(`should return 1050 when user answered correctly for 8 questions and with 2 errors`, () => {
-    const answers = Array(10);
-    const leftLives = 3;
+  it(`should return 1150 points when user answered correctly for all questions`, () => {
+    answers.fill({variant: true, seconds: 15});
 
+    expect(calculatePoints(answers, leftLives)).to.equal(POINTS_FOR_ALL_ANSWERS);
+  });
+
+  it(`should return 850 points when user have 2 errors`, () => {
     answers.fill({variant: true, seconds: 15}, 0, 8);
-    answers.fill({variant: false, seconds: 15}, 8, 10);
+    answers.fill({variant: false, seconds: 15}, 8, INITIAL_QUESTIONS);
 
-    expect(calculatePoints(answers, leftLives)).to.equal(850);
+    expect(calculatePoints(answers, leftLives)).to.equal(POINTS_FOR_ALL_ANSWERS_WITH_TWO_ERRORS);
   });
 
-  it(`should return 1500 when user answered correctly and fast for 10 questions`, () => {
-    const answers = Array(10);
-    const leftLives = 3;
+  it(`should return maximum points count`, () => {
+    answers.fill({variant: true, seconds: 5});
 
-    answers.fill({variant: true, seconds: 5}, 0, 10);
-
-    expect(calculatePoints(answers, leftLives)).to.equal(1650);
+    expect(calculatePoints(answers, leftLives)).to.equal(MAXIMUM_POINTS);
   });
 
-  it(`should return 650 when user answered correctly and slow for 10 questions`, () => {
-    const answers = Array(10);
-    const leftLives = 3;
+  it(`should return minimum points for slow answers`, () => {
+    answers.fill({variant: true, seconds: 25});
 
-    answers.fill({variant: true, seconds: 25}, 0, 10);
-
-    expect(calculatePoints(answers, leftLives)).to.equal(650);
+    expect(calculatePoints(answers, leftLives)).to.equal(MINIMUM_POINT_FOR_SLOW_ANSWERS);
   });
 });

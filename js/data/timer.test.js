@@ -1,15 +1,17 @@
 import {expect} from 'chai';
-import {createTimer, timerObject} from './timer';
+import {createTimer, timerObject, FINISHED} from './timer';
+
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 describe(`timerObject`, () => {
-  it(`should return 29 when timer init with 30 seconds and tick one time`, () => {
-    const seconds = 30;
+  it(`should decrease left seconds after tick`, () => {
+    const seconds = getRandomInt(1, 30);
     const timer = timerObject(seconds);
 
     expect(timer.leftSeconds).to.equal(seconds);
 
     timer.tick();
-    expect(timer.leftSeconds).to.equal(29);
+    expect(timer.leftSeconds).to.equal(seconds - 1);
     expect(timer.isFinished).to.equal(false);
   });
 
@@ -19,7 +21,7 @@ describe(`timerObject`, () => {
 
     timer.tick();
     expect(timer.leftSeconds).to.equal(0);
-    expect(timer.tick()).to.equal(`finished`);
+    expect(timer.tick()).to.equal(FINISHED);
     expect(timer.isFinished).to.equal(true);
   });
 });
@@ -30,10 +32,6 @@ describe(`createTimer`, () => {
 
     expect(() => createTimer(0)).to.throw(Error, errorMessage);
     expect(() => createTimer(-1)).to.throw(Error, errorMessage);
-  });
-
-  it(`should not allow NaN as seconds`, () => {
-    expect(() => createTimer(``)).to.throw(TypeError, /Seconds should be of type number/);
   });
 
   it(`should create new timer object`, () => {
