@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {createTimer, timerObject, FINISHED} from './timer';
+import {createTimer, timerObject, FINISHED, TICK_COUNT} from './timer';
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -11,7 +11,7 @@ describe(`timerObject`, () => {
     expect(timer.leftSeconds).to.equal(seconds);
 
     timer.tick();
-    expect(timer.leftSeconds).to.equal(seconds - 1);
+    expect(timer.leftSeconds).to.equal(seconds - TICK_COUNT);
     expect(timer.isFinished).to.equal(false);
   });
 
@@ -35,12 +35,14 @@ describe(`createTimer`, () => {
   });
 
   it(`should create new timer object`, () => {
-    expect(() => createTimer(1)).to.not.throw();
+    const seconds = 1;
 
-    const timer = createTimer(1);
+    expect(() => createTimer(seconds)).to.not.throw();
+
+    const timer = createTimer(seconds);
     expect(timer).to.be.an.instanceof(Object);
     expect(timer).to.respondTo(`tick`);
     expect(timer.isFinished).to.equal(false);
-    expect(timer.leftSeconds).to.equal(1);
+    expect(timer.leftSeconds).to.equal(seconds);
   });
 });

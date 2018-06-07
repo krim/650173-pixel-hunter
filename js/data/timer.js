@@ -1,5 +1,5 @@
 export const FINISHED = `finished`;
-const TICK_COUNT = 1;
+export const TICK_COUNT = 1;
 
 export const timerObject = (seconds) => {
   const timer = {
