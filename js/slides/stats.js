@@ -1,28 +1,27 @@
 import {getElementFromTemplate} from '../util';
-import {backButtonElement, backButtonInit} from '../back_button';
-import {footerElement} from '../footer';
+import {backButtonElement, backButtonInit} from '../elements/back_button';
+import {statsBlockElement} from '../elements/stats';
+import {answers} from '../data';
+import footerElement from '../elements/footer';
+
+const stats = {
+  title: `Победа!`
+};
+
+export const statsInit = () => {
+  backButtonInit();
+};
 
 export const statsElement = getElementFromTemplate(`<header class="header">
   ${backButtonElement}
 </header>
 <div class="result">
-  <h1>Победа!</h1>
+  <h1>${stats.title}</h1>
   <table class="result__table">
     <tr>
       <td class="result__number">1.</td>
       <td colspan="2">
-        <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--unknown"></li>
-        </ul>
+        ${statsBlockElement(answers)}
       </td>
       <td class="result__points">×&nbsp;100</td>
       <td class="result__total">900</td>
@@ -56,18 +55,7 @@ export const statsElement = getElementFromTemplate(`<header class="header">
     <tr>
       <td class="result__number">2.</td>
       <td>
-        <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--wrong"></li>
-        </ul>
+        ${statsBlockElement(answers)}
       </td>
       <td class="result__total"></td>
       <td class="result__total  result__total--final">fail</td>
@@ -77,18 +65,7 @@ export const statsElement = getElementFromTemplate(`<header class="header">
     <tr>
       <td class="result__number">3.</td>
       <td colspan="2">
-        <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--unknown"></li>
-        </ul>
+        ${statsBlockElement(answers)}
       </td>
       <td class="result__points">×&nbsp;100</td>
       <td class="result__total">900</td>
@@ -106,7 +83,3 @@ export const statsElement = getElementFromTemplate(`<header class="header">
   </table>
 </div>
 ${footerElement}`);
-
-export const statsInit = () => {
-  backButtonInit();
-};

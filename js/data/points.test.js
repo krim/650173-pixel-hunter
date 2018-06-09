@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {beforeEach} from 'mocha';
-import {calculatePoints, GAME_FAILED, MAX_SECONDS_FOR_FAST_ANSWER, MIN_SECONDS_FOR_SLOW_ANSWER, QUESTIONS_COUNT} from './points';
+import {calculatePoints, GAME_FAILED, MAX_SECONDS_FOR_FAST_ANSWER, MIN_SECONDS_FOR_SLOW_ANSWER} from './points';
+import {QUESTIONS_COUNT} from '../data';
 
 const INITIAL_LIVES = 3;
 const NORMAL_SPEED_FOR_ANSWER_IN_SECONDS = MAX_SECONDS_FOR_FAST_ANSWER + 1;
