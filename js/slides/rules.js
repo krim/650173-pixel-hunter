@@ -2,7 +2,7 @@ import {initialState} from '../data';
 import {getElementFromTemplate} from '../util';
 import {backButtonElement, backButtonInit} from '../elements/back_button';
 import footerElement from '../elements/footer';
-import {renderLevel} from '../levels';
+import {renderLevel} from '../data/levels';
 
 const rules = {
   title: `Правила`,
@@ -20,7 +20,7 @@ const rules = {
 
 const rulesSubmitButtonClickHandler = () => {
   removeRulesHandlers();
-  renderLevel(initialState);
+  renderLevel(Object.assign({}, initialState, {answers: []}));
 };
 
 const rulesButtons = function () {

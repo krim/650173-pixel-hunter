@@ -1,25 +1,17 @@
 export const BASE_LEFT_LIVES = 3;
 export const QUESTIONS_COUNT = 10;
-export const initialState = {
+export const initialState = Object.freeze({
   level: `level-0`,
   leftLives: 3,
-  leftSeconds: 30
-};
-export const answers = [
-  {variant: true, seconds: 1},
-  {variant: true, seconds: 15},
-  {variant: false, seconds: 10},
-  {variant: true, seconds: 25},
-  {variant: true, seconds: 29},
-  {variant: false, seconds: 10}
-];
-
+  leftSeconds: 30,
+  answers: []
+});
 export const levels = {
   'level-0': {
     questions: [
       {
         src: `http://placehold.it/705x455`,
-        alt: `Option 1`
+        type: `paint`
       }
     ]
   },
@@ -27,11 +19,11 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 1`
+        type: `paint`
       },
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 2`
+        type: `photo`
       }
     ]
   },
@@ -39,7 +31,7 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/705x455`,
-        alt: `Option 1`
+        type: `photo`
       }
     ]
   },
@@ -47,15 +39,15 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 1`
+        type: `paint`
       },
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 2`
+        type: `photo`
       },
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 3`
+        type: `photo`
       }
     ]
   },
@@ -63,7 +55,7 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/705x455`,
-        alt: `Option 1`
+        type: `photo`
       }
     ]
   },
@@ -71,7 +63,7 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/705x455`,
-        alt: `Option 1`
+        type: `paint`
       }
     ]
   },
@@ -79,15 +71,15 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 1`
+        type: `paint`
       },
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 2`
+        type: `photo`
       },
       {
         src: `http://placehold.it/304x455`,
-        alt: `Option 3`
+        type: `photo`
       }
     ]
   },
@@ -95,7 +87,7 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/705x455`,
-        alt: `Option 1`
+        type: `paint`
       }
     ]
   },
@@ -103,11 +95,11 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 1`
+        type: `paint`
       },
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 2`
+        type: `photo`
       }
     ]
   },
@@ -115,11 +107,11 @@ export const levels = {
     questions: [
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 1`
+        type: `paint`
       },
       {
         src: `http://placehold.it/468x458`,
-        alt: `Option 2`
+        type: `photo`
       }
     ]
   }

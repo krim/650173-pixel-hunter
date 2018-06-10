@@ -17,7 +17,7 @@ export const questionElement = (question, type, index) => {
 };
 
 const secondTypeQuestionElement = (question, index) => `<div class="game__option">
-  <img src="${question.src}" alt="${question.alt}" width="468" height="458">
+  <img src="${question.src}" alt="${question.src}" width="468" height="458">
   <label class="game__answer game__answer--photo">
     <input name="question${index}" type="radio" value="photo">
     <span>Фото</span>
@@ -29,7 +29,7 @@ const secondTypeQuestionElement = (question, index) => `<div class="game__option
 </div>`;
 
 const firstTypeQuestionElement = (question, index) => `<div class="game__option">
-  <img src="${question.src}" alt="${question.alt}" width="705" height="455">
+  <img src="${question.src}" alt="${question.src}" width="705" height="455">
   <label class="game__answer  game__answer--photo">
     <input name="question${index}" type="radio" value="photo">
     <span>Фото</span>
@@ -44,6 +44,6 @@ const thirdTypeQuestionElement = (question, index) => {
   const selectedClass = index === 1 ? `game__option--selected` : ``;
 
   return `<div class="game__option ${selectedClass}">
-    <img src="${question.src}" alt="${question.alt}" width="304" height="455">
+    <img src="${question.src}" alt="${question.src}" width="304" height="455">
   </div>`;
 };
