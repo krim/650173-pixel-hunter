@@ -1,7 +1,8 @@
-import {getElementFromTemplate, showSlide} from '../util';
-import {gameFirstElement, gameFirstInit} from './game-1';
+import {initialState} from '../data';
+import {getElementFromTemplate} from '../util';
 import {backButtonElement, backButtonInit} from '../elements/back_button';
 import footerElement from '../elements/footer';
+import {renderLevel} from '../levels';
 
 const rules = {
   title: `Правила`,
@@ -19,8 +20,7 @@ const rules = {
 
 const rulesSubmitButtonClickHandler = () => {
   removeRulesHandlers();
-  showSlide(gameFirstElement);
-  gameFirstInit();
+  renderLevel(initialState);
 };
 
 const rulesButtons = function () {

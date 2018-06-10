@@ -1,39 +1,39 @@
-import {getElementFromTemplate, showSlide} from '../util';
-import {gameThirdElement, gameThirdInit} from './game-3';
+import {getElementFromTemplate} from '../util';
 import {backButtonInit} from '../elements/back_button';
-import {initialState, answers} from '../data';
+import {answers, levels} from '../data';
 import {headerElement} from '../elements/header';
 import footerElement from '../elements/footer';
 import {statsBlockElement} from '../elements/stats';
 import {questionsFormElement} from '../elements/questions/form';
-import {levels} from '../levels';
+import {renderNextLevel} from '../levels';
 
 const gameSecond = {
   title: `Угадай, фото или рисунок?`
 };
 
-const answersCheckedHandler = () => {
-  removeGameFormHandler();
-  showSlide(gameThirdElement);
-  gameThirdInit();
+const answersCheckedHandler = (state) => {
+  removeGameFormHandler(state);
+  renderNextLevel(state);
 };
 
-const removeGameFormHandler = () => {
+const removeGameFormHandler = (state) => {
   const gameForm = document.querySelector(`.game__content`);
-  gameForm.removeEventListener(`change`, answersCheckedHandler);
+  gameForm.removeEventListener(`change`, () => answersCheckedHandler(state));
 };
 
-export const gameSecondInit = () => {
+export const gameSecondInit = (state) => {
   backButtonInit();
 
   const gameForm = document.querySelector(`.game__content`);
-  gameForm.addEventListener(`change`, answersCheckedHandler);
+  gameForm.addEventListener(`change`, () => answersCheckedHandler(state));
 };
 
-export const gameSecondElement = getElementFromTemplate(`${headerElement(initialState)}
-<div class="game">
-  <p class="game__task">${gameSecond.title}</p>
-  ${questionsFormElement(levels[`level-2`])}
-  <div class="stats">${statsBlockElement(answers)}</div>
-</div>
-${footerElement}`);
+export const gameSecondElement = (state) => {
+  return getElementFromTemplate(`${headerElement(state)}
+  <div class="game">
+    <p class="game__task">${gameSecond.title}</p>
+    ${questionsFormElement(levels[state.level])}
+    <div class="stats">${statsBlockElement(answers)}</div>
+  </div>
+  ${footerElement}`);
+};
