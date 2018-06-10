@@ -37,17 +37,12 @@ export const renderLevel = (state) => {
 };
 
 export const renderNextLevel = (state) => {
-  if (!canContinue(state)) {
-    showSlide(statsElement(stats));
-    statsInit();
-  } else {
-    const level = nextLevel(state.level);
+  const level = nextLevel(state.level);
 
-    if (level) {
-      renderLevel(Object.assign({}, state, {level}));
-    } else {
-      showSlide(statsElement(stats));
-      statsInit();
-    }
+  if (canContinue(state) && level) {
+    renderLevel(Object.assign({}, state, {level}));
+  } else {
+    showSlide(statsElement(stats, state));
+    statsInit();
   }
 };

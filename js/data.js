@@ -1,5 +1,8 @@
 export const BASE_LEFT_LIVES = 3;
 export const QUESTIONS_COUNT = 10;
+export const PAINT = `paint`;
+export const PHOTO = `photo`;
+
 export const initialState = Object.freeze({
   level: `level-0`,
   leftLives: 3,
@@ -38,15 +41,15 @@ export const levels = {
   'level-3': {
     questions: [
       {
-        src: `http://placehold.it/304x455`,
+        src: `http://placehold.it/304x455?1`,
         type: `paint`
       },
       {
-        src: `http://placehold.it/304x455`,
+        src: `http://placehold.it/304x455?2`,
         type: `photo`
       },
       {
-        src: `http://placehold.it/304x455`,
+        src: `http://placehold.it/304x455?3`,
         type: `photo`
       }
     ]
@@ -70,15 +73,15 @@ export const levels = {
   'level-6': {
     questions: [
       {
-        src: `http://placehold.it/304x455`,
+        src: `http://placehold.it/304x455?1`,
         type: `paint`
       },
       {
-        src: `http://placehold.it/304x455`,
-        type: `photo`
+        src: `http://placehold.it/304x455?2`,
+        type: `paint`
       },
       {
-        src: `http://placehold.it/304x455`,
+        src: `http://placehold.it/304x455?3`,
         type: `photo`
       }
     ]

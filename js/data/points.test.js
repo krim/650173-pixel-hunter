@@ -23,7 +23,7 @@ describe(`calculatePoints`, () => {
     answers = Array(invalidQuestionsCount);
     answers.fill({variant: false, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 0, invalidQuestionsCount);
 
-    expect(calculatePoints(answers, leftLives)).to.equal(GAME_FAILED);
+    expect(calculatePoints(answers, leftLives).pointsSum).to.equal(GAME_FAILED);
   });
 
   it(`should return 1150 points when user answered correctly for all questions`, () => {
@@ -31,7 +31,7 @@ describe(`calculatePoints`, () => {
 
     answers.fill({variant: true, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS});
 
-    expect(calculatePoints(answers, leftLives)).to.equal(pointsForAllAnswers);
+    expect(calculatePoints(answers, leftLives).pointsSum).to.equal(pointsForAllAnswers);
   });
 
   it(`should return 850 points when user have 2 errors`, () => {
@@ -40,7 +40,7 @@ describe(`calculatePoints`, () => {
     answers.fill({variant: true, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 0, 8);
     answers.fill({variant: false, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 8, QUESTIONS_COUNT);
 
-    expect(calculatePoints(answers, leftLives)).to.equal(pointsForAllAnswersWithTwoErrors);
+    expect(calculatePoints(answers, leftLives).pointsSum).to.equal(pointsForAllAnswersWithTwoErrors);
   });
 
   it(`should return maximum points count`, () => {
@@ -48,7 +48,7 @@ describe(`calculatePoints`, () => {
 
     answers.fill({variant: true, seconds: FAST_SPEED_FOR_ANSWER_IN_SECONDS});
 
-    expect(calculatePoints(answers, leftLives)).to.equal(maximumPoints);
+    expect(calculatePoints(answers, leftLives).pointsSum).to.equal(maximumPoints);
   });
 
   it(`should return minimum points for slow answers`, () => {
@@ -56,6 +56,6 @@ describe(`calculatePoints`, () => {
 
     answers.fill({variant: true, seconds: SLOW_SPEED_FOR_ANSWER_IN_SECONDS});
 
-    expect(calculatePoints(answers, leftLives)).to.equal(minimumPointsForSlowAnswers);
+    expect(calculatePoints(answers, leftLives).pointsSum).to.equal(minimumPointsForSlowAnswers);
   });
 });

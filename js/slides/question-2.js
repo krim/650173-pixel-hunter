@@ -6,7 +6,7 @@ import footerElement from '../elements/footer';
 import {statsBlockElement} from '../elements/stats';
 import {questionsFormElement} from '../elements/questions/form';
 import {renderNextLevel} from '../data/levels';
-import {saveAnswerByArray} from "../data/answers";
+import {saveAnswerByArray} from '../data/answers';
 
 const gameSecond = {
   title: `Угадай, фото или рисунок?`

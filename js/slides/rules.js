@@ -51,15 +51,17 @@ export const rulesInit = () => {
   buttons.rulesSubmitButton.addEventListener(`click`, rulesSubmitButtonClickHandler);
 };
 
-export const rulesElement = getElementFromTemplate(`<header class="header">
-  ${backButtonElement}
-</header>
-<div class="rules">
-  <h1 class="rules__title">${rules.title}</h1>
-  <p class="rules__description">${rules.description}</p>
-  <form class="rules__form">
-    <input class="rules__input" type="text" placeholder="${rules.placeholder}">
-    <button class="rules__button  continue" type="submit" disabled>${rules.button}</button>
-  </form>
-</div>
-${footerElement}`);
+export const rulesElement = getElementFromTemplate(`
+  <header class="header">
+    ${backButtonElement}
+  </header>
+  <div class="rules">
+    <h1 class="rules__title">${rules.title}</h1>
+    <p class="rules__description">${rules.description}</p>
+    <form class="rules__form">
+      <input class="rules__input" type="text" placeholder="${rules.placeholder}">
+      <button class="rules__button  continue" type="submit" disabled>${rules.button}</button>
+    </form>
+  </div>
+  ${footerElement}
+`);

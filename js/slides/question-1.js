@@ -27,7 +27,7 @@ const answersCheckedHandler = (state) => {
 const removeGameFormHandler = (state) => {
   const gameForm = document.querySelector(`.game__content`);
 
-  if (gameForm){
+  if (gameForm) {
     gameForm.removeEventListener(`change`, () => answersCheckedHandler(state));
   }
 };
