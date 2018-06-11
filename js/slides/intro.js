@@ -1,10 +1,9 @@
 import {getElementFromTemplate, showSlide} from '../util';
 import {greetingElement, greetingInit} from './greeting';
 
-export const introElement = getElementFromTemplate(`<div id="intro" class="intro">
-  <h1 class="intro__asterisk">*</h1>
-  <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-</div>`);
+const intro = {
+  description: `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`
+};
 
 const introAsteriskClickHandler = () => {
   removeAsteriskClickHandler();
@@ -21,3 +20,10 @@ export const introInit = () => {
   const introAsterisk = document.querySelector(`#intro h1.intro__asterisk`);
   introAsterisk.addEventListener(`click`, introAsteriskClickHandler);
 };
+
+export const introElement = getElementFromTemplate(`
+  <div id="intro" class="intro">
+    <h1 class="intro__asterisk">*</h1>
+    <p class="intro__motto"><sup>*</sup> ${intro.description}</p>
+  </div>
+`);

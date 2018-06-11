@@ -1,5 +1,5 @@
-import {showSlide} from './util';
-import {greetingElement, greetingInit} from './slides/greeting';
+import {showSlide} from '../util';
+import {greetingElement, greetingInit} from '../slides/greeting';
 
 export const backButtonElement = `<div class="header__back">
   <button class="back">
