@@ -3,22 +3,27 @@ import {isFastAnswer, isSlowAnswer} from '../data/points';
 
 const statElement = (answer) => `<li class="stats__result stats__result--${statClass(answer)}"></li>`;
 
-const statClass = (answer) => {
-  let statElementClass;
+const ANSWERS_STATE = {
+  FAST: `fast`,
+  SLOW: `slow`,
+  CORRECT: `correct`,
+  WRONG: `wrong`
+};
 
-  if (answer.variant) {
-    if (isFastAnswer(answer.seconds)) {
-      statElementClass = `fast`;
-    } else if (isSlowAnswer(answer.seconds)) {
-      statElementClass = `slow`;
-    } else {
-      statElementClass = `correct`;
-    }
-  } else {
-    statElementClass = `wrong`;
+const statClass = (answer) => {
+  if (!answer.variant) {
+    return ANSWERS_STATE.WRONG;
   }
 
-  return statElementClass;
+  if (isFastAnswer(answer.seconds)) {
+    return ANSWERS_STATE.FAST;
+  }
+
+  if (isSlowAnswer(answer.seconds)) {
+    return ANSWERS_STATE.SLOW;
+  }
+
+  return ANSWERS_STATE.CORRECT;
 };
 
 export const statsBlockElement = (answers) => `

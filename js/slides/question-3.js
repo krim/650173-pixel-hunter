@@ -1,6 +1,6 @@
 import {getElementFromTemplate} from '../util';
 import {backButtonInit} from '../elements/back_button';
-import {levels, PAINT} from '../data';
+import {levels, PAINT, PHOTO} from '../data';
 import {headerElement} from '../elements/header';
 import footerElement from '../elements/footer';
 import {statsBlockElement} from '../elements/stats';
@@ -10,8 +10,8 @@ import {saveAnswerByElement} from '../data/answers';
 
 const gameThird = {
   titles: {
-    'paint': `Найдите рисунок среди изображений`,
-    'photo': `Найдите фото среди изображений`
+    [PAINT]: `Найдите рисунок среди изображений`,
+    [PHOTO]: `Найдите фото среди изображений`
   }
 };
 
@@ -31,7 +31,7 @@ const removeGameFormHandler = (state) => {
 };
 
 const questionTitle = (questions) => {
-  return isPaintQuestion(questions) ? gameThird.titles[`paint`] : gameThird.titles[`photo`];
+  return isPaintQuestion(questions) ? gameThird.titles[PAINT] : gameThird.titles[PHOTO];
 };
 
 export const gameThirdInit = (state) => {
@@ -51,9 +51,9 @@ export const gameThirdElement = (state) => {
   return getElementFromTemplate(`
     ${headerElement(state)}
     <div class="game">
-      <p class="game__task">${questionTitle(levels[state.level].questions)}</p>
+      <p class="game__task">${questionTitle(levels[state.level])}</p>
       ${questionsFormElement(levels[state.level])}
-      <div class="stats">${statsBlockElement(state.answers)}</div>
+      <div class="stats">${statsBlockElement(state.givenAnswers)}</div>
     </div>
     ${footerElement}
   `);

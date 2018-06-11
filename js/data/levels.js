@@ -6,10 +6,8 @@ import {gameFirstElement, gameFirstInit} from '../slides/question-1';
 import {gameSecondElement, gameSecondInit} from '../slides/question-2';
 import {gameThirdElement, gameThirdInit} from '../slides/question-3';
 
-const nextLevel = (currentLevel) => {
-  const nextLevelIndex = Object.keys(levels).indexOf(currentLevel) + 1;
-
-  return Object.keys(levels)[nextLevelIndex];
+const isNextLevelExists = (currentLevel) => {
+  return levels[currentLevel + 1];
 };
 
 export const canContinue = (state) => state.leftLives > 0;
@@ -20,7 +18,7 @@ export const die = (state) => {
 };
 
 export const renderLevel = (state) => {
-  switch (levels[state.level].questions.length) {
+  switch (levels[state.level].length) {
     case QUESTIONS_TYPE.ONE_IMAGE:
       showSlide(gameSecondElement(state));
       gameSecondInit(state);
@@ -37,10 +35,8 @@ export const renderLevel = (state) => {
 };
 
 export const renderNextLevel = (state) => {
-  const level = nextLevel(state.level);
-
-  if (canContinue(state) && level) {
-    renderLevel(Object.assign({}, state, {level}));
+  if (canContinue(state) && isNextLevelExists(state.level)) {
+    renderLevel(Object.assign({}, state, {level: state.level + 1}));
   } else {
     showSlide(statsElement(stats, state));
     statsInit();

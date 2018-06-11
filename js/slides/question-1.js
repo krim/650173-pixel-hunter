@@ -45,7 +45,7 @@ export const gameFirstElement = (state) => {
     <div class="game">
       <p class="game__task">${gameFirst.title}</p>
       ${questionsFormElement(levels[state.level])}
-      <div class="stats">${statsBlockElement(state.answers)}</div>
+      <div class="stats">${statsBlockElement(state.givenAnswers)}</div>
     </div>
     ${footerElement}
   `);

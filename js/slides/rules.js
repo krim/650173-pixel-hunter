@@ -20,7 +20,7 @@ const rules = {
 
 const rulesSubmitButtonClickHandler = () => {
   removeRulesHandlers();
-  renderLevel(Object.assign({}, initialState, {answers: []}));
+  renderLevel(Object.assign({}, initialState, {givenAnswers: []}));
 };
 
 const rulesButtons = function () {

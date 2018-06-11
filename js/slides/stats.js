@@ -95,11 +95,11 @@ export const statsInit = () => {
 };
 
 const statTitle = (state) => {
-  return state.answers.length < QUESTIONS_COUNT ? stats.titles.lose : stats.titles.win;
+  return state.givenAnswers.length < QUESTIONS_COUNT ? stats.titles.lose : stats.titles.win;
 };
 
 export const statsElement = (statistic, state) => {
-  statistic.allAnswers.push(state.answers);
+  statistic.allAnswers.push(state.givenAnswers);
 
   return getElementFromTemplate(`
     <header class="header">

@@ -4,118 +4,75 @@ export const PAINT = `paint`;
 export const PHOTO = `photo`;
 
 export const initialState = Object.freeze({
-  level: `level-0`,
+  level: 0,
   leftLives: 3,
   leftSeconds: 30,
-  answers: []
+  givenAnswers: []
 });
-export const levels = {
-  'level-0': {
-    questions: [
-      {
-        src: `http://placehold.it/705x455`,
-        type: `paint`
-      }
-    ]
-  },
-  'level-1': {
-    questions: [
-      {
-        src: `http://placehold.it/468x458`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/468x458`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-2': {
-    questions: [
-      {
-        src: `http://placehold.it/705x455`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-3': {
-    questions: [
-      {
-        src: `http://placehold.it/304x455?1`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/304x455?2`,
-        type: `photo`
-      },
-      {
-        src: `http://placehold.it/304x455?3`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-4': {
-    questions: [
-      {
-        src: `http://placehold.it/705x455`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-5': {
-    questions: [
-      {
-        src: `http://placehold.it/705x455`,
-        type: `paint`
-      }
-    ]
-  },
-  'level-6': {
-    questions: [
-      {
-        src: `http://placehold.it/304x455?1`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/304x455?2`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/304x455?3`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-7': {
-    questions: [
-      {
-        src: `http://placehold.it/705x455`,
-        type: `paint`
-      }
-    ]
-  },
-  'level-8': {
-    questions: [
-      {
-        src: `http://placehold.it/468x458`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/468x458`,
-        type: `photo`
-      }
-    ]
-  },
-  'level-9': {
-    questions: [
-      {
-        src: `http://placehold.it/468x458`,
-        type: `paint`
-      },
-      {
-        src: `http://placehold.it/468x458`,
-        type: `photo`
-      }
-    ]
-  }
+
+const questionsImages = {
+  paintings: [
+    // People
+    `https://k42.kn3.net/CF42609C8.jpg`,
+
+    // Animals
+    `https://k42.kn3.net/D2F0370D6.jpg`,
+
+    // Nature
+    `https://k32.kn3.net/5C7060EC5.jpg`
+  ],
+  photos: [
+    // People
+    `http://i.imgur.com/1KegWPz.jpg`,
+
+    // Animals
+    `https://i.imgur.com/DiHM5Zb.jpg`,
+
+    // Nature
+    `http://i.imgur.com/DKR1HtB.jpg`
+  ]
 };
+
+const questionVariant = (src, type) => {
+  return {src, type};
+};
+
+export const levels = [
+  [
+    questionVariant(questionsImages.paintings[0], PAINT)
+  ],
+  [
+    questionVariant(questionsImages.paintings[0], PAINT),
+    questionVariant(questionsImages.photos[0], PHOTO)
+  ],
+  [
+    questionVariant(questionsImages.paintings[1], PAINT),
+    questionVariant(questionsImages.paintings[2], PAINT),
+    questionVariant(questionsImages.photos[1], PHOTO)
+  ],
+  [
+    questionVariant(questionsImages.photos[1], PHOTO),
+    questionVariant(questionsImages.photos[2], PHOTO),
+    questionVariant(questionsImages.paintings[1], PAINT)
+  ],
+  [
+    questionVariant(questionsImages.paintings[2], PAINT)
+  ],
+  [
+    questionVariant(questionsImages.photos[2], PHOTO)
+  ],
+  [
+    questionVariant(questionsImages.paintings[2], PAINT),
+    questionVariant(questionsImages.photos[2], PHOTO)
+  ],
+  [
+    questionVariant(questionsImages.paintings[1], PAINT),
+    questionVariant(questionsImages.photos[0], PHOTO)
+  ],
+  [
+    questionVariant(questionsImages.paintings[0], PAINT)
+  ],
+  [
+    questionVariant(questionsImages.photos[0], PHOTO)
+  ]
+];

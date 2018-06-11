@@ -29,7 +29,7 @@ export const calculatePoints = (answers, leftLives) => {
       }
 
       if (isSlowAnswer(answer.seconds)) {
-        slowPenaltyPoints.points -= SLOW_PENALTY_POINTS;
+        slowPenaltyPoints.points += SLOW_PENALTY_POINTS;
         slowPenaltyPoints.count++;
       }
     } else {
@@ -45,7 +45,7 @@ export const calculatePoints = (answers, leftLives) => {
   if (answers.length < QUESTIONS_COUNT) {
     pointsSum = GAME_FAILED;
   } else {
-    pointsSum = rightAnswerPoints.points + fastBonusPoints.points + slowPenaltyPoints.points + liveBonusPoints.points;
+    pointsSum = rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
   }
 
   return {rightAnswerPoints, fastBonusPoints, slowPenaltyPoints, liveBonusPoints, pointsSum};

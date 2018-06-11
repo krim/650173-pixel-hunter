@@ -41,7 +41,7 @@ export const gameSecondElement = (state) => {
     <div class="game">
       <p class="game__task">${gameSecond.title}</p>
       ${questionsFormElement(levels[state.level])}
-      <div class="stats">${statsBlockElement(state.answers)}</div>
+      <div class="stats">${statsBlockElement(state.givenAnswers)}</div>
     </div>
     ${footerElement}
   `);

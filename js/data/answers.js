@@ -8,14 +8,14 @@ export const saveAnswer = (state, variant) => {
   if (!variant) {
     state = die(state);
   }
-  state.answers.push({variant, seconds: SECONDS_FOR_ANSWER});
+  state.givenAnswers.push({variant, seconds: SECONDS_FOR_ANSWER});
 
   return state;
 };
 
 export const saveAnswerByArray = (state, answers) => {
   const checkedAnswers = Array.from(answers).map((answer) => answer.value);
-  const levelsAnswers = levels[state.level].questions.map((question) => question.type);
+  const levelsAnswers = levels[state.level].map((question) => question.type);
   const variant = checkedAnswers.toString() === levelsAnswers.toString();
 
   return saveAnswer(state, variant);
@@ -23,7 +23,7 @@ export const saveAnswerByArray = (state, answers) => {
 
 export const saveAnswerByElement = (state, answer) => {
   const answerSrc = answer.getElementsByTagName(`img`)[0].src;
-  const questions = levels[state.level].questions;
+  const questions = levels[state.level];
   const levelsAnswer = questions.find((level) => level.src === answerSrc);
   const questionType = isPaintQuestion(questions) ? PAINT : PHOTO;
   const variant = levelsAnswer.type === questionType;
