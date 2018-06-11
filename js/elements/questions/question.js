@@ -1,14 +1,20 @@
+export const QUESTIONS_TYPE = {
+  ONE_IMAGE: 1,
+  TWO_IMAGES: 2,
+  THREE_IMAGES: 3
+};
+
 export const questionElement = (question, type, index) => {
   let element;
 
   switch (type) {
-    case 1:
+    case QUESTIONS_TYPE.ONE_IMAGE:
       element = firstTypeQuestionElement(question, index);
       break;
-    case 2:
+    case QUESTIONS_TYPE.TWO_IMAGES:
       element = secondTypeQuestionElement(question, index);
       break;
-    case 3:
+    case QUESTIONS_TYPE.THREE_IMAGES:
       element = thirdTypeQuestionElement(question, index);
       break;
   }

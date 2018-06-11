@@ -1,12 +1,12 @@
-import {questionElement} from './question';
+import {questionElement, QUESTIONS_TYPE} from './question';
 
 export const questionsFormElement = (level) => {
   let formClass;
 
   switch (level.questions.length) {
-    case 1: formClass = `game__content--wide`; break;
-    case 2: formClass = ``; break;
-    case 3: formClass = `game__content--triple`; break;
+    case QUESTIONS_TYPE.ONE_IMAGE: formClass = `game__content--wide`; break;
+    case QUESTIONS_TYPE.TWO_IMAGES: formClass = ``; break;
+    case QUESTIONS_TYPE.THREE_IMAGES: formClass = `game__content--triple`; break;
   }
 
   return `<form class="game__content ${formClass}">
