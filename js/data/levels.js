@@ -5,6 +5,7 @@ import {QUESTIONS_TYPE} from '../elements/questions/question';
 import {gameFirstElement, gameFirstInit} from '../slides/question-1';
 import {gameSecondElement, gameSecondInit} from '../slides/question-2';
 import {gameThirdElement, gameThirdInit} from '../slides/question-3';
+import {resizeImage} from './resize_image';
 
 const isNextLevelExists = (currentLevel) => {
   return levels[currentLevel + 1];
@@ -15,6 +16,21 @@ export const die = (state) => {
   const leftLives = state.leftLives - 1;
 
   return Object.assign({}, state, {leftLives});
+};
+
+const resizeImages = () => {
+  const images = document.querySelectorAll(`.game__option img`);
+
+  images.forEach((image) => {
+    image.onload = () => {
+      const newImageDimensions = resizeImage(
+          {width: image.width, height: image.height},
+          {width: image.naturalWidth, height: image.naturalHeight}
+      );
+      image.height = newImageDimensions.height;
+      image.width = newImageDimensions.width;
+    };
+  });
 };
 
 export const renderLevel = (state) => {
@@ -32,6 +48,8 @@ export const renderLevel = (state) => {
       gameThirdInit(state);
       break;
   }
+
+  resizeImages();
 };
 
 export const renderNextLevel = (state) => {
