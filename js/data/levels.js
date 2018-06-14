@@ -1,10 +1,10 @@
-import {statsElement, statsInit, stats} from '../slides/stats';
+// import {statsElement, statsInit, stats} from '../views/stats-view';
 import {showSlide} from '../util';
-import {levels} from '../data';
+import {levels, gameFirstData, gameSecondData, gameThirdData} from '../data';
 import {QUESTIONS_TYPE} from '../elements/questions/question';
-import {gameFirstElement, gameFirstInit} from '../slides/question-1';
-import {gameSecondElement, gameSecondInit} from '../slides/question-2';
-import {gameThirdElement, gameThirdInit} from '../slides/question-3';
+// import {GameFirstView} from '../views/question-first-view';
+// import {GameSecondView} from '../views/question-second-view';
+// import {GameThirdView} from '../views/question-third-view';
 import {resizeImage} from './resize_image';
 
 const isNextLevelExists = (currentLevel) => {
@@ -34,20 +34,20 @@ const resizeImages = () => {
 };
 
 export const renderLevel = (state) => {
-  switch (levels[state.level].length) {
-    case QUESTIONS_TYPE.ONE_IMAGE:
-      showSlide(gameSecondElement(state));
-      gameSecondInit(state);
-      break;
-    case QUESTIONS_TYPE.TWO_IMAGES:
-      showSlide(gameFirstElement(state));
-      gameFirstInit(state);
-      break;
-    case QUESTIONS_TYPE.THREE_IMAGES:
-      showSlide(gameThirdElement(state));
-      gameThirdInit(state);
-      break;
-  }
+  // switch (levels[state.level].length) {
+  //   case QUESTIONS_TYPE.ONE_IMAGE:
+  //     showSlide(gameSecondElement(state));
+  //     gameSecondInit(state);
+  //     break;
+  //   case QUESTIONS_TYPE.TWO_IMAGES:
+  //     showSlide(gameFirstElement(state));
+  //     gameFirstInit(state);
+  //     break;
+  //   case QUESTIONS_TYPE.THREE_IMAGES:
+  //     showSlide(gameThirdElement(state));
+  //     gameThirdInit(state);
+  //     break;
+  // }
 
   resizeImages();
 };

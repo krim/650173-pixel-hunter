@@ -1,6 +1,6 @@
 import {levels, PAINT, PHOTO} from '../data';
 import {die} from './levels';
-import {isPaintQuestion} from '../slides/question-3';
+import {isPaintQuestion} from '../views/question-third-view';
 
 const SECONDS_FOR_ANSWER = 15;
 

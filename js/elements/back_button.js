@@ -1,5 +1,5 @@
 import {showSlide} from '../util';
-import {greetingElement, greetingInit} from '../slides/greeting';
+// import {greetingView} from '../views/greeting-vew';
 
 export const backButtonElement = `<div class="header__back">
   <button class="back">
@@ -10,8 +10,8 @@ export const backButtonElement = `<div class="header__back">
 
 const backButtonClickHandler = () => {
   removeBackButtonEventHandler();
-  showSlide(greetingElement);
-  greetingInit();
+  // showSlide(greetingElement);
+  // greetingInit();
 };
 
 const removeBackButtonEventHandler = () => {
