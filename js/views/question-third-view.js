@@ -29,43 +29,27 @@ export default class QuestionThirdView extends AbstractView {
   }
 
   bind(el) {
-    const gameForm = el.querySelector(`.game__content`);
-    const answersCheckedHandler = () => {
-      this.onAnswersChecked();
+    const gameOptions = el.querySelectorAll(`.game__option`);
+    const gameOptionsClickHandler = (object, state) => {
+      this.onGameOptionsClick(object, state);
     };
 
-    gameForm.removeEventListener(`change`, answersCheckedHandler);
-    gameForm.addEventListener(`change`, answersCheckedHandler);
+    gameOptions.forEach((it) => it.addEventListener(`click`, (event) => gameOptionsClickHandler(event.target, this.state)));
   }
 
   questionTitle(questions) {
-    return this.isPaintQuestion(questions) ? this.titles[PAINT] : this.titles[PHOTO];
+    return QuestionThirdView.isPaintQuestion(questions) ? this.titles[PAINT] : this.titles[PHOTO];
   }
 
-  isPaintQuestion(questions) {
+  static isPaintQuestion(questions) {
     const paintPhotosCount = questions.filter((question) => question.type === PAINT).length;
 
     return paintPhotosCount === 1;
   }
 
-  onAnswersChecked() { }
+  onGameOptionsClick(_object, _state) { }
 }
 
-// const gameOptionsClickHandler = (object, state) => {
-//   const newState = saveAnswerByElement(state, object);
-//
-//   removeGameFormHandler(newState);
-//   renderNextLevel(newState);
-// };
-//
-// const removeGameFormHandler = (state) => {
-//   const gameOptions = document.querySelectorAll(`.game__option`);
-//
-//   if (gameOptions) {
-//     gameOptions.forEach((it) => it.removeEventListener(`click`, () => gameOptionsClickHandler(state)));
-//   }
-// };
-//
 // export const gameThirdInit = (state) => {
 //   backButtonInit();
 //

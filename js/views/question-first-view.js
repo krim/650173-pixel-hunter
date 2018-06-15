@@ -1,14 +1,10 @@
 import {backButtonInit} from '../elements/back_button';
 import {levels} from '../data';
-import {saveAnswerByArray} from '../data/answers';
 import {headerElement} from '../elements/header';
 import footerElement from '../elements/footer';
 import {statsBlockElement} from '../elements/stats';
 import {questionsFormElement} from '../elements/questions/form';
-import {renderNextLevel} from '../data/levels';
 import AbstractView from './abstract-view';
-
-const QUESTION_ANSWERS_COUNT = 2;
 
 export default class QuestionFirstView extends AbstractView {
   constructor(data, state) {

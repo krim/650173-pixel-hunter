@@ -34,7 +34,7 @@ export default class RulesView extends AbstractView {
     const nameInput = el.querySelector(`.rules__input`);
 
     const nameInputChangeHandler = () => {
-      this.onNameInputChange();
+      submitButton.disabled = nameInput.value.length === 0;
     };
 
     const submitButtonClickHandler = () => {
@@ -47,13 +47,5 @@ export default class RulesView extends AbstractView {
     submitButton.addEventListener(`click`, submitButtonClickHandler);
   }
 
-  onNameInputChange() { }
   onSubmitButtonClick() {}
 }
-
-//
-//
-// const rulesSubmitButtonClickHandler = () => {
-//   removeRulesHandlers();
-//   renderLevel(Object.assign({}, initialState, {givenAnswers: []}));
-// };

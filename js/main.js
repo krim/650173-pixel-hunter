@@ -21,11 +21,5 @@ greetingScreen.onGreetingContinueClick = () => showSlide(rulesScreen);
 rulesScreen.onSubmitButtonClick = () => {
   renderLevel(Object.assign({}, initialState, {givenAnswers: []}));
 };
-rulesScreen.onNameInputChange = () => {
-  const rulesInput = document.querySelector(`.rules__input`);
-  const submitButton = document.querySelector(`.rules__button`);
-
-  submitButton.disabled = rulesInput.value.length === 0;
-};
 
 showSlide(introScreen);
