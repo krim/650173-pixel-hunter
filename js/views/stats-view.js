@@ -6,9 +6,10 @@ import {
   CORRECT_ANSWER_POINTS,
   GAME_FAILED
 } from '../data/points';
-import {statsBlockElement} from '../elements/stats';
+
 import {QUESTIONS_COUNT} from '../data';
 import AbstractView from './abstract-view';
+import StatBlockView from './stat-block-view';
 import FooterView from './footer-view';
 import HeaderView from "./header-view";
 
@@ -50,10 +51,12 @@ export default class StatsView extends AbstractView {
   }
 
   winnerBlock(answers, index, calculatedPoints) {
+    const statBlock = new StatBlockView(answers);
+
     return `
       <tr>
         <td class="result__number">${index + 1}.</td>
-        <td colspan="2">${statsBlockElement(answers)}</td>
+        <td colspan="2">${statBlock.element.innerHTML}</td>
         <td class="result__points">×&nbsp;${CORRECT_ANSWER_POINTS}</td>
         <td class="result__total">${calculatedPoints.rightAnswerPoints.points}</td>
       </tr>
@@ -67,10 +70,12 @@ export default class StatsView extends AbstractView {
   }
 
   loserBlock(answers, index) {
+    const statBlock = new StatBlockView(answers);
+
     return `
       <tr>
         <td class="result__number">${index + 1}.</td>
-        <td>${statsBlockElement(answers)}</td>
+        <td>${statBlock.element.innerHTML}</td>
         <td class="result__total"></td>
         <td colspan="5" class="result__total  result__total--final">${this.data.loserBlock.description}</td>
       </tr>
