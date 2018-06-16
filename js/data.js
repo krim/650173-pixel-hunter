@@ -10,10 +10,10 @@ export const initialState = Object.freeze({
   givenAnswers: []
 });
 
-
 export const introData = {
   description: `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`
 };
+
 export const greetingData = {
   title: `Лучшие художники-фотореалисты бросают&nbsp;тебе&nbsp;вызов!`,
   description: `
@@ -75,7 +75,6 @@ export const statsData = {
   },
   allAnswers: []
 };
-
 
 const questionsImages = {
   paintings: [

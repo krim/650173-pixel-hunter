@@ -6,35 +6,33 @@ import {
   CORRECT_ANSWER_POINTS,
   GAME_FAILED
 } from '../data/points';
-import {backButtonElement, backButtonInit} from '../elements/back_button';
+import BackButtonView from './back-button-view';
 import {statsBlockElement} from '../elements/stats';
-import footerElement from '../elements/footer';
 import {QUESTIONS_COUNT} from '../data';
-import AbstractView from "./abstract-view";
+import AbstractView from './abstract-view';
+import FooterView from "./footer";
 
 export default class StatsView extends AbstractView {
-  constructor(data, state, statistic) {
+  constructor(data, state) {
     super();
     this.data = data;
     this.state = state;
-    this.statistic = statistic;
+    this.statistic = data.allAnswers;
+    this.backButton = new BackButtonView();
+    this.footer = new FooterView();
   }
 
   get template() {
     return `
       <header class="header">
-        ${backButtonElement}
+        ${this.backButton.element.innerHTML}
       </header>
       <div class="result">
         <h1>${this.statTitle(this.state)}</h1>
-        ${this.statistic.allAnswers.map((answers, index) => this.statTable(answers, index, this.state.leftLives)).join(``)}
+        ${this.statistic.map((answers, index) => this.statTable(answers, index, this.state.leftLives)).join(``)}
       </div>
-      ${footerElement}
+      ${this.footer.element.innerHTML}
     `;
-  }
-
-  bind() {
-    this.statistic.allAnswers.push(this.state.givenAnswers);
   }
 
   bonusBlock(bonusPoints, pointsCount, type) {
@@ -76,7 +74,7 @@ export default class StatsView extends AbstractView {
         <td class="result__number">${index + 1}.</td>
         <td>${statsBlockElement(answers)}</td>
         <td class="result__total"></td>
-        <td colspan="5" class="result__total  result__total--final">${this.loserBlock.description}</td>
+        <td colspan="5" class="result__total  result__total--final">${this.data.loserBlock.description}</td>
       </tr>
     `;
   }
@@ -93,6 +91,6 @@ export default class StatsView extends AbstractView {
   }
 
   statTitle(state) {
-    return state.givenAnswers.length < QUESTIONS_COUNT ? this.titles.lose : this.titles.win;
+    return state.givenAnswers.length < QUESTIONS_COUNT ? this.data.titles.lose : this.data.titles.win;
   }
 }

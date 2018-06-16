@@ -1,27 +1,28 @@
 import {statsBlockElement} from '../elements/stats';
-import footerElement from "../elements/footer";
-import {questionsFormElement} from "../elements/questions/form";
-import AbstractView from "./abstract-view";
-import {levels} from "../data";
-import {headerElement} from "../elements/header";
-// import {saveAnswerByArray} from '../data/answers';
+import {questionsFormElement} from '../elements/questions/form';
+import AbstractView from './abstract-view';
+import {levels} from '../data';
+import HeaderView from './header-view';
+import FooterView from './footer';
 
 export default class QuestionSecondView extends AbstractView {
   constructor(data, state) {
     super();
     this.title = data.title;
     this.state = state;
+    this.header = new HeaderView(state);
+    this.footer = new FooterView();
   }
 
   get template() {
     return `
-      ${headerElement(this.state)}
+      ${this.header.element.innerHTML}
       <div class="game">
         <p class="game__task">${this.title}</p>
         ${questionsFormElement(levels[this.state.level])}
         <div class="stats">${statsBlockElement(this.state.givenAnswers)}</div>
       </div>
-      ${footerElement}
+      ${this.footer.element.innerHTML}
     `;
   }
 
@@ -37,27 +38,3 @@ export default class QuestionSecondView extends AbstractView {
 
   onAnswersChecked() { }
 }
-//
-// const answersCheckedHandler = (state) => {
-//   const checkedAnswers = document.querySelectorAll(`input:checked`);
-//   const newState = saveAnswerByArray(state, checkedAnswers);
-//
-//   removeGameFormHandler(newState);
-//   renderNextLevel(newState);
-// };
-//
-// const removeGameFormHandler = (state) => {
-//   const gameForm = document.querySelector(`.game__content`);
-//
-//   if (gameForm) {
-//     gameForm.removeEventListener(`change`, () => answersCheckedHandler(state));
-//   }
-// };
-//
-// export const gameSecondInit = (state) => {
-//   backButtonInit();
-//
-//   const gameForm = document.querySelector(`.game__content`);
-//   gameForm.addEventListener(`change`, () => answersCheckedHandler(state));
-// };
-//

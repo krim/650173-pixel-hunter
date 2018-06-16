@@ -1,4 +1,3 @@
-// import {statsElement, statsInit, stats} from '../views/stats-view';
 import {showSlide} from '../util';
 import {levels, gameFirstData, gameSecondData, gameThirdData, statsData} from '../data';
 import {QUESTIONS_TYPE} from '../elements/questions/question';
@@ -83,8 +82,8 @@ export const renderNextLevel = (state) => {
   if (canContinue(state) && isNextLevelExists(state.level)) {
     renderLevel(Object.assign({}, state, {level: state.level + 1}));
   } else {
-    const statsScreen = new StatsView(statsData, state, statistic);
-    // showSlide(statsElement(stats, state));
-    // statsInit();
+    statsData.allAnswers.push(state.givenAnswers);
+    const statsScreen = new StatsView(statsData, state);
+    showSlide(statsScreen);
   }
 };

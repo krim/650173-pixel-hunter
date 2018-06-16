@@ -1,6 +1,6 @@
-import {backButtonElement} from '../elements/back_button';
-import footerElement from '../elements/footer';
+import BackButtonView from './back-button-view';
 import AbstractView from './abstract-view';
+import FooterView from './footer';
 
 export default class RulesView extends AbstractView {
   constructor(data) {
@@ -9,12 +9,14 @@ export default class RulesView extends AbstractView {
     this.description = data.description;
     this.placeholder = data.placeholder;
     this.button = data.button;
+    this.backButton = new BackButtonView();
+    this.footer = new FooterView();
   }
 
   get template() {
     return `
       <header class="header">
-        ${backButtonElement}
+        ${this.backButton.element.innerHTML}
       </header>
       <div class="rules">
         <h1 class="rules__title">${this.title}</h1>
@@ -24,12 +26,11 @@ export default class RulesView extends AbstractView {
           <button class="rules__button  continue" type="submit" disabled>${this.button}</button>
         </form>
       </div>
-      ${footerElement}
+      ${this.footer.element.innerHTML}
     `;
   }
 
   bind(el) {
-    //   backButtonInit();
     const submitButton = el.querySelector(`.rules__button`);
     const nameInput = el.querySelector(`.rules__input`);
 

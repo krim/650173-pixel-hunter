@@ -1,27 +1,28 @@
-import {backButtonInit} from '../elements/back_button';
 import {levels} from '../data';
-import {headerElement} from '../elements/header';
-import footerElement from '../elements/footer';
+import HeaderView from './header-view';
 import {statsBlockElement} from '../elements/stats';
 import {questionsFormElement} from '../elements/questions/form';
 import AbstractView from './abstract-view';
+import FooterView from './footer';
 
 export default class QuestionFirstView extends AbstractView {
   constructor(data, state) {
     super();
     this.title = data.title;
     this.state = state;
+    this.header = new HeaderView(state);
+    this.footer = new FooterView();
   }
 
   get template() {
     return `
-      ${headerElement(this.state)}
+      ${this.header.element.innerHTML}
       <div class="game">
         <p class="game__task">${this.title}</p>
         ${questionsFormElement(levels[this.state.level])}
         <div class="stats">${statsBlockElement(this.state.givenAnswers)}</div>
       </div>
-      ${footerElement}
+      ${this.footer.element.innerHTML}
     `;
   }
 
@@ -37,29 +38,3 @@ export default class QuestionFirstView extends AbstractView {
 
   onAnswersChecked() { }
 }
-
-//
-// const answersCheckedHandler = (state) => {
-//   const checkedAnswers = document.querySelectorAll(`input:checked`);
-//
-//   if (checkedAnswers.length === QUESTION_ANSWERS_COUNT) {
-//     const newState = saveAnswerByArray(state, checkedAnswers);
-//
-//     removeGameFormHandler(newState);
-//     renderNextLevel(newState);
-//   }
-// };
-//
-// const removeGameFormHandler = (state) => {
-//
-//   if (gameForm) {
-//     gameForm.removeEventListener(`change`, () => answersCheckedHandler(state));
-//   }
-// };
-//
-// export const gameFirstInit = (state) => {
-//   backButtonInit();
-//
-//   const gameForm = document.querySelector(`.game__content`);
-//   gameForm.addEventListener(`change`, () => answersCheckedHandler(state));
-// };

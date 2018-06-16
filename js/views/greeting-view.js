@@ -1,11 +1,12 @@
 import AbstractView from './abstract-view';
-import footerElement from '../elements/footer';
+import FooterView from './footer';
 
 export default class GreetingView extends AbstractView {
   constructor(data) {
     super();
     this.title = data.title;
     this.description = data.description;
+    this.footer = new FooterView();
   }
 
   get template() {
@@ -19,16 +20,16 @@ export default class GreetingView extends AbstractView {
         </div>
         <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
       </div>
-      ${footerElement}
+      ${this.footer.element.innerHTML}
     `;
   }
 
   bind(el) {
-    const greetingContinue = el.querySelector(`.greeting__continue`);
     const greetingContinueClickHandler = () => {
       this.onGreetingContinueClick();
     };
 
+    const greetingContinue = el.querySelector(`.greeting__continue`);
     greetingContinue.removeEventListener(`click`, greetingContinueClickHandler);
     greetingContinue.addEventListener(`click`, greetingContinueClickHandler);
   }
