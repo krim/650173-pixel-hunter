@@ -6,11 +6,11 @@ import {
   CORRECT_ANSWER_POINTS,
   GAME_FAILED
 } from '../data/points';
-import BackButtonView from './back-button-view';
 import {statsBlockElement} from '../elements/stats';
 import {QUESTIONS_COUNT} from '../data';
 import AbstractView from './abstract-view';
-import FooterView from "./footer";
+import FooterView from './footer-view';
+import HeaderView from "./header-view";
 
 export default class StatsView extends AbstractView {
   constructor(data, state) {
@@ -18,15 +18,13 @@ export default class StatsView extends AbstractView {
     this.data = data;
     this.state = state;
     this.statistic = data.allAnswers;
-    this.backButton = new BackButtonView();
+    this.header = new HeaderView();
     this.footer = new FooterView();
   }
 
   get template() {
     return `
-      <header class="header">
-        ${this.backButton.element.innerHTML}
-      </header>
+      ${this.header.element.innerHTML}
       <div class="result">
         <h1>${this.statTitle(this.state)}</h1>
         ${this.statistic.map((answers, index) => this.statTable(answers, index, this.state.leftLives)).join(``)}

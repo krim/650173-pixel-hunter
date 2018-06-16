@@ -3,7 +3,7 @@ import HeaderView from './header-view';
 import {statsBlockElement} from '../elements/stats';
 import {questionsFormElement} from '../elements/questions/form';
 import AbstractView from './abstract-view';
-import FooterView from './footer';
+import FooterView from './footer-view';
 
 export default class QuestionFirstView extends AbstractView {
   constructor(data, state) {

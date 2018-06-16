@@ -3,7 +3,7 @@ import {questionsFormElement} from '../elements/questions/form';
 import AbstractView from './abstract-view';
 import {levels, PAINT, PHOTO} from '../data';
 import HeaderView from './header-view';
-import FooterView from './footer';
+import FooterView from './footer-view';
 
 export default class QuestionThirdView extends AbstractView {
   constructor(data, state) {
