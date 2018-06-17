@@ -9,21 +9,19 @@ export default class QuestionView extends AbstractView {
     this.index = index;
   }
   get template() {
-    let template;
-
-    switch (this.type) {
-      case QUESTIONS_TYPES.ONE_IMAGE:
-        template = this.firstTypeQuestionElement(this.question, this.index);
-        break;
-      case QUESTIONS_TYPES.TWO_IMAGES:
-        template = this.secondTypeQuestionElement(this.question, this.index);
-        break;
-      case QUESTIONS_TYPES.THREE_IMAGES:
-        template = this.thirdTypeQuestionElement(this.question, this.index);
-        break;
+    if (this.type === QUESTIONS_TYPES.ONE_IMAGE) {
+      return this.firstTypeQuestionElement(this.question, this.index);
     }
 
-    return template;
+    if (this.type === QUESTIONS_TYPES.TWO_IMAGES) {
+      return this.secondTypeQuestionElement(this.question, this.index);
+    }
+
+    if (this.type === QUESTIONS_TYPES.THREE_IMAGES) {
+      return this.thirdTypeQuestionElement(this.question, this.index);
+    }
+
+    return ``;
   }
 
 

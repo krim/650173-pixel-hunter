@@ -34,9 +34,7 @@ export default class RulesView extends AbstractView {
       this.onSubmitButtonClick();
     };
 
-    nameInput.removeEventListener(`input`, nameInputChangeHandler);
     nameInput.addEventListener(`input`, nameInputChangeHandler);
-    submitButton.removeEventListener(`click`, submitButtonClickHandler);
     submitButton.addEventListener(`click`, submitButtonClickHandler);
   }
 

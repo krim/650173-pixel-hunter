@@ -18,7 +18,6 @@ export default class BackButtonView extends AbstractView {
     };
 
     const backButton = el.querySelector(`button.back`);
-    backButton.removeEventListener(`click`, backButtonClickHandler);
     backButton.addEventListener(`click`, backButtonClickHandler);
   }
 

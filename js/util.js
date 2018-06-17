@@ -18,12 +18,12 @@ export const initGreetingScreen = (greetingScreen) => {
 };
 
 const mainElement = document.querySelector(`main.central`);
-export const showScreen = (klass) => {
+export const showScreen = (object) => {
   mainElement.innerHTML = ``;
 
   const header = new HeaderView();
   const footer = new FooterView();
-  const gameStat = new GameStatView(klass.state);
+  const gameStat = new GameStatView(object.state);
   const backButton = new BackButtonView();
   backButton.onBackButtonClick = () => {
     const greetingScreen = new GreetingView(greetingData);
@@ -36,7 +36,7 @@ export const showScreen = (klass) => {
   const headerElement = mainElement.querySelector(`header`);
   headerElement.appendChild(backButton.element);
   headerElement.appendChild(gameStat.element);
-  mainElement.appendChild(klass.element);
+  mainElement.appendChild(object.element);
   mainElement.appendChild(footer.element);
 };
 

@@ -23,16 +23,13 @@ export default class StatsView extends AbstractView {
     return `
       <div class="result">
         <h1>${this.statTitle(this.state)}</h1>
-        ${this.statistic.map((answers, index) => this.statTable(answers, index, this.state.leftLives)).join(``)}
+        ${this.statistic.map((answers, index) => this.statTable(answers, index)).join(``)}
       </div>
     `;
   }
 
   bonusBlock(bonusPoints, pointsCount, type) {
-    if (bonusPoints.count === 0) {
-      return ``;
-    } else {
-      return `
+    return bonusPoints.count === 0 ? `` : `
       <tr>
         <td></td>
         <td class="result__extra">${this.data.bonusBlocks[`type`]}</td>
@@ -41,7 +38,6 @@ export default class StatsView extends AbstractView {
         <td class="result__total">${bonusPoints.points}</td>
       </tr>
     `;
-    }
   }
 
   winnerBlock(answers, index, calculatedPoints) {
@@ -77,17 +73,22 @@ export default class StatsView extends AbstractView {
   }
 
 
-  statTable(answers, index, state) {
-    const calculatedPoints = calculatePoints(answers, state.leftLives);
+  statTable(answers, index) {
+    const calculatedPoints = calculatePoints(answers, this.state.leftLives);
 
     return `
       <table class="result__table">
-        ${calculatedPoints.pointsSum === GAME_FAILED ? this.loserBlock(answers, index) : this.winnerBlock(answers, index, calculatedPoints)}
+        ${this.isLose(calculatedPoints) ? this.loserBlock(answers, index) : this.winnerBlock(answers, index, calculatedPoints)}
       </table>
     `;
   }
 
-  statTitle(state) {
-    return state.givenAnswers.length < QUESTIONS_COUNT ? this.data.titles.lose : this.data.titles.win;
+  statTitle() {
+    return this.isLose(this.state) ? this.data.titles.lose : this.data.titles.win;
+  }
+
+  isLose(calculatedPoints) {
+    return (this.state.givenAnswers.length < QUESTIONS_COUNT) ||
+      (calculatedPoints && calculatedPoints.pointsSum === GAME_FAILED);
   }
 }

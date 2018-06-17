@@ -33,7 +33,6 @@ export default class QuestionFirstView extends AbstractView {
       this.onAnswersChecked();
     };
 
-    gameForm.removeEventListener(`change`, answersCheckedHandler);
     gameForm.addEventListener(`change`, answersCheckedHandler);
   }
 

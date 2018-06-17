@@ -21,7 +21,6 @@ export default class IntroView extends AbstractView {
     };
 
     const introAsterisk = el.querySelector(`#intro h1.intro__asterisk`);
-    introAsterisk.removeEventListener(`click`, introAsteriskClickHandler);
     introAsterisk.addEventListener(`click`, introAsteriskClickHandler);
   }
 

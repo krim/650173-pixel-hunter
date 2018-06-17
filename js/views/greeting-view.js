@@ -27,7 +27,6 @@ export default class GreetingView extends AbstractView {
     };
 
     const greetingContinue = el.querySelector(`.greeting__continue`);
-    greetingContinue.removeEventListener(`click`, greetingContinueClickHandler);
     greetingContinue.addEventListener(`click`, greetingContinueClickHandler);
   }
 

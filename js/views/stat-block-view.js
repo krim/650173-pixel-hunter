@@ -17,7 +17,7 @@ export default class StatBlockView extends AbstractView {
   get template() {
     return `
       <ul class="stats">
-        ${[...this.answers].map((answer) => this.statElement(answer)).join(``)}
+        ${this.answers.map((answer) => this.statElement(answer)).join(``)}
         ${new Array(QUESTIONS_COUNT - this.answers.length)
           .fill(`<li class="stats__result stats__result--unknown"></li>`)
           .join(``)}
