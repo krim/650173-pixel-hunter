@@ -19,13 +19,11 @@ export default class QuestionFirstView extends AbstractView {
     const questionForm = new QuestionFormView(levels[this.state.level]);
 
     return `
-      ${this.header.element.innerHTML}
       <div class="game">
         <p class="game__task">${this.title}</p>
         ${questionForm.element.innerHTML}
         <div class="stats">${statBlock.element.innerHTML}</div>
       </div>
-      ${this.footer.element.innerHTML}
     `;
   }
 

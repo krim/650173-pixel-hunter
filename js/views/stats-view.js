@@ -10,8 +10,6 @@ import {
 import {QUESTIONS_COUNT} from '../data';
 import AbstractView from './abstract-view';
 import StatBlockView from './stat-block-view';
-import FooterView from './footer-view';
-import HeaderView from "./header-view";
 
 export default class StatsView extends AbstractView {
   constructor(data, state) {
@@ -19,18 +17,14 @@ export default class StatsView extends AbstractView {
     this.data = data;
     this.state = state;
     this.statistic = data.allAnswers;
-    this.header = new HeaderView();
-    this.footer = new FooterView();
   }
 
   get template() {
     return `
-      ${this.header.element.innerHTML}
       <div class="result">
         <h1>${this.statTitle(this.state)}</h1>
         ${this.statistic.map((answers, index) => this.statTable(answers, index, this.state.leftLives)).join(``)}
       </div>
-      ${this.footer.element.innerHTML}
     `;
   }
 

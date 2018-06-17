@@ -1,4 +1,4 @@
-import {showSlide} from '../util';
+import {showScreen} from '../util';
 import {
   levels,
   gameFirstData,
@@ -52,7 +52,7 @@ export const renderLevel = (state) => {
 
         renderNextLevel(newState);
       };
-      showSlide(gameSecondScreen);
+      showScreen(gameSecondScreen);
 
       break;
     case QUESTIONS_TYPES.TWO_IMAGES:
@@ -66,7 +66,7 @@ export const renderLevel = (state) => {
           renderNextLevel(newState);
         }
       };
-      showSlide(gameFirstScreen);
+      showScreen(gameFirstScreen);
 
       break;
     case QUESTIONS_TYPES.THREE_IMAGES:
@@ -76,7 +76,7 @@ export const renderLevel = (state) => {
 
         renderNextLevel(newState);
       };
-      showSlide(gameThirdScreen);
+      showScreen(gameThirdScreen);
 
       break;
   }
@@ -90,6 +90,6 @@ export const renderNextLevel = (state) => {
   } else {
     statsData.allAnswers.push(state.givenAnswers);
     const statsScreen = new StatsView(statsData, state);
-    showSlide(statsScreen);
+    showScreen(statsScreen);
   }
 };

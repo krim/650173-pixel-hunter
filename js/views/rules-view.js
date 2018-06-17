@@ -1,6 +1,4 @@
 import AbstractView from './abstract-view';
-import FooterView from './footer-view';
-import HeaderView from "./header-view";
 
 export default class RulesView extends AbstractView {
   constructor(data) {
@@ -9,13 +7,10 @@ export default class RulesView extends AbstractView {
     this.description = data.description;
     this.placeholder = data.placeholder;
     this.button = data.button;
-    this.header = new HeaderView();
-    this.footer = new FooterView();
   }
 
   get template() {
     return `
-      ${this.header.element.innerHTML}
       <div class="rules">
         <h1 class="rules__title">${this.title}</h1>
         <p class="rules__description">${this.description}</p>
@@ -24,7 +19,6 @@ export default class RulesView extends AbstractView {
           <button class="rules__button  continue" type="submit" disabled>${this.button}</button>
         </form>
       </div>
-      ${this.footer.element.innerHTML}
     `;
   }
 

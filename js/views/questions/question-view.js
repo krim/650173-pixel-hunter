@@ -57,7 +57,7 @@ export default class QuestionView extends AbstractView {
         </label>
       </div>
     `;
-}
+  }
 
   thirdTypeQuestionElement(question, index) {
     const selectedClass = index === 1 ? `game__option--selected` : ``;
@@ -67,5 +67,5 @@ export default class QuestionView extends AbstractView {
         <img src="${question.src}" alt="${question.src}" width="304" height="455">
       </div>
     `;
-  };
+  }
 }

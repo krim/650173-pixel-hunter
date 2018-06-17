@@ -1,12 +1,10 @@
 import AbstractView from './abstract-view';
-import FooterView from './footer-view';
 
 export default class GreetingView extends AbstractView {
   constructor(data) {
     super();
     this.title = data.title;
     this.description = data.description;
-    this.footer = new FooterView();
   }
 
   get template() {
@@ -20,7 +18,6 @@ export default class GreetingView extends AbstractView {
         </div>
         <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
       </div>
-      ${this.footer.element.innerHTML}
     `;
   }
 

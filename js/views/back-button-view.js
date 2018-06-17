@@ -1,7 +1,4 @@
 import AbstractView from './abstract-view';
-import GreetingView from './greeting-view';
-import {showSlide} from '../util';
-import {greetingData} from '../data';
 
 export default class BackButtonView extends AbstractView {
   get template() {
@@ -17,12 +14,13 @@ export default class BackButtonView extends AbstractView {
 
   bind(el) {
     const backButtonClickHandler = () => {
-      const greetingScreen = new GreetingView(greetingData);
-      showSlide(greetingScreen);
+      this.onBackButtonClick();
     };
 
     const backButton = el.querySelector(`button.back`);
     backButton.removeEventListener(`click`, backButtonClickHandler);
     backButton.addEventListener(`click`, backButtonClickHandler);
   }
+
+  onBackButtonClick() {}
 }
