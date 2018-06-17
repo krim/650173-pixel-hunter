@@ -9,17 +9,13 @@ export default class RulesView extends AbstractView {
     this.description = data.description;
     this.placeholder = data.placeholder;
     this.button = data.button;
+    this.header = new HeaderView();
     this.footer = new FooterView();
-  }
-
-  get header() {
-    const header = new HeaderView();
-
-    return header.element;
   }
 
   get template() {
     return `
+      ${this.header.element.innerHTML}
       <div class="rules">
         <h1 class="rules__title">${this.title}</h1>
         <p class="rules__description">${this.description}</p>
