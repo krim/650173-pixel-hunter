@@ -1,9 +1,9 @@
-import {questionsFormElement} from '../elements/questions/form';
-import AbstractView from './abstract-view';
-import {levels} from '../data';
-import StatBlockView from './stat-block-view';
-import HeaderView from './header-view';
-import FooterView from './footer-view';
+import QuestionFormView from './form-view';
+import AbstractView from '../abstract-view';
+import {levels} from '../../data';
+import StatBlockView from '../stat-block-view';
+import HeaderView from '../header-view';
+import FooterView from '../footer-view';
 
 export default class QuestionSecondView extends AbstractView {
   constructor(data, state) {
@@ -16,12 +16,13 @@ export default class QuestionSecondView extends AbstractView {
 
   get template() {
     const statBlock = new StatBlockView(this.state.givenAnswers);
+    const questionForm = new QuestionFormView(levels[this.state.level]);
 
     return `
       ${this.header.element.innerHTML}
       <div class="game">
         <p class="game__task">${this.title}</p>
-        ${questionsFormElement(levels[this.state.level])}
+        ${questionForm.element.innerHTML}
         <div class="stats">${statBlock.element.innerHTML}</div>
       </div>
       ${this.footer.element.innerHTML}

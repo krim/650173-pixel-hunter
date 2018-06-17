@@ -1,12 +1,18 @@
 import {showSlide} from '../util';
-import {levels, gameFirstData, gameSecondData, gameThirdData, statsData} from '../data';
-import {QUESTIONS_TYPE} from '../elements/questions/question';
-import GameFirstView from '../views/question-first-view';
-import GameSecondView from '../views/question-second-view';
-import GameThirdView from '../views/question-third-view';
+import {
+  levels,
+  gameFirstData,
+  gameSecondData,
+  gameThirdData,
+  statsData,
+  QUESTIONS_TYPES
+} from '../data';
+import GameFirstView from '../views/questions/question-first-view';
+import GameSecondView from '../views/questions/question-second-view';
+import GameThirdView from '../views/questions/question-third-view';
 import {resizeImage} from './resize_image';
-import {saveAnswerByArray, saveAnswerByElement} from "./answers";
-import StatsView from "../views/stats-view";
+import {saveAnswerByArray, saveAnswerByElement} from './answers';
+import StatsView from '../views/stats-view';
 
 const SECOND_QUESTION_ANSWERS_COUNT = 2;
 
@@ -38,7 +44,7 @@ const resizeImages = () => {
 
 export const renderLevel = (state) => {
   switch (levels[state.level].length) {
-    case QUESTIONS_TYPE.ONE_IMAGE:
+    case QUESTIONS_TYPES.ONE_IMAGE:
       const gameSecondScreen = new GameSecondView(gameSecondData, state);
       gameSecondScreen.onAnswersChecked = () => {
         const checkedAnswers = document.querySelectorAll(`input:checked`);
@@ -49,7 +55,7 @@ export const renderLevel = (state) => {
       showSlide(gameSecondScreen);
 
       break;
-    case QUESTIONS_TYPE.TWO_IMAGES:
+    case QUESTIONS_TYPES.TWO_IMAGES:
       const gameFirstScreen = new GameFirstView(gameFirstData, state);
       gameFirstScreen.onAnswersChecked = () => {
         const checkedAnswers = document.querySelectorAll(`input:checked`);
@@ -63,7 +69,7 @@ export const renderLevel = (state) => {
       showSlide(gameFirstScreen);
 
       break;
-    case QUESTIONS_TYPE.THREE_IMAGES:
+    case QUESTIONS_TYPES.THREE_IMAGES:
       const gameThirdScreen = new GameThirdView(gameThirdData, state);
       gameThirdScreen.onGameOptionsClick = (object, gameState) => {
         const newState = saveAnswerByElement(gameState, object);

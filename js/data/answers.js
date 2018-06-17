@@ -1,6 +1,6 @@
 import {levels, PAINT, PHOTO} from '../data';
 import {die} from './levels';
-import GameThirdView from '../views/question-third-view';
+import GameThirdView from '../views/questions/question-third-view';
 
 const SECONDS_FOR_ANSWER = 15;
 

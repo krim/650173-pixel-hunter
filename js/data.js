@@ -3,6 +3,17 @@ export const QUESTIONS_COUNT = 10;
 export const PAINT = `paint`;
 export const PHOTO = `photo`;
 
+export const QUESTIONS_TYPES = {
+  ONE_IMAGE: 1,
+  TWO_IMAGES: 2,
+  THREE_IMAGES: 3
+};
+
+export const IMAGE_TITLES = {
+  PHOTO: `Фото`,
+  PAINT: `Рисунок`
+};
+
 export const initialState = Object.freeze({
   level: 0,
   leftLives: 3,
