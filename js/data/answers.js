@@ -1,6 +1,6 @@
 import {levels, PAINT, PHOTO} from '../data';
 import {die} from './levels';
-import {isPaintQuestion} from '../slides/question-3';
+import GameThirdView from '../views/questions/question-third-view';
 
 const SECONDS_FOR_ANSWER = 15;
 
@@ -25,7 +25,7 @@ export const saveAnswerByElement = (state, answer) => {
   const answerSrc = answer.getElementsByTagName(`img`)[0].src;
   const questions = levels[state.level];
   const levelsAnswer = questions.find((level) => level.src === answerSrc);
-  const questionType = isPaintQuestion(questions) ? PAINT : PHOTO;
+  const questionType = GameThirdView.isPaintQuestion(questions) ? PAINT : PHOTO;
   const variant = levelsAnswer.type === questionType;
 
   return saveAnswer(state, variant);
