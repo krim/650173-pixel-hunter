@@ -18,29 +18,29 @@ export const initGreetingScreen = (greetingScreen) => {
 };
 
 const mainElement = document.querySelector(`main.central`);
-export const showScreen = (object) => {
+export const showScreen = (object, conditions = {header: true, footer: true}) => {
   mainElement.innerHTML = ``;
 
-  const header = new HeaderView();
-  const footer = new FooterView();
-  const gameStat = new GameStatView(object.state);
-  const backButton = new BackButtonView();
-  backButton.onBackButtonClick = () => {
-    const greetingScreen = new GreetingView(greetingData);
+  if (conditions.header) {
+    const header = new HeaderView();
+    const gameStat = new GameStatView(object.state);
+    const backButton = new BackButtonView();
+    backButton.onBackButtonClick = () => {
+      const greetingScreen = new GreetingView(greetingData);
 
-    initGreetingScreen(greetingScreen);
-    showScreen(greetingScreen);
-  };
+      initGreetingScreen(greetingScreen);
+      showScreen(greetingScreen, {header: false, footer: true});
+    };
+    mainElement.appendChild(header.element);
+    const headerElement = mainElement.querySelector(`header`);
+    headerElement.appendChild(backButton.element);
+    headerElement.appendChild(gameStat.element);
+  }
 
-  mainElement.appendChild(header.element);
-  const headerElement = mainElement.querySelector(`header`);
-  headerElement.appendChild(backButton.element);
-  headerElement.appendChild(gameStat.element);
   mainElement.appendChild(object.element);
-  mainElement.appendChild(footer.element);
-};
 
-export const showMainScreen = (klass) => {
-  mainElement.innerHTML = ``;
-  mainElement.appendChild(klass.element);
+  if (conditions.footer) {
+    const footer = new FooterView();
+    mainElement.appendChild(footer.element);
+  }
 };
