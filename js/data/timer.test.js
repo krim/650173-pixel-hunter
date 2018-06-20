@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {createTimer, timerObject, FINISHED, TICK_COUNT} from './timer';
+import {createTimer, timerObject, FINISHED, TICK_COUNT, MAX_SECONDS} from './timer';
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 describe(`timerObject`, () => {
   it(`should decrease left seconds after tick`, () => {
-    const seconds = getRandomInt(1, 30);
+    const seconds = getRandomInt(1, MAX_SECONDS);
     const timer = timerObject(seconds);
 
-    expect(timer.leftSeconds).to.equal(seconds);
+    expect(timer.seconds).to.equal(seconds);
 
     timer.tick();
-    expect(timer.leftSeconds).to.equal(seconds - TICK_COUNT);
+    expect(timer.seconds).to.equal(seconds + TICK_COUNT);
     expect(timer.isFinished).to.equal(false);
   });
 
@@ -20,7 +20,7 @@ describe(`timerObject`, () => {
     const timer = timerObject(seconds);
 
     timer.tick();
-    expect(timer.leftSeconds).to.equal(0);
+    expect(timer.seconds).to.equal(0);
     expect(timer.tick()).to.equal(FINISHED);
     expect(timer.isFinished).to.equal(true);
   });
@@ -43,6 +43,6 @@ describe(`createTimer`, () => {
     expect(timer).to.be.an.instanceof(Object);
     expect(timer).to.respondTo(`tick`);
     expect(timer.isFinished).to.equal(false);
-    expect(timer.leftSeconds).to.equal(seconds);
+    expect(timer.seconds).to.equal(seconds);
   });
 });

@@ -1,24 +1,20 @@
-import {levels, PAINT, PHOTO} from '../../data';
-import StatBlockView from '../stat-block-view';
+import {PAINT, PHOTO} from '../../data';
 import QuestionFormView from './form-view';
 import AbstractView from '../abstract-view';
 
 export default class QuestionThirdView extends AbstractView {
-  constructor(data, state) {
+  constructor(data, images) {
     super();
     this.titles = data.titles;
-    this.state = state;
+    this.questionForm = new QuestionFormView(images);
+    this.images = images;
   }
 
   get template() {
-    const statBlock = new StatBlockView(this.state.givenAnswers);
-    const questionForm = new QuestionFormView(levels[this.state.level]);
-
     return `
       <div class="game">
-        <p class="game__task">${this.questionTitle(levels[this.state.level])}</p>
-        ${questionForm.element.innerHTML}
-        <div class="stats">${statBlock.element.innerHTML}</div>
+        <p class="game__task">${this.questionTitle(this.images)}</p>
+        ${this.questionForm.element.innerHTML}
       </div>
     `;
   }

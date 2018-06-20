@@ -11,7 +11,7 @@ export default class GameStatView extends AbstractView {
       return ``;
     } else {
       return `
-        <h1 class="game__timer">${this.state.leftSeconds}</h1>
+        <h1 class="game__timer">${this.state.seconds}</h1>
         <div class="game__lives">
         ${new Array(BASE_LEFT_LIVES - this.state.leftLives)
           .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)

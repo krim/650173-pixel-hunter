@@ -1,11 +1,12 @@
 export const FINISHED = `finished`;
 export const TICK_COUNT = 1;
+export const MAX_SECONDS = 30;
 
 export const timerObject = (seconds) => {
   const timer = {
     tick() {
-      if (this.leftSeconds > 0) {
-        this.leftSeconds -= TICK_COUNT;
+      if (this.seconds < MAX_SECONDS) {
+        this.seconds += TICK_COUNT;
       } else {
         this.isFinished = true;
 
@@ -14,7 +15,7 @@ export const timerObject = (seconds) => {
 
       return true;
     },
-    leftSeconds: seconds,
+    seconds,
     isFinished: false
   };
 

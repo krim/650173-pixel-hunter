@@ -1,33 +1,17 @@
-import {showScreen} from '../util';
 import {
-  levels,
   gameFirstData,
   gameSecondData,
   gameThirdData,
-  statsData,
   QUESTIONS_TYPES
 } from '../data';
 import GameFirstView from '../views/questions/question-first-view';
 import GameSecondView from '../views/questions/question-second-view';
 import GameThirdView from '../views/questions/question-third-view';
 import {resizeImage} from './resize_image';
-import {saveAnswerByArray, saveAnswerByElement} from './answers';
-import StatsView from '../views/stats-view';
 
 const SECOND_QUESTION_ANSWERS_COUNT = 2;
 
-const isNextLevelExists = (currentLevel) => {
-  return levels[currentLevel + 1];
-};
-
-export const canContinue = (state) => state.leftLives > 0;
-export const die = (state) => {
-  const leftLives = state.leftLives - 1;
-
-  return Object.assign({}, state, {leftLives});
-};
-
-const resizeImages = () => {
+export const resizeImages = () => {
   const images = document.querySelectorAll(`.game__option img`);
 
   images.forEach((image) => {
@@ -42,54 +26,49 @@ const resizeImages = () => {
   });
 };
 
-export const renderLevel = (state) => {
-  switch (levels[state.level].length) {
-    case QUESTIONS_TYPES.ONE_IMAGE:
-      const gameSecondScreen = new GameSecondView(gameSecondData, state);
-      gameSecondScreen.onAnswersChecked = () => {
-        const checkedAnswers = document.querySelectorAll(`input:checked`);
-        const newState = saveAnswerByArray(state, checkedAnswers);
+export const levelView = (images, screen) => {
+  if (images.length === QUESTIONS_TYPES.ONE_IMAGE) {
+    const gameSecondScreen = new GameSecondView(gameSecondData, images);
+    gameSecondScreen.onAnswersChecked = () => {
+      const checkedAnswers = document.querySelectorAll(`input:checked`);
+      screen.modelObject.saveAnswerByArray(checkedAnswers);
+      screen.changeLevel();
+    };
 
-        renderNextLevel(newState);
-      };
-      showScreen(gameSecondScreen);
-
-      break;
-    case QUESTIONS_TYPES.TWO_IMAGES:
-      const gameFirstScreen = new GameFirstView(gameFirstData, state);
-      gameFirstScreen.onAnswersChecked = () => {
-        const checkedAnswers = document.querySelectorAll(`input:checked`);
-
-        if (checkedAnswers.length === SECOND_QUESTION_ANSWERS_COUNT) {
-          const newState = saveAnswerByArray(state, checkedAnswers);
-
-          renderNextLevel(newState);
-        }
-      };
-      showScreen(gameFirstScreen);
-
-      break;
-    case QUESTIONS_TYPES.THREE_IMAGES:
-      const gameThirdScreen = new GameThirdView(gameThirdData, state);
-      gameThirdScreen.onGameOptionsClick = (object, gameState) => {
-        const newState = saveAnswerByElement(gameState, object);
-
-        renderNextLevel(newState);
-      };
-      showScreen(gameThirdScreen);
-
-      break;
+    return gameSecondScreen;
   }
 
-  resizeImages();
-};
+  if (images.length === QUESTIONS_TYPES.TWO_IMAGES) {
+    const gameFirstScreen = new GameFirstView(gameFirstData, images);
+    gameFirstScreen.onAnswersChecked = () => {
+      const checkedAnswers = document.querySelectorAll(`input:checked`);
 
-export const renderNextLevel = (state) => {
-  if (canContinue(state) && isNextLevelExists(state.level)) {
-    renderLevel(Object.assign({}, state, {level: state.level + 1}));
-  } else {
-    statsData.allAnswers.push(state.givenAnswers);
-    const statsScreen = new StatsView(statsData, state);
-    showScreen(statsScreen);
+      if (checkedAnswers.length === SECOND_QUESTION_ANSWERS_COUNT) {
+        screen.modelObject.saveAnswerByArray(checkedAnswers);
+        screen.changeLevel();
+      }
+    };
+
+    return gameFirstScreen;
+  }
+
+  if (images.length === QUESTIONS_TYPES.THREE_IMAGES) {
+    const gameThirdScreen = new GameThirdView(gameThirdData, images);
+    gameThirdScreen.onGameOptionsClick = (object) => {
+      screen.modelObject.saveAnswerByElement(object);
+      screen.changeLevel();
+    };
+
+    return gameThirdScreen;
   }
 };
+
+// export const renderNextLevel = (state) => {
+//   if (canContinue(state) && isNextLevelExists(state.level)) {
+//     renderLevel(Object.assign({}, state, {level: state.level + 1}));
+//   } else {
+//     statsData.allAnswers.push(state.givenAnswers);
+//     const statsScreen = new StatsView(statsData, state);
+//     showScreen(statsScreen);
+//   }
+// };
