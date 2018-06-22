@@ -1,11 +1,10 @@
 import {showScreen} from './util';
-import IntroScreen from './controllers/intro-screen';
-import GreetingScreen from './controllers/greeting-screen';
-import RulesScreen from './controllers/rules-screen';
-import GameScreen from './controllers/game-screen';
-import StatsScreen from './controllers/stats-screen';
+import IntroScreen from './screens/intro-screen';
+import GreetingScreen from './screens/greeting-screen';
+import RulesScreen from './screens/rules-screen';
+import GameScreen from './screens/game-screen';
+import StatsScreen from './screens/stats-screen';
 import GameModel from './models/game-model';
-import {statsData} from "./data";
 
 export default class Application {
   static showIntro() {
@@ -39,7 +38,7 @@ export default class Application {
   }
 
   static showStats(state) {
-    const statistics = new StatsScreen(statsData, state);
+    const statistics = new StatsScreen(state);
 
     statistics.init();
     showScreen(statistics.element);

@@ -76,8 +76,7 @@ export const statsData = {
   },
   loserBlock: {
     description: `FAIL`
-  },
-  allAnswers: []
+  }
 };
 
 const questionsImages = {

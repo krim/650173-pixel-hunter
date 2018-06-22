@@ -1,6 +1,9 @@
-const render = (html) => {
+const render = (html, blockClass) => {
   const wrapper = document.createElement(`div`);
   wrapper.innerHTML = html.trim();
+  if (blockClass) {
+    wrapper.className = blockClass;
+  }
 
   return wrapper;
 };
@@ -22,11 +25,12 @@ export default class AbstractView {
     }
     this._element = this.render();
     this.bind(this._element);
+
     return this._element;
   }
 
   render() {
-    return render(this.template);
+    return render(this.template, this._blockClass);
   }
 
   bind(_element) {}

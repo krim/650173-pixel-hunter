@@ -16,7 +16,7 @@ export default class StatsView extends AbstractView {
     super();
     this.data = data;
     this.state = state;
-    this.statistic = data.allAnswers;
+    this.statistic = [state.givenAnswers];
   }
 
   get template() {

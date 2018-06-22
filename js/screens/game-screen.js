@@ -1,27 +1,22 @@
 import Application from "../application";
-import RulesView from "../views/rules-view";
 import GameStatView from "../views/game-stat-view";
 import BackButtonView from "../views/back-button-view";
 import FooterView from "../views/footer-view";
-import HeaderView from "../views/header-view";
 import {levelView, resizeImages} from '../data/levels';
-import {statsData} from "../data";
+import StatBlockView from "../views/stat-block-view";
 
 export default class GameScreen {
   constructor(model) {
     this.model = model;
     this.backButton = new BackButtonView();
-    this.gameStat = new GameStatView(); // object.state
-    this.header = new HeaderView();
-    this.content = levelView(this.model.getCurrentLevel())
+    this.gameStat = new GameStatView(this.model.state);
+
+    this.createHeaderElement();
+    this._content = this.createContentElement();
 
     this.root = document.createElement(`div`);
-    this.root.appendChild(
-        this.header.element.
-          appendChild(this.backButton.element).
-          appendChild(this.gameStat.element)
-    );
-    this.root.appendChild(this.content.element);
+    this.root.appendChild(this._header);
+    this.root.appendChild(this._content);
     this.root.appendChild(new FooterView().element);
 
     this._interval = null;
@@ -55,31 +50,46 @@ export default class GameScreen {
   }
 
   exit() {
-    statsData.allAnswers.push(this.model._state.givenAnswers);
-    Application.showStats(this.model._state);
+    Application.showStats(this.model.state);
+  }
+
+  createHeaderElement() {
+    this._header = document.createElement(`header`);
+    this._header.className = `header`;
+    this._header.appendChild(this.backButton.element);
+    this._header.appendChild(this.gameStat.element);
+  }
+
+  createContentElement() {
+    const statBlock = new StatBlockView(this.model.state.givenAnswers);
+
+    const content = levelView(this.model.getCurrentLevel(), this);
+    content.element.append(statBlock.element);
+
+    return content.element;
   }
 
   updateHeader() {
-    const gameStat = new GameStatView();
-    this.root.replaceChild(gameStat.element, this.gameStat.element);
+    const gameStat = new GameStatView(this.model.state);
+    this._header.replaceChild(gameStat.element, this.gameStat.element);
     this.gameStat = gameStat;
   }
 
-  changeContentView(view) {
-    this.root.replaceChild(view.element, this.content.element);
-    this.content = view;
+  updateContentView() {
+    const contentElement = this.createContentElement();
+
+    this.root.replaceChild(contentElement, this._content);
+    this._content = contentElement;
     resizeImages();
   }
 
   changeLevel() {
     if (this.model.canContinue() && this.model.isNextLevelExists()) {
       this.model.nextLevel();
+      this.updateHeader();
+      this.updateContentView();
     } else {
       this.exit();
     }
-    this.updateHeader();
-
-    const level = levelView(this.model.getCurrentLevel(), this);
-    this.changeContentView(level);
   }
 }

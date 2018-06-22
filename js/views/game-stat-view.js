@@ -6,22 +6,19 @@ export default class GameStatView extends AbstractView {
     super();
     this.state = state;
   }
+
   get template() {
-    if (!this.state) {
-      return ``;
-    } else {
-      return `
-        <h1 class="game__timer">${this.state.seconds}</h1>
-        <div class="game__lives">
-        ${new Array(BASE_LEFT_LIVES - this.state.leftLives)
-          .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
-          .join(``)}
-        ${new Array(this.state.leftLives)
-          .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
-          .join(``)}
-        </div>
-      `;
-    }
+    return `
+      <h1 class="game__timer">${this.state.seconds}</h1>
+      <div class="game__lives">
+      ${new Array(BASE_LEFT_LIVES - this.state.leftLives)
+        .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
+        .join(``)}
+      ${new Array(this.state.leftLives)
+        .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`)
+        .join(``)}
+      </div>
+    `;
   }
 }
 

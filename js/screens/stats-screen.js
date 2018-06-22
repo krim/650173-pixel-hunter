@@ -3,10 +3,11 @@ import BackButtonView from "../views/back-button-view";
 import Application from "../application";
 import HeaderView from "../views/header-view";
 import FooterView from "../views/footer-view";
+import {statsData} from "../data";
 
 export default class StatsScreen {
-  constructor(data, state) {
-    this.view = new StatsView(data, state);;
+  constructor(state) {
+    this.view = new StatsView(statsData, state);
     this.backButton = new BackButtonView();
     this.header = new HeaderView();
     this.footer = new FooterView();

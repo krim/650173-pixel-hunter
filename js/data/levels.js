@@ -62,13 +62,3 @@ export const levelView = (images, screen) => {
     return gameThirdScreen;
   }
 };
-
-// export const renderNextLevel = (state) => {
-//   if (canContinue(state) && isNextLevelExists(state.level)) {
-//     renderLevel(Object.assign({}, state, {level: state.level + 1}));
-//   } else {
-//     statsData.allAnswers.push(state.givenAnswers);
-//     const statsScreen = new StatsView(statsData, state);
-//     showScreen(statsScreen);
-//   }
-// };

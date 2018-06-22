@@ -8,14 +8,13 @@ export default class QuestionThirdView extends AbstractView {
     this.titles = data.titles;
     this.questionForm = new QuestionFormView(images);
     this.images = images;
+    this._blockClass = `game`;
   }
 
   get template() {
     return `
-      <div class="game">
-        <p class="game__task">${this.questionTitle(this.images)}</p>
-        ${this.questionForm.element.innerHTML}
-      </div>
+      <p class="game__task">${this.questionTitle(this.images)}</p>
+      ${this.questionForm.element.innerHTML}
     `;
   }
 
