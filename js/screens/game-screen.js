@@ -2,14 +2,16 @@ import Application from "../application";
 import GameStatView from "../views/game-stat-view";
 import BackButtonView from "../views/back-button-view";
 import FooterView from "../views/footer-view";
-import {levelView, resizeImages} from '../data/levels';
+import {levelView, resizeImages} from '../libs/render-questions';
 import StatBlockView from "../views/stat-block-view";
+import TimerView from "../views/timer-view";
 
 export default class GameScreen {
   constructor(model) {
     this.model = model;
-    this.backButton = new BackButtonView();
-    this.gameStat = new GameStatView(this.model.state);
+    this._backButton = new BackButtonView();
+    this._gameStat = new GameStatView(this.model.state);
+    this._timer = new TimerView(this.model.seconds);
 
     this.createHeaderElement();
     this._content = this.createContentElement();
@@ -23,19 +25,22 @@ export default class GameScreen {
   }
 
   init() {
-    this.backButton.onBackButtonClick = () => Application.showGreeting();
+    this._backButton.onBackButtonClick = () => Application.showGreeting();
   }
 
-  get modelObject() {
-    return this.model;
-  }
 
   get element() {
     return this.root;
   }
 
   startGame() {
-    this.changeLevel();
+    this.renderLevel();
+    this.model.initTimer();
+
+    this._interval = setInterval(() => {
+      this.model.tick();
+      this.updateHeader();
+    }, 1000);
   }
 
   stopGame() {
@@ -56,8 +61,10 @@ export default class GameScreen {
   createHeaderElement() {
     this._header = document.createElement(`header`);
     this._header.className = `header`;
-    this._header.appendChild(this.backButton.element);
-    this._header.appendChild(this.gameStat.element);
+
+    this._header.appendChild(this._backButton.element);
+    this._header.appendChild(this._timer.element);
+    this._header.appendChild(this._gameStat.element);
   }
 
   createContentElement() {
@@ -71,8 +78,12 @@ export default class GameScreen {
 
   updateHeader() {
     const gameStat = new GameStatView(this.model.state);
-    this._header.replaceChild(gameStat.element, this.gameStat.element);
-    this.gameStat = gameStat;
+    const timer = new TimerView(this.model.seconds);
+
+    this._header.replaceChild(timer.element, this._timer.element);
+    this._header.replaceChild(gameStat.element, this._gameStat.element);
+    this._gameStat = gameStat;
+    this._timer = timer;
   }
 
   updateContentView() {
@@ -80,14 +91,18 @@ export default class GameScreen {
 
     this.root.replaceChild(contentElement, this._content);
     this._content = contentElement;
+  }
+
+  renderLevel() {
+    this.updateHeader();
+    this.updateContentView();
     resizeImages();
   }
 
   changeLevel() {
     if (this.model.canContinue() && this.model.isNextLevelExists()) {
       this.model.nextLevel();
-      this.updateHeader();
-      this.updateContentView();
+      this.renderLevel();
     } else {
       this.exit();
     }

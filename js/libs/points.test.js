@@ -34,11 +34,13 @@ describe(`calculatePoints`, () => {
     expect(calculatePoints(answers, leftLives).pointsSum).to.equal(pointsForAllAnswers);
   });
 
-  it(`should return 850 points when user have 2 errors`, () => {
-    const pointsForAllAnswersWithTwoErrors = 850;
+  it(`should return 950 points when user have 2 errors`, () => {
+    const pointsForAllAnswersWithTwoErrors = 950;
+    const answersWithErrors = 2;
+    const rightAnswersCount = QUESTIONS_COUNT - answersWithErrors;
 
-    answers.fill({variant: true, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 0, 8);
-    answers.fill({variant: false, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 8, QUESTIONS_COUNT);
+    answers.fill({variant: true, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, 0, rightAnswersCount);
+    answers.fill({variant: false, seconds: NORMAL_SPEED_FOR_ANSWER_IN_SECONDS}, rightAnswersCount, QUESTIONS_COUNT);
 
     expect(calculatePoints(answers, leftLives).pointsSum).to.equal(pointsForAllAnswersWithTwoErrors);
   });

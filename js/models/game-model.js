@@ -1,11 +1,11 @@
 import {levels, PAINT, PHOTO} from '../data';
 import GameThirdView from '../views/questions/question-third-view';
+import Timer, {MAX_SECONDS} from "../libs/timer";
 
-const SECONDS_FOR_ANSWER = 15;
 const INITIAL_GAME = Object.freeze({
   level: 0,
   leftLives: 3,
-  seconds: 30,
+  seconds: 0,
   givenAnswers: []
 });
 
@@ -19,7 +19,20 @@ export default class GameModel {
     return Object.freeze(this._state);
   }
 
+  initTimer() {
+    this._timer = new Timer(MAX_SECONDS);
+  }
+
+  get seconds() {
+    return this._timer.seconds;
+  }
+
+  tick() {
+    this._timer.tick();
+  }
+
   restart() {
+    this.initTimer();
     this._state = Object.assign({}, INITIAL_GAME, {givenAnswers: []});
   }
 
@@ -45,29 +58,29 @@ export default class GameModel {
     this._state = Object.assign({}, this._state, {leftLives});
   }
 
-  saveAnswer(variant) {
+  saveAnswer(variant, seconds) {
     if (!variant) {
       this.die();
     }
 
-    this._state.givenAnswers.push({variant, seconds: SECONDS_FOR_ANSWER});
+    this._state.givenAnswers.push({variant, seconds});
   }
 
-  saveAnswerByArray(answers) {
+  saveAnswerByArray(answers, seconds) {
     const checkedAnswers = Array.from(answers).map((answer) => answer.value);
     const levelsAnswers = levels[this._state.level].map((question) => question.type);
     const variant = checkedAnswers.toString() === levelsAnswers.toString();
 
-    this.saveAnswer(variant);
+    this.saveAnswer(variant, seconds);
   }
 
-  saveAnswerByElement(answer) {
+  saveAnswerByElement(answer, seconds) {
     const answerSrc = answer.getElementsByTagName(`img`)[0].src;
     const questions = levels[this._state.level];
     const levelsAnswer = questions.find((level) => level.src === answerSrc);
     const questionType = GameThirdView.isPaintQuestion(questions) ? PAINT : PHOTO;
     const variant = levelsAnswer.type === questionType;
 
-    this.saveAnswer(variant);
+    this.saveAnswer(variant, seconds);
   }
 }
