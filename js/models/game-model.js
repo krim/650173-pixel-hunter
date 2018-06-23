@@ -31,6 +31,10 @@ export default class GameModel {
     this._timer.tick();
   }
 
+  get isTimerFinished() {
+    return this._timer.isFinished;
+  }
+
   restart() {
     this.initTimer();
     this._state = Object.assign({}, INITIAL_GAME, {givenAnswers: []});

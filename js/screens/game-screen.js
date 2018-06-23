@@ -10,7 +10,7 @@ export default class GameScreen {
   constructor(model) {
     this.model = model;
     this._backButton = new BackButtonView();
-    this._gameStat = new GameStatView(this.model.state);
+    this._gameStat = new GameStatView(this.model.state.leftLives);
     this._timer = new TimerView(this.model.seconds);
 
     this.createHeaderElement();
@@ -40,6 +40,12 @@ export default class GameScreen {
     this._interval = setInterval(() => {
       this.model.tick();
       this.updateHeader();
+      if (this.model.isTimerFinished) {
+        this.stopGame();
+        this.model.saveAnswer(false, this.model.seconds);
+        this.startGame();
+        this.changeLevel();
+      }
     }, 1000);
   }
 
@@ -47,14 +53,8 @@ export default class GameScreen {
     clearInterval(this._interval);
   }
 
-  restart(continueGame) {
-    if (!continueGame) {
-      this.model.restart();
-    }
-    this.startGame();
-  }
-
   exit() {
+    this.stopGame();
     Application.showStats(this.model.state);
   }
 
@@ -77,7 +77,7 @@ export default class GameScreen {
   }
 
   updateHeader() {
-    const gameStat = new GameStatView(this.model.state);
+    const gameStat = new GameStatView(this.model.state.leftLives);
     const timer = new TimerView(this.model.seconds);
 
     this._header.replaceChild(timer.element, this._timer.element);
