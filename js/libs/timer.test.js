@@ -1,14 +1,15 @@
 import {expect} from 'chai';
-import Timer, {FINISHED, TICK_COUNT} from './timer';
+import Timer, {TICK_COUNT} from './timer';
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 describe(`Timer`, () => {
-  it(`should decrease left seconds after tick`, () => {
+  it(`should decrease left seconds and increase Seconds for answer after tick`, () => {
     const seconds = getRandomInt(1, 30);
     const timer = new Timer(seconds);
 
     expect(timer.leftSeconds).to.equal(seconds);
+    expect(timer.secondsForAnswer).to.equal(0);
 
     timer.tick();
     expect(timer.leftSeconds).to.equal(seconds - TICK_COUNT);
@@ -23,7 +24,8 @@ describe(`Timer`, () => {
     timer.tick();
     expect(timer.leftSeconds).to.equal(0);
     expect(timer.secondsForAnswer).to.equal(1);
-    expect(timer.tick()).to.equal(FINISHED);
+
+    timer.tick();
     expect(timer.isFinished).to.equal(true);
   });
 
