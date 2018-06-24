@@ -1,17 +1,18 @@
 import {expect} from 'chai';
-import Timer, {FINISHED, TICK_COUNT, MAX_SECONDS, INITIAL_SECONDS} from './timer';
+import Timer, {FINISHED, TICK_COUNT} from './timer';
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-describe(`timerObject`, () => {
-  it(`should increase seconds after tick`, () => {
-    const seconds = getRandomInt(1, MAX_SECONDS);
+describe(`Timer`, () => {
+  it(`should decrease left seconds after tick`, () => {
+    const seconds = getRandomInt(1, 30);
     const timer = new Timer(seconds);
 
-    expect(timer.seconds).to.equal(INITIAL_SECONDS);
+    expect(timer.leftSeconds).to.equal(seconds);
 
     timer.tick();
-    expect(timer.seconds).to.equal(TICK_COUNT);
+    expect(timer.leftSeconds).to.equal(seconds - TICK_COUNT);
+    expect(timer.secondsForAnswer).to.equal(TICK_COUNT);
     expect(timer.isFinished).to.equal(false);
   });
 
@@ -20,13 +21,12 @@ describe(`timerObject`, () => {
     const timer = new Timer(seconds);
 
     timer.tick();
-    expect(timer.seconds).to.equal(1);
+    expect(timer.leftSeconds).to.equal(0);
+    expect(timer.secondsForAnswer).to.equal(1);
     expect(timer.tick()).to.equal(FINISHED);
     expect(timer.isFinished).to.equal(true);
   });
-});
 
-describe(`createTimer`, () => {
   it(`should not allow seconds below or equal zero`, () => {
     const errorMessage = /Seconds should be positive value/;
 
@@ -35,13 +35,13 @@ describe(`createTimer`, () => {
   });
 
   it(`should create new timer object`, () => {
-    const seconds = 30;
+    const seconds = 1;
 
     expect(() => new Timer(seconds)).to.not.throw();
 
     const timer = new Timer(seconds);
     expect(timer).to.respondTo(`tick`);
     expect(timer.isFinished).to.equal(false);
-    expect(timer.seconds).to.equal(INITIAL_SECONDS);
+    expect(timer.leftSeconds).to.equal(seconds);
   });
 });

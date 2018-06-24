@@ -11,7 +11,7 @@ export default class GameScreen {
     this.model = model;
     this._backButton = new BackButtonView();
     this._gameStat = new GameStatView(this.model.state.leftLives);
-    this._timer = new TimerView(this.model.seconds);
+    this._timer = new TimerView(this.model.secondsForAnswer);
 
     this.createHeaderElement();
     this._content = this.createContentElement();
@@ -42,7 +42,7 @@ export default class GameScreen {
       this.updateHeader();
       if (this.model.isTimerFinished) {
         this.stopGame();
-        this.model.saveAnswer(false, this.model.seconds);
+        this.model.saveAnswer(false, this.model.secondsForAnswer);
         this.startGame();
         this.changeLevel();
       }
@@ -78,7 +78,7 @@ export default class GameScreen {
 
   updateHeader() {
     const gameStat = new GameStatView(this.model.state.leftLives);
-    const timer = new TimerView(this.model.seconds);
+    const timer = new TimerView(this.model.leftSeconds);
 
     this._header.replaceChild(timer.element, this._timer.element);
     this._header.replaceChild(gameStat.element, this._gameStat.element);

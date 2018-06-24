@@ -5,7 +5,7 @@ import Timer, {MAX_SECONDS} from "../libs/timer";
 const INITIAL_GAME = Object.freeze({
   level: 0,
   leftLives: 3,
-  seconds: 0,
+  seconds: 30,
   givenAnswers: []
 });
 
@@ -23,8 +23,12 @@ export default class GameModel {
     this._timer = new Timer(MAX_SECONDS);
   }
 
-  get seconds() {
-    return this._timer.seconds;
+  get secondsForAnswer() {
+    return this._timer.secondsForAnswer;
+  }
+
+  get leftSeconds() {
+    return this._timer.leftSeconds;
   }
 
   tick() {

@@ -1,22 +1,22 @@
 export const FINISHED = `finished`;
 export const TICK_COUNT = 1;
 export const MAX_SECONDS = 30;
-export const INITIAL_SECONDS = 0;
 
 export default class Timer {
-  constructor(maxSeconds) {
-    if (maxSeconds <= 0) {
+  constructor(leftSeconds) {
+    if (leftSeconds <= 0) {
       throw new Error(`Seconds should be positive value`);
     }
 
-    this._maxSeconds = maxSeconds;
     this.isFinished = false;
-    this.seconds = INITIAL_SECONDS;
+    this.secondsForAnswer = 0;
+    this.leftSeconds = leftSeconds;
   }
 
   tick() {
-    if (this.seconds < this._maxSeconds) {
-      this.seconds += TICK_COUNT;
+    if (this.leftSeconds > 0) {
+      this.leftSeconds -= TICK_COUNT;
+      this.secondsForAnswer += TICK_COUNT;
     } else {
       this.isFinished = true;
 

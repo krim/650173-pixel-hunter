@@ -7,7 +7,7 @@ import {
 import GameFirstView from '../views/questions/question-first-view';
 import GameSecondView from '../views/questions/question-second-view';
 import GameThirdView from '../views/questions/question-third-view';
-import {resizeImage} from './resize_image';
+import {calculateDimensions} from './calculate-dimensions';
 
 const SECOND_QUESTION_ANSWERS_COUNT = 2;
 
@@ -16,7 +16,7 @@ export const resizeImages = () => {
 
   images.forEach((image) => {
     image.onload = () => {
-      const newImageDimensions = resizeImage(
+      const newImageDimensions = calculateDimensions(
           {width: image.width, height: image.height},
           {width: image.naturalWidth, height: image.naturalHeight}
       );
@@ -33,7 +33,7 @@ const firstQuestionType = (images, screen) => {
 
     if (checkedAnswers.length === SECOND_QUESTION_ANSWERS_COUNT) {
       screen.stopGame();
-      screen.model.saveAnswerByArray(checkedAnswers, screen.model.seconds);
+      screen.model.saveAnswerByArray(checkedAnswers, screen.model.secondsForAnswer);
       screen.startGame();
       screen.changeLevel();
     }
@@ -47,7 +47,7 @@ const secondQuestionType = (images, screen) => {
   gameSecondScreen.onAnswersChecked = () => {
     const checkedAnswers = document.querySelectorAll(`input:checked`);
     screen.stopGame();
-    screen.model.saveAnswerByArray(checkedAnswers, screen.model.seconds);
+    screen.model.saveAnswerByArray(checkedAnswers, screen.model.secondsForAnswer);
     screen.startGame();
     screen.changeLevel();
   };
@@ -59,7 +59,7 @@ const thirdQuestionType = (images, screen) => {
   const gameThirdScreen = new GameThirdView(gameThirdData, images);
   gameThirdScreen.onGameOptionsClick = (object) => {
     screen.stopGame();
-    screen.model.saveAnswerByElement(object, screen.model.seconds);
+    screen.model.saveAnswerByElement(object, screen.model.secondsForAnswer);
     screen.startGame();
     screen.changeLevel();
   };
@@ -76,9 +76,5 @@ export const levelView = (images, screen) => {
     return firstQuestionType(images, screen);
   }
 
-  if (images.length === QUESTIONS_TYPES.THREE_IMAGES) {
-    return thirdQuestionType(images, screen);
-  }
-
-  return true;
+  return thirdQuestionType(images, screen);
 };
