@@ -1,4 +1,4 @@
-import {PAINT, PHOTO} from '../../data';
+import {PAINTING, PHOTO} from '../../data';
 import QuestionFormView from './form-view';
 import AbstractView from '../abstract-view';
 
@@ -28,11 +28,11 @@ export default class QuestionThirdView extends AbstractView {
   }
 
   questionTitle(questions) {
-    return QuestionThirdView.isPaintQuestion(questions) ? this.titles[PAINT] : this.titles[PHOTO];
+    return QuestionThirdView.isPaintQuestion(questions) ? this.titles[PAINTING] : this.titles[PHOTO];
   }
 
   static isPaintQuestion(questions) {
-    const paintPhotosCount = questions.filter((question) => question.type === PAINT).length;
+    const paintPhotosCount = questions.filter((question) => question.type === PAINTING).length;
 
     return paintPhotosCount === 1;
   }
