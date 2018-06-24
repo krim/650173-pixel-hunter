@@ -1,6 +1,6 @@
 import {adaptServerData} from './data-adapter';
 
-export default class Loader {
+export default class Api {
   loadLevels() {
     window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
     then(this.checkStatus).
