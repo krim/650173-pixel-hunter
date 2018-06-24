@@ -31,12 +31,12 @@ export default class RulesView extends AbstractView {
     };
 
     const submitButtonClickHandler = () => {
-      this.onSubmitButtonClick();
+      this.onSubmitButtonClick(nameInput.value);
     };
 
     nameInput.addEventListener(`input`, nameInputChangeHandler);
     submitButton.addEventListener(`click`, submitButtonClickHandler);
   }
 
-  onSubmitButtonClick() {}
+  onSubmitButtonClick(_userName) {}
 }

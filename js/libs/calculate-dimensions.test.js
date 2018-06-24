@@ -1,9 +1,9 @@
 import assert from 'assert';
-import {resizeImage} from './resize_image';
+import {calculateDimensions} from './calculate-dimensions';
 
 const createTestForFrame = (frame) => {
   const assertRatio = (given, expected) => {
-    const actual = resizeImage(frame, given);
+    const actual = calculateDimensions(frame, given);
     assert.deepEqual(actual, expected);
   };
 

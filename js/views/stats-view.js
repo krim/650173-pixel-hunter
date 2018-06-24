@@ -5,7 +5,7 @@ import {
   SLOW_PENALTY_POINTS,
   CORRECT_ANSWER_POINTS,
   GAME_FAILED
-} from '../data/points';
+} from '../libs/points';
 
 import {QUESTIONS_COUNT} from '../data';
 import AbstractView from './abstract-view';
@@ -16,7 +16,7 @@ export default class StatsView extends AbstractView {
     super();
     this.data = data;
     this.state = state;
-    this.statistic = data.allAnswers;
+    this.statistic = [state.givenAnswers];
   }
 
   get template() {
@@ -32,7 +32,7 @@ export default class StatsView extends AbstractView {
     return bonusPoints.count === 0 ? `` : `
       <tr>
         <td></td>
-        <td class="result__extra">${this.data.bonusBlocks[`type`]}</td>
+        <td class="result__extra">${this.data.bonusBlocks[type].title}</td>
         <td class="result__extra">${bonusPoints.count}&nbsp;<span class="stats__result stats__result--${type}"></span></td>
         <td class="result__points">×&nbsp;${pointsCount}</td>
         <td class="result__total">${bonusPoints.points}</td>

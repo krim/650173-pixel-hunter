@@ -32,8 +32,6 @@ export const calculatePoints = (answers, leftLives) => {
         slowPenaltyPoints.points += SLOW_PENALTY_POINTS;
         slowPenaltyPoints.count++;
       }
-    } else {
-      leftLives -= 1;
     }
   });
 
@@ -48,5 +46,11 @@ export const calculatePoints = (answers, leftLives) => {
     pointsSum = rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
   }
 
-  return {rightAnswerPoints, fastBonusPoints, slowPenaltyPoints, liveBonusPoints, pointsSum};
+  return {
+    rightAnswerPoints,
+    fastBonusPoints,
+    slowPenaltyPoints,
+    liveBonusPoints,
+    pointsSum
+  };
 };

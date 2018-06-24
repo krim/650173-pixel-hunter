@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view';
 import {QUESTIONS_COUNT} from '../data';
-import {isFastAnswer, isSlowAnswer} from '../data/points';
+import {isFastAnswer, isSlowAnswer} from '../libs/points';
 
 const ANSWERS_STATE = {
   FAST: `fast`,
@@ -13,6 +13,7 @@ export default class StatBlockView extends AbstractView {
   constructor(answers) {
     super();
     this.answers = answers;
+    this._blockClass = `stats`;
   }
   get template() {
     return `

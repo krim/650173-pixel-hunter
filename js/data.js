@@ -14,13 +14,6 @@ export const IMAGE_TITLES = {
   PAINT: `Рисунок`
 };
 
-export const initialState = Object.freeze({
-  level: 0,
-  leftLives: 3,
-  leftSeconds: 30,
-  givenAnswers: []
-});
-
 export const introData = {
   description: `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`
 };
@@ -83,8 +76,7 @@ export const statsData = {
   },
   loserBlock: {
     description: `FAIL`
-  },
-  allAnswers: []
+  }
 };
 
 const questionsImages = {
