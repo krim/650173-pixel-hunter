@@ -12,18 +12,18 @@ import AbstractView from './abstract-view';
 import StatBlockView from './stat-block-view';
 
 export default class StatsView extends AbstractView {
-  constructor(data, state) {
+  constructor(data, state, results) {
     super();
     this.data = data;
     this.state = state;
-    this.statistic = [state.givenAnswers];
+    this.statistic = results.map((result) => result.data);
   }
 
   get template() {
     return `
       <div class="result">
         <h1>${this.statTitle(this.state)}</h1>
-        ${this.statistic.map((answers, index) => this.statTable(answers, index)).join(``)}
+        ${this.statistic.map((result, index) => this.statTable(result, index)).join(``)}
       </div>
     `;
   }
@@ -73,12 +73,12 @@ export default class StatsView extends AbstractView {
   }
 
 
-  statTable(answers, index) {
-    const calculatedPoints = calculatePoints(answers, this.state.leftLives);
+  statTable(result, index) {
+    const calculatedPoints = calculatePoints(result.givenAnswers, result.leftLives);
 
     return `
       <table class="result__table">
-        ${this.isLose(calculatedPoints) ? this.loserBlock(answers, index) : this.winnerBlock(answers, index, calculatedPoints)}
+        ${this.isLose(calculatedPoints) ? this.loserBlock(result.givenAnswers, index) : this.winnerBlock(result.givenAnswers, index, calculatedPoints)}
       </table>
     `;
   }

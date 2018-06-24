@@ -6,8 +6,8 @@ import FooterView from "../views/footer-view";
 import {statsData} from "../data";
 
 export default class StatsScreen {
-  constructor(state) {
-    this.view = new StatsView(statsData, state);
+  constructor(state, results) {
+    this.view = new StatsView(statsData, state, results);
     this.backButton = new BackButtonView();
     this.header = new HeaderView();
     this.footer = new FooterView();

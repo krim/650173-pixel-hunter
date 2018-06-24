@@ -1,4 +1,5 @@
 import {PAINTING, PHOTO} from '../data';
+import Api from '../libs/api';
 import GameThirdView from '../views/questions/question-third-view';
 import Timer, {MAX_SECONDS} from "../libs/timer";
 
@@ -65,6 +66,12 @@ export default class GameModel {
     const leftLives = this._state.leftLives - 1;
 
     this._state = Object.assign({}, this._state, {leftLives});
+  }
+
+  sendResults() {
+    const api = new Api();
+
+    return api.sendResults(this.userName, this._state);
   }
 
   saveAnswer(variant, seconds) {

@@ -55,7 +55,8 @@ export default class GameScreen {
 
   exit() {
     this.stopGame();
-    Application.showStats(this.model.state);
+    this.model.sendResults().
+      then(() => Application.showStats(this.model._state, this.model.userName));
   }
 
   createHeaderElement() {
