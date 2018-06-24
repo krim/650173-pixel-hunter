@@ -1,4 +1,4 @@
-import {levels, PAINT, PHOTO} from '../data';
+import {PAINTING, PHOTO} from '../data';
 import GameThirdView from '../views/questions/question-third-view';
 import Timer, {MAX_SECONDS} from "../libs/timer";
 
@@ -10,8 +10,9 @@ const INITIAL_GAME = Object.freeze({
 });
 
 export default class GameModel {
-  constructor(userName) {
+  constructor(userName, levels) {
     this.userName = userName;
+    this.levels = levels;
     this.restart();
   }
 
@@ -49,7 +50,7 @@ export default class GameModel {
   }
 
   isNextLevelExists() {
-    return levels[this._state.level + 1];
+    return this.levels[this._state.level + 1];
   }
 
   canContinue() {
@@ -57,7 +58,7 @@ export default class GameModel {
   }
 
   getCurrentLevel() {
-    return levels[this._state.level];
+    return this.levels[this._state.level];
   }
 
   die() {
@@ -76,7 +77,7 @@ export default class GameModel {
 
   saveAnswerByArray(answers, seconds) {
     const checkedAnswers = Array.from(answers).map((answer) => answer.value);
-    const levelsAnswers = levels[this._state.level].map((question) => question.type);
+    const levelsAnswers = this.levels[this._state.level].map((question) => question.type);
     const variant = checkedAnswers.toString() === levelsAnswers.toString();
 
     this.saveAnswer(variant, seconds);
@@ -84,9 +85,9 @@ export default class GameModel {
 
   saveAnswerByElement(answer, seconds) {
     const answerSrc = answer.getElementsByTagName(`img`)[0].src;
-    const questions = levels[this._state.level];
+    const questions = this.levels[this._state.level];
     const levelsAnswer = questions.find((level) => level.src === answerSrc);
-    const questionType = GameThirdView.isPaintQuestion(questions) ? PAINT : PHOTO;
+    const questionType = GameThirdView.isPaintQuestion(questions) ? PAINTING : PHOTO;
     const variant = levelsAnswer.type === questionType;
 
     this.saveAnswer(variant, seconds);

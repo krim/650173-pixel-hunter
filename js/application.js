@@ -5,6 +5,9 @@ import RulesScreen from './screens/rules-screen';
 import GameScreen from './screens/game-screen';
 import StatsScreen from './screens/stats-screen';
 import GameModel from './models/game-model';
+import Loader from "./libs/loader";
+
+let loader = new Loader();
 
 export default class Application {
   static showIntro() {
@@ -12,6 +15,7 @@ export default class Application {
     intro.init();
 
     showScreen(intro.element);
+    loader.loadLevels();
   }
 
   static showGreeting() {
@@ -29,7 +33,7 @@ export default class Application {
   }
 
   static showGame(userName) {
-    const gameModel = new GameModel(userName);
+    const gameModel = new GameModel(userName, loader.levels);
     const gameScreen = new GameScreen(gameModel);
 
     gameScreen.init();

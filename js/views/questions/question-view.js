@@ -35,7 +35,7 @@ export default class QuestionView extends AbstractView {
         </label>
         <label class="game__answer game__answer--wide  game__answer--paint">
           <input name="question${index}" type="radio" value="paint">
-          <span>${IMAGE_TITLES.PAINT}</span>
+          <span>${IMAGE_TITLES.PAINTING}</span>
         </label>
       </div>
     `;
@@ -51,7 +51,7 @@ export default class QuestionView extends AbstractView {
         </label>
         <label class="game__answer game__answer--paint">
           <input name="question${index}" type="radio" value="paint">
-          <span>${IMAGE_TITLES.PAINT}</span>
+          <span>${IMAGE_TITLES.PAINTING}</span>
         </label>
       </div>
     `;
