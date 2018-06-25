@@ -12,7 +12,7 @@ export default class Api {
       });
   }
 
-  statisticUrl(userName) {
+  getStatisticUrl(userName) {
     return `https://es.dump.academy/pixel-hunter/stats/${APP_ID}-${userName}`;
   }
 
@@ -25,11 +25,11 @@ export default class Api {
       method: `POST`
     };
 
-    return fetch(this.statisticUrl(userName), requestData).then(this.checkStatus);
+    return fetch(this.getStatisticUrl(userName), requestData).then(this.checkStatus);
   }
 
   loadResults(userName) {
-    return window.fetch(this.statisticUrl(userName)).
+    return window.fetch(this.getStatisticUrl(userName)).
       then(this.checkStatus).
       then(this.convertToJson);
   }
