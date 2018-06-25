@@ -41,10 +41,13 @@ export default class Application {
     gameScreen.startGame();
   }
 
-  static showStats(state) {
-    const statistics = new StatsScreen(state);
+  static showStats(state, userName) {
+    api.loadResults(userName).
+      then((results) => {
+        const statistics = new StatsScreen(state, results);
 
-    statistics.init();
-    showScreen(statistics.element);
+        statistics.init();
+        showScreen(statistics.element);
+      });
   }
 }

@@ -1,15 +1,38 @@
 import {adaptServerData} from './data-adapter';
 
+const APP_ID = 650173;
+
 export default class Api {
   loadLevels() {
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
-    then(this.checkStatus).
-    then(this.convertToJson).
-    then((data) => {
-      this.levels = adaptServerData(data);
-    });
+    fetch(`https://es.dump.academy/pixel-hunter/questions`).
+      then(this.checkOkStatus).
+      then(this.convertToJson).
+      then((data) => {
+        this.levels = adaptServerData(data);
+      });
   }
 
+  getStatisticUrl(userName) {
+    return `https://es.dump.academy/pixel-hunter/stats/${APP_ID}-${userName}`;
+  }
+
+  sendResults(userName, data) {
+    const requestData = {
+      body: JSON.stringify({userName, data}),
+      headers: {
+        'Content-Type': `application/json`
+      },
+      method: `POST`
+    };
+
+    return fetch(this.getStatisticUrl(userName), requestData).then(this.checkStatus);
+  }
+
+  loadResults(userName) {
+    return window.fetch(this.getStatisticUrl(userName)).
+      then(this.checkStatus).
+      then(this.convertToJson);
+  }
 
   checkStatus(response) {
     if (response.ok) {
