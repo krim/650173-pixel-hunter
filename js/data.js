@@ -14,6 +14,11 @@ export const IMAGE_TITLES = {
   PAINTING: `Рисунок`
 };
 
+export const errorModalData = {
+  title: `Произошла ошибка!`,
+  description: `Пожалуйста, перезагрузите страницу.`
+};
+
 export const introData = {
   description: `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`
 };
