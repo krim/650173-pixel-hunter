@@ -26,16 +26,21 @@ export const resizeImages = () => {
   });
 };
 
+const onAnswerHandler = (screen, answers, saveAnswer) => {
+  screen.stopGame();
+  saveAnswer(answers, screen.model.secondsForAnswer);
+  screen.startGame();
+  screen.changeLevel();
+};
+
 const firstQuestionType = (images, screen) => {
   const gameFirstScreen = new GameFirstView(gameFirstData, images);
+
   gameFirstScreen.onAnswersChecked = () => {
     const checkedAnswers = document.querySelectorAll(`input:checked`);
 
     if (checkedAnswers.length === SECOND_QUESTION_ANSWERS_COUNT) {
-      screen.stopGame();
-      screen.model.saveAnswerByArray(checkedAnswers, screen.model.secondsForAnswer);
-      screen.startGame();
-      screen.changeLevel();
+      onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
     }
   };
 
@@ -44,12 +49,11 @@ const firstQuestionType = (images, screen) => {
 
 const secondQuestionType = (images, screen) => {
   const gameSecondScreen = new GameSecondView(gameSecondData, images);
+
   gameSecondScreen.onAnswersChecked = () => {
     const checkedAnswers = document.querySelectorAll(`input:checked`);
-    screen.stopGame();
-    screen.model.saveAnswerByArray(checkedAnswers, screen.model.secondsForAnswer);
-    screen.startGame();
-    screen.changeLevel();
+
+    onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
   };
 
   return gameSecondScreen;
@@ -57,11 +61,9 @@ const secondQuestionType = (images, screen) => {
 
 const thirdQuestionType = (images, screen) => {
   const gameThirdScreen = new GameThirdView(gameThirdData, images);
+
   gameThirdScreen.onGameOptionsClick = (object) => {
-    screen.stopGame();
-    screen.model.saveAnswerByElement(object, screen.model.secondsForAnswer);
-    screen.startGame();
-    screen.changeLevel();
+    onAnswerHandler(screen, object, screen.model.saveAnswerByElement.bind(screen.model));
   };
 
   return gameThirdScreen;
