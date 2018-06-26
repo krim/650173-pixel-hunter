@@ -1,3 +1,4 @@
+import {confirmModalData} from '../data';
 import Application from "../application";
 import GameStatView from "../views/game-stat-view";
 import BackButtonView from "../views/back-button-view";
@@ -5,6 +6,7 @@ import FooterView from "../views/footer-view";
 import {levelView, resizeImages} from '../libs/render-questions';
 import StatBlockView from "../views/stat-block-view";
 import TimerView from "../views/timer-view";
+import ConfirmModalView from "../views/modals/confirm";
 
 export default class GameScreen {
   constructor(model) {
@@ -12,6 +14,7 @@ export default class GameScreen {
     this._backButton = new BackButtonView();
     this._gameStat = new GameStatView(this.model.state.leftLives);
     this._timer = new TimerView(this.model.secondsForAnswer);
+    this._confirmModal = new ConfirmModalView(confirmModalData);
 
     this.createHeaderElement();
     this._content = this.createContentElement();
@@ -25,7 +28,11 @@ export default class GameScreen {
   }
 
   init() {
-    this._backButton.onBackButtonClick = () => Application.showGreeting();
+    this._backButton.onBackButtonClick = () => {
+      this.root.appendChild(this._confirmModal.element);
+      this._confirmModal.onOkButtonClick = () => Application.showGreeting();
+      this._confirmModal.onCancelButtonClick = () => this.root.removeChild(this._confirmModal.element);
+    };
   }
 
 
