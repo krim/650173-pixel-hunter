@@ -19,6 +19,11 @@ export const errorModalData = {
   description: `Пожалуйста, перезагрузите страницу.`
 };
 
+export const confirmModalData = {
+  title: `Подтверждение`,
+  text: `Вы уверены что хотите начать игру заново?`
+};
+
 export const introData = {
   description: `Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.`
 };
