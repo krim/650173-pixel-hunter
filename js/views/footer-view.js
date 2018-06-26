@@ -3,14 +3,14 @@ import AbstractView from './abstract-view';
 export default class FooterView extends AbstractView {
   constructor(creationDate = 2016) {
     super();
-    this.creationDate = creationDate;
+    this._creationDate = creationDate;
   }
 
   get template() {
     return `
       <footer class="footer">
         <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-        <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; ${this.creationDate}</span>
+        <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; ${this._creationDate}</span>
         <div class="footer__social-links">
           <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
           <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>

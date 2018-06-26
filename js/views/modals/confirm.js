@@ -3,7 +3,7 @@ import AbstractView from '../abstract-view';
 export default class ConfirmModalView extends AbstractView {
   constructor(data) {
     super();
-    this.data = data;
+    this._data = data;
   }
 
   get template() {
@@ -11,8 +11,8 @@ export default class ConfirmModalView extends AbstractView {
       <section class="modal-confirm modal-confirm__wrap">
         <form class="modal-confirm__inner">
           <button class="modal-confirm__close" type="button">Закрыть</button>
-          <h2 class="modal-confirm__title">${this.data.title}</h2>
-          <p class="modal-confirm__text">${this.data.text}</p>
+          <h2 class="modal-confirm__title">${this._data.title}</h2>
+          <p class="modal-confirm__text">${this._data.text}</p>
           <div class="modal-confirm__btn-wrap">
             <button class="modal-confirm__btn ok-btn">Ок</button>
             <button class="modal-confirm__btn cancel-btn">Отмена</button>

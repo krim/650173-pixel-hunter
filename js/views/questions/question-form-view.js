@@ -5,12 +5,12 @@ import {QUESTIONS_TYPES} from '../../data';
 export default class QuestionFormView extends AbstractView {
   constructor(questions) {
     super();
-    this.questions = questions;
+    this._questions = questions;
   }
   get template() {
     return `
-      <form class="game__content ${this.formClass(this.questions)}">
-        ${[...this.questions].map((question, index) => this.question(question, this.questions.length, index)).join(``)}
+      <form class="game__content ${this.formClass(this._questions)}">
+        ${[...this._questions].map((question, index) => this.question(question, this._questions.length, index)).join(``)}
       </form>
     `;
   }

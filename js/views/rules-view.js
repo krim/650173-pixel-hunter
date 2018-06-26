@@ -3,20 +3,17 @@ import AbstractView from './abstract-view';
 export default class RulesView extends AbstractView {
   constructor(data) {
     super();
-    this.title = data.title;
-    this.description = data.description;
-    this.placeholder = data.placeholder;
-    this.button = data.button;
+    this._data = data;
   }
 
   get template() {
     return `
       <div class="rules">
-        <h1 class="rules__title">${this.title}</h1>
-        <p class="rules__description">${this.description}</p>
+        <h1 class="rules__title">${this._data.title}</h1>
+        <p class="rules__description">${this._data.description}</p>
         <form class="rules__form">
-          <input class="rules__input" type="text" placeholder="${this.placeholder}">
-          <button class="rules__button  continue" type="submit" disabled>${this.button}</button>
+          <input class="rules__input" type="text" placeholder="${this._data.placeholder}">
+          <button class="rules__button  continue" type="submit" disabled>${this._data.button}</button>
         </form>
       </div>
     `;

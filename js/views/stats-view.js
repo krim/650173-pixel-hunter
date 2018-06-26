@@ -14,16 +14,16 @@ import StatBlockView from './stat-block-view';
 export default class StatsView extends AbstractView {
   constructor(data, state, results) {
     super();
-    this.data = data;
-    this.state = state;
-    this.statistic = results.map((result) => result.data);
+    this._data = data;
+    this._state = state;
+    this._statistic = results.map((result) => result.data);
   }
 
   get template() {
     return `
       <div class="result">
-        <h1>${this.statTitle(this.state)}</h1>
-        ${this.statistic.map((result, index) => this.statTable(result, index)).join(``)}
+        <h1>${this.statTitle(this._state)}</h1>
+        ${this._statistic.map((result, index) => this.statTable(result, index)).join(``)}
       </div>
     `;
   }
@@ -32,7 +32,7 @@ export default class StatsView extends AbstractView {
     return bonusPoints.count === 0 ? `` : `
       <tr>
         <td></td>
-        <td class="result__extra">${this.data.bonusBlocks[type].title}</td>
+        <td class="result__extra">${this._data.bonusBlocks[type].title}</td>
         <td class="result__extra">${bonusPoints.count}&nbsp;<span class="stats__result stats__result--${type}"></span></td>
         <td class="result__points">×&nbsp;${pointsCount}</td>
         <td class="result__total">${bonusPoints.points}</td>
@@ -67,7 +67,7 @@ export default class StatsView extends AbstractView {
         <td class="result__number">${index + 1}.</td>
         <td>${statBlock.element.innerHTML}</td>
         <td class="result__total"></td>
-        <td colspan="5" class="result__total  result__total--final">${this.data.loserBlock.description}</td>
+        <td colspan="5" class="result__total  result__total--final">${this._data.loserBlock.description}</td>
       </tr>
     `;
   }
@@ -84,11 +84,11 @@ export default class StatsView extends AbstractView {
   }
 
   statTitle() {
-    return this.isLose(this.state) ? this.data.titles.lose : this.data.titles.win;
+    return this.isLose(this._state) ? this._data.titles.lose : this._data.titles.win;
   }
 
   isLose(calculatedPoints) {
-    return (this.state.givenAnswers.length < QUESTIONS_COUNT) ||
+    return (this._state.givenAnswers.length < QUESTIONS_COUNT) ||
       (calculatedPoints && calculatedPoints.pointsSum === GAME_FAILED);
   }
 }

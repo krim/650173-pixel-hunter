@@ -1,18 +1,18 @@
-import QuestionFormView from './form-view';
+import QuestionFormView from './question-form-view';
 import AbstractView from '../abstract-view';
 
 export default class QuestionSecondView extends AbstractView {
   constructor(data, images) {
     super();
-    this.title = data.title;
-    this.questionForm = new QuestionFormView(images);
+    this._data = data;
+    this._questionForm = new QuestionFormView(images);
     this._blockClass = `game`;
   }
 
   get template() {
     return `
-      <p class="game__task">${this.title}</p>
-      ${this.questionForm.element.innerHTML}
+      <p class="game__task">${this._data.title}</p>
+      ${this._questionForm.element.innerHTML}
     `;
   }
 

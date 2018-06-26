@@ -1,40 +1,42 @@
 import AbstractView from '../abstract-view';
-import {QUESTIONS_TYPES, IMAGE_TITLES} from '../../data';
+import {QUESTIONS_TYPES, IMAGE_TITLES, PAINTING, PHOTO} from '../../data';
 
 export default class QuestionView extends AbstractView {
   constructor(question, type, index) {
     super();
-    this.question = question;
-    this.type = type;
-    this.index = index;
+    this._question = question;
+    this._type = type;
+    this._index = index;
+    this._debugMode = new URLSearchParams(document.location.search).get(`debug`) === `true`;
   }
+
   get template() {
-    if (this.type === QUESTIONS_TYPES.ONE_IMAGE) {
-      return this.firstTypeQuestionElement(this.question, this.index);
+    if (this._type === QUESTIONS_TYPES.ONE_IMAGE) {
+      return this.firstTypeQuestionElement(this._question, this._index);
     }
 
-    if (this.type === QUESTIONS_TYPES.TWO_IMAGES) {
-      return this.secondTypeQuestionElement(this.question, this.index);
+    if (this._type === QUESTIONS_TYPES.TWO_IMAGES) {
+      return this.secondTypeQuestionElement(this._question, this._index);
     }
 
-    if (this.type === QUESTIONS_TYPES.THREE_IMAGES) {
-      return this.thirdTypeQuestionElement(this.question, this.index);
+    if (this._type === QUESTIONS_TYPES.THREE_IMAGES) {
+      return this.thirdTypeQuestionElement(this._question, this._index);
     }
 
     return ``;
   }
 
-
   firstTypeQuestionElement(question, index) {
     return `
       <div class="game__option">
+        ${this.addDebugImageType(question)}
         <img src="${question.src}" alt="${question.src}" width="705" height="455">
-        <label class="game__answer  game__answer--photo">
-          <input name="question${index}" type="radio" value="photo">
+        <label class="game__answer game__answer--photo">
+          <input name="question${index}" type="radio" value="${PHOTO}">
           <span>${IMAGE_TITLES.PHOTO}</span>
         </label>
         <label class="game__answer game__answer--wide  game__answer--paint">
-          <input name="question${index}" type="radio" value="paint">
+          <input name="question${index}" type="radio" value="${PAINTING}">
           <span>${IMAGE_TITLES.PAINTING}</span>
         </label>
       </div>
@@ -44,13 +46,14 @@ export default class QuestionView extends AbstractView {
   secondTypeQuestionElement(question, index) {
     return `
       <div class="game__option">
+        ${this.addDebugImageType(question)}
         <img src="${question.src}" alt="${question.src}" width="468" height="458">
         <label class="game__answer game__answer--photo">
-          <input name="question${index}" type="radio" value="photo">
+          <input name="question${index}" type="radio" value="${PHOTO}">
           <span>${IMAGE_TITLES.PHOTO}</span>
         </label>
         <label class="game__answer game__answer--paint">
-          <input name="question${index}" type="radio" value="paint">
+          <input name="question${index}" type="radio" value="${PAINTING}">
           <span>${IMAGE_TITLES.PAINTING}</span>
         </label>
       </div>
@@ -62,8 +65,13 @@ export default class QuestionView extends AbstractView {
 
     return `
       <div class="game__option ${selectedClass}">
+        ${this.addDebugImageType(question)}
         <img src="${question.src}" alt="${question.src}" width="304" height="455">
       </div>
     `;
+  }
+
+  addDebugImageType(question) {
+    return this._debugMode ? `<div class="debug">${question.type}</div>` : ``;
   }
 }
