@@ -7,7 +7,7 @@ import GameScreen from './screens/game-screen';
 import StatsScreen from './screens/stats-screen';
 import GameModel from './models/game-model';
 import Api from './libs/api';
-import ErrorModalView from "./views/modals/error";
+import ErrorModalView from './views/modals/error';
 
 const api = new Api();
 

@@ -1,7 +1,7 @@
 import {PAINTING, PHOTO} from '../data';
 import Api from '../libs/api';
 import GameThirdView from '../views/questions/question-third-view';
-import Timer, {MAX_SECONDS} from "../libs/timer";
+import Timer, {MAX_SECONDS} from '../libs/timer';
 
 const INITIAL_GAME = Object.freeze({
   level: 0,

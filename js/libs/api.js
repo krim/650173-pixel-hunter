@@ -1,5 +1,5 @@
 import {adaptServerData} from './data-adapter';
-import Application from "../application";
+import Application from '../application';
 
 const APP_ID = 650173;
 

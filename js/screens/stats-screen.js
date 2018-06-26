@@ -1,9 +1,9 @@
-import StatsView from "../views/stats-view";
-import BackButtonView from "../views/back-button-view";
-import Application from "../application";
-import HeaderView from "../views/header-view";
-import FooterView from "../views/footer-view";
-import {statsData} from "../data";
+import StatsView from '../views/stats-view';
+import BackButtonView from '../views/back-button-view';
+import Application from '../application';
+import HeaderView from '../views/header-view';
+import FooterView from '../views/footer-view';
+import {statsData} from '../data';
 
 export default class StatsScreen {
   constructor(state, results) {

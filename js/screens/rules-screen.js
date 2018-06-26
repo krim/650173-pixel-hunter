@@ -1,9 +1,9 @@
 import {rulesData} from '../data';
 import RulesView from '../views/rules-view';
-import Application from "../application";
-import HeaderView from "../views/header-view";
-import BackButtonView from "../views/back-button-view";
-import FooterView from "../views/footer-view";
+import Application from '../application';
+import HeaderView from '../views/header-view';
+import BackButtonView from '../views/back-button-view';
+import FooterView from '../views/footer-view';
 
 export default class RulesScreen {
   constructor() {
