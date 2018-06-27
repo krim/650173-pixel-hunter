@@ -8,14 +8,16 @@ export const MAX_SECONDS_FOR_FAST_ANSWER = 10;
 export const MIN_SECONDS_FOR_SLOW_ANSWER = 20;
 export const GAME_FAILED = -1;
 
+const INITIAL_POINTS = Object.freeze({count: 0, points: 0});
+
 export const isFastAnswer = (seconds) => seconds < MAX_SECONDS_FOR_FAST_ANSWER;
 export const isSlowAnswer = (seconds) => seconds > MIN_SECONDS_FOR_SLOW_ANSWER;
 
 export const calculatePoints = (answers, leftLives) => {
-  let rightAnswerPoints = {count: 0, points: 0};
-  let fastBonusPoints = {count: 0, points: 0};
-  let slowPenaltyPoints = {count: 0, points: 0};
-  let liveBonusPoints = {count: 0, points: 0};
+  let rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
+  let fastBonusPoints = Object.assign({}, INITIAL_POINTS);
+  let slowPenaltyPoints = Object.assign({}, INITIAL_POINTS);
+  let liveBonusPoints = Object.assign({}, INITIAL_POINTS);
   let pointsSum;
 
   answers.forEach((answer) => {

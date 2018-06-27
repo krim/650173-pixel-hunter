@@ -1,12 +1,12 @@
-import {PAINTING, PHOTO} from '../data';
+import {PAINTING, PHOTO, BASE_LEFT_LIVES} from '../data';
 import Api from '../libs/api';
 import GameThirdView from '../views/questions/question-third-view';
 import Timer, {MAX_SECONDS} from '../libs/timer';
 
 const INITIAL_GAME = Object.freeze({
   level: 0,
-  leftLives: 3,
-  seconds: 30,
+  leftLives: BASE_LEFT_LIVES,
+  seconds: MAX_SECONDS,
   givenAnswers: []
 });
 
@@ -14,6 +14,7 @@ export default class GameModel {
   constructor(userName, levels) {
     this.userName = userName;
     this.levels = levels;
+
     this.restart();
   }
 

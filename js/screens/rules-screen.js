@@ -7,20 +7,20 @@ import FooterView from '../views/footer-view';
 
 export default class RulesScreen {
   constructor() {
-    this.view = new RulesView(rulesData);
-    this.backButton = new BackButtonView();
-    this.header = new HeaderView();
-    this.footer = new FooterView();
+    this._view = new RulesView(rulesData);
+    this._backButton = new BackButtonView();
+    this._header = new HeaderView();
+    this._footer = new FooterView();
 
     this.root = document.createElement(`div`);
-    this.root.appendChild(this.header.element.appendChild(this.backButton.element));
-    this.root.appendChild(this.view.element);
-    this.root.appendChild(this.footer.element);
+    this.root.appendChild(this._header.element.appendChild(this._backButton.element));
+    this.root.appendChild(this._view.element);
+    this.root.appendChild(this._footer.element);
   }
 
   init() {
-    this.view.onSubmitButtonClick = (userName) => Application.showGame(userName);
-    this.backButton.onBackButtonClick = () => Application.showGreeting();
+    this._view.onSubmitButtonClick = (userName) => Application.showGame(userName);
+    this._backButton.onBackButtonClick = () => Application.showGreeting();
   }
 
   get element() {

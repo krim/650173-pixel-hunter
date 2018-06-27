@@ -1,20 +1,20 @@
 import {PAINTING, PHOTO} from '../../data';
-import QuestionFormView from './form-view';
+import QuestionFormView from './question-form-view';
 import AbstractView from '../abstract-view';
 
 export default class QuestionThirdView extends AbstractView {
   constructor(data, images) {
     super();
-    this.titles = data.titles;
-    this.questionForm = new QuestionFormView(images);
-    this.images = images;
+    this._data = data;
+    this._questionForm = new QuestionFormView(images);
+    this._images = images;
     this._blockClass = `game`;
   }
 
   get template() {
     return `
-      <p class="game__task">${this.questionTitle(this.images)}</p>
-      ${this.questionForm.element.innerHTML}
+      <p class="game__task">${this.questionTitle(this._images)}</p>
+      ${this._questionForm.element.innerHTML}
     `;
   }
 
@@ -28,7 +28,7 @@ export default class QuestionThirdView extends AbstractView {
   }
 
   questionTitle(questions) {
-    return QuestionThirdView.isPaintQuestion(questions) ? this.titles[PAINTING] : this.titles[PHOTO];
+    return QuestionThirdView.isPaintQuestion(questions) ? this._data.titles[PAINTING] : this._data.titles[PHOTO];
   }
 
   static isPaintQuestion(questions) {

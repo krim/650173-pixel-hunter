@@ -4,14 +4,14 @@ import Application from '../application';
 
 export default class IntroScreen {
   constructor() {
-    this.view = new IntroView(introData);
+    this._view = new IntroView(introData);
   }
 
   init() {
-    this.view.onIntroAsteriskClick = () => Application.showGreeting();
+    this._view.onIntroAsteriskClick = () => Application.showGreeting();
   }
 
   get element() {
-    return this.view.element;
+    return this._view.element;
   }
 }

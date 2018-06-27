@@ -12,14 +12,14 @@ const ANSWERS_STATE = {
 export default class StatBlockView extends AbstractView {
   constructor(answers) {
     super();
-    this.answers = answers;
+    this._answers = answers;
     this._blockClass = `stats`;
   }
   get template() {
     return `
       <ul class="stats">
-        ${this.answers.map((answer) => this.statElement(answer)).join(``)}
-        ${new Array(QUESTIONS_COUNT - this.answers.length)
+        ${this._answers.map((answer) => this.statElement(answer)).join(``)}
+        ${new Array(QUESTIONS_COUNT - this._answers.length)
           .fill(`<li class="stats__result stats__result--unknown"></li>`)
           .join(``)}
       </ul>
