@@ -1,7 +1,7 @@
 import {adaptServerData} from './data-adapter';
 import Application from '../application';
 
-const APP_ID = 650173;
+const APP_ID = 6501730;
 
 export default class Api {
   loadLevels() {
