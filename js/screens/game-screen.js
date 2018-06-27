@@ -1,12 +1,12 @@
 import {confirmModalData} from '../data';
-import Application from "../application";
-import GameStatView from "../views/game-stat-view";
-import BackButtonView from "../views/back-button-view";
-import FooterView from "../views/footer-view";
+import Application from '../application';
+import GameStatView from '../views/game-stat-view';
+import BackButtonView from '../views/back-button-view';
+import FooterView from '../views/footer-view';
 import {levelView, resizeImages} from '../libs/render-questions';
-import StatBlockView from "../views/stat-block-view";
-import TimerView from "../views/timer-view";
-import ConfirmModalView from "../views/modals/confirm";
+import StatBlockView from '../views/stat-block-view';
+import TimerView from '../views/timer-view';
+import ConfirmModalView from '../views/modals/confirm';
 
 export default class GameScreen {
   constructor(model) {

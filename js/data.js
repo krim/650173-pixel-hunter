@@ -14,6 +14,11 @@ export const IMAGE_TITLES = {
   PAINTING: `Рисунок`
 };
 
+export const errorModalData = {
+  title: `Произошла ошибка!`,
+  description: `Пожалуйста, перезагрузите страницу.`
+};
+
 export const confirmModalData = {
   title: `Подтверждение`,
   text: `Вы уверены что хотите начать игру заново?`

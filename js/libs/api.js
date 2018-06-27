@@ -1,4 +1,5 @@
 import {adaptServerData} from './data-adapter';
+import Application from '../application';
 
 const APP_ID = 650173;
 
@@ -9,7 +10,8 @@ export default class Api {
       then(this.convertToJson).
       then((data) => {
         this.levels = adaptServerData(data);
-      });
+      }).
+      catch((error) => Application.showError(error));
   }
 
   getStatisticUrl(userName) {
@@ -25,20 +27,23 @@ export default class Api {
       method: `POST`
     };
 
-    return fetch(this.getStatisticUrl(userName), requestData).then(this.checkStatus);
+    return fetch(this.getStatisticUrl(userName), requestData).
+      then(this.checkStatus).
+      catch((error) => Application.showError(error));
   }
 
   loadResults(userName) {
     return window.fetch(this.getStatisticUrl(userName)).
       then(this.checkStatus).
-      then(this.convertToJson);
+      then(this.convertToJson).
+      catch((error) => Application.showError(error));
   }
 
   checkStatus(response) {
     if (response.ok) {
       return response;
     } else {
-      throw new Error(`${response.status}: ${response.statusText}`);
+      return `Статус: ${response.status}.`;
     }
   }
 

@@ -1,4 +1,5 @@
 import {showScreen} from './util';
+import {errorModalData} from './data';
 import IntroScreen from './screens/intro-screen';
 import GreetingScreen from './screens/greeting-screen';
 import RulesScreen from './screens/rules-screen';
@@ -6,6 +7,7 @@ import GameScreen from './screens/game-screen';
 import StatsScreen from './screens/stats-screen';
 import GameModel from './models/game-model';
 import Api from './libs/api';
+import ErrorModalView from './views/modals/error';
 
 const api = new Api();
 
@@ -49,5 +51,11 @@ export default class Application {
         statistics.init();
         showScreen(statistics.element);
       });
+  }
+
+  static showError(description) {
+    const errorModal = new ErrorModalView(errorModalData, description);
+
+    showScreen(errorModal.element);
   }
 }
