@@ -45,7 +45,7 @@ export default class GameScreen {
 
     this._interval = setInterval(() => {
       this.model.tick();
-      this.updateHeader();
+      this.updateTimer();
       if (this.model.isTimerFinished) {
         this.stopGame();
         this.model.saveAnswer(false, this.model.secondsForAnswer);
@@ -84,13 +84,20 @@ export default class GameScreen {
   }
 
   updateHeader() {
-    const gameStat = new GameStatView(this.model.state.leftLives);
-    const timer = new TimerView(this.model.leftSeconds);
+    this.updateTimer();
+    this.updateGameStat();
+  }
 
+  updateTimer() {
+    const timer = new TimerView(this.model.leftSeconds);
     this._header.replaceChild(timer.element, this._timer.element);
+    this._timer = timer;
+  }
+
+  updateGameStat() {
+    const gameStat = new GameStatView(this.model.state.leftLives);
     this._header.replaceChild(gameStat.element, this._gameStat.element);
     this._gameStat = gameStat;
-    this._timer = timer;
   }
 
   updateContentView() {
