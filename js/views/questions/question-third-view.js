@@ -20,11 +20,11 @@ export default class QuestionThirdView extends AbstractView {
 
   bind(el) {
     const gameOptions = el.querySelectorAll(`.game__option`);
-    const gameOptionsClickHandler = (object, state) => {
-      this.onGameOptionsClick(object, state);
-    };
+    gameOptions.forEach((it) => it.addEventListener(`click`, (event) => this.gameOptionsClickHandler(event.target, this.state)));
+  }
 
-    gameOptions.forEach((it) => it.addEventListener(`click`, (event) => gameOptionsClickHandler(event.target, this.state)));
+  gameOptionsClickHandler(object, state) {
+    this.onGameOptionsClick(object, state);
   }
 
   questionTitle(questions) {

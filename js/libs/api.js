@@ -11,8 +11,7 @@ export default class Api {
       then((data) => {
         this.levels = adaptServerData(data);
       }).
-      then(() => this.loadImages(this.levels)).
-      catch((error) => Application.showError(error));
+      then(() => this.loadImages(this.levels));
   }
 
   getStatisticUrl(userName) {
@@ -36,8 +35,7 @@ export default class Api {
   loadResults(userName) {
     return window.fetch(this.getStatisticUrl(userName)).
       then(this.checkStatus).
-      then(this.convertToJson).
-      catch((error) => Application.showError(error));
+      then(this.convertToJson);
   }
 
   checkStatus(response) {

@@ -18,11 +18,11 @@ export default class QuestionFirstView extends AbstractView {
 
   bind(el) {
     const gameForm = el.querySelector(`.game__content`);
-    const answersCheckedHandler = () => {
-      this.onAnswersChecked();
-    };
+    gameForm.addEventListener(`change`, () => this.answersCheckedHandler());
+  }
 
-    gameForm.addEventListener(`change`, answersCheckedHandler);
+  answersCheckedHandler() {
+    this.onAnswersChecked();
   }
 
   onAnswersChecked() { }

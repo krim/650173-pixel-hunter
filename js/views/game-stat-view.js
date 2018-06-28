@@ -8,7 +8,7 @@ export default class GameStatView extends AbstractView {
   }
 
   get template() {
-    return this._leftLives >= 0 ? `` : `
+    return this._leftLives < 0 ? `` : `
       <div class="game__lives">
       ${new Array(GameParams.LIVES - this._leftLives)
         .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)

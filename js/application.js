@@ -17,7 +17,8 @@ export default class Application {
 
     showScreen(intro.element);
     api.loadLevels().
-      then(() => Application.showGreeting());
+      then(() => Application.showGreeting()).
+      catch((error) => Application.showError(error));
   }
 
   static showGreeting() {
@@ -50,7 +51,8 @@ export default class Application {
 
         statistics.init();
         showScreen(statistics.element);
-      });
+      }).
+      catch((error) => Application.showError(error));
   }
 
   static showError(description) {
