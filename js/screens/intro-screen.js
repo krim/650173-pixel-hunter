@@ -7,10 +7,6 @@ export default class IntroScreen {
     this._view = new IntroView(introData);
   }
 
-  init() {
-    this._view.onIntroAsteriskClick = () => Application.showGreeting();
-  }
-
   get element() {
     return this._view.element;
   }

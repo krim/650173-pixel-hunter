@@ -5,12 +5,13 @@ const APP_ID = 6501730;
 
 export default class Api {
   loadLevels() {
-    fetch(`https://es.dump.academy/pixel-hunter/questions`).
+    return fetch(`https://es.dump.academy/pixel-hunter/questions`).
       then(this.checkOkStatus).
       then(this.convertToJson).
       then((data) => {
         this.levels = adaptServerData(data);
       }).
+      then(() => this.loadImages(this.levels)).
       catch((error) => Application.showError(error));
   }
 
@@ -49,5 +50,14 @@ export default class Api {
 
   convertToJson(response) {
     return response.json();
+  }
+
+  loadImages(levels) {
+    for (const images of levels) {
+      for (const image of images) {
+        const preloadedImage = new Image();
+        preloadedImage.src = image.src;
+      }
+    }
   }
 }

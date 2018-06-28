@@ -14,10 +14,10 @@ const api = new Api();
 export default class Application {
   static showIntro() {
     const intro = new IntroScreen();
-    intro.init();
 
     showScreen(intro.element);
-    api.loadLevels();
+    api.loadLevels().
+      then(() => Application.showGreeting());
   }
 
   static showGreeting() {
