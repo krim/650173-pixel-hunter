@@ -14,13 +14,12 @@ export default class BackButtonView extends AbstractView {
 
   bind(el) {
     const backButton = el.querySelector(`button.back`);
+    backButton.addEventListener(`click`, () => this.backButtonClickHandler(backButton));
+  }
 
-    const backButtonClickHandler = () => {
-      backButton.removeEventListener(`click`, backButtonClickHandler);
-      this.onBackButtonClick();
-    };
-
-    backButton.addEventListener(`click`, backButtonClickHandler);
+  backButtonClickHandler(button) {
+    button.removeEventListener(`click`, this.backButtonClickHandler);
+    this.onBackButtonClick();
   }
 
   onBackButtonClick() {}

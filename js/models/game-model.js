@@ -64,9 +64,7 @@ export default class GameModel {
   }
 
   die() {
-    const leftLives = this._state.leftLives - 1;
-
-    this._state = Object.assign({}, this._state, {leftLives});
+    this._state = Object.assign({}, this._state, {leftLives: this._state.leftLives - 1});
   }
 
   sendResults() {
