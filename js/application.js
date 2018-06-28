@@ -1,5 +1,5 @@
 import {showScreen} from './util';
-import {errorModalData} from './data';
+import {errorModalData} from './constants';
 import IntroScreen from './screens/intro-screen';
 import GreetingScreen from './screens/greeting-screen';
 import RulesScreen from './screens/rules-screen';
@@ -14,10 +14,11 @@ const api = new Api();
 export default class Application {
   static showIntro() {
     const intro = new IntroScreen();
-    intro.init();
 
     showScreen(intro.element);
-    api.loadLevels();
+    api.loadLevels().
+      then(() => Application.showGreeting()).
+      catch((error) => Application.showError(error));
   }
 
   static showGreeting() {
@@ -50,7 +51,8 @@ export default class Application {
 
         statistics.init();
         showScreen(statistics.element);
-      });
+      }).
+      catch((error) => Application.showError(error));
   }
 
   static showError(description) {

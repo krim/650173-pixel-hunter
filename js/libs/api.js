@@ -5,13 +5,13 @@ const APP_ID = 6501730;
 
 export default class Api {
   loadLevels() {
-    fetch(`https://es.dump.academy/pixel-hunter/questions`).
+    return fetch(`https://es.dump.academy/pixel-hunter/questions`).
       then(this.checkOkStatus).
       then(this.convertToJson).
       then((data) => {
         this.levels = adaptServerData(data);
       }).
-      catch((error) => Application.showError(error));
+      then(() => this.loadImages(this.levels));
   }
 
   getStatisticUrl(userName) {
@@ -35,8 +35,7 @@ export default class Api {
   loadResults(userName) {
     return window.fetch(this.getStatisticUrl(userName)).
       then(this.checkStatus).
-      then(this.convertToJson).
-      catch((error) => Application.showError(error));
+      then(this.convertToJson);
   }
 
   checkStatus(response) {
@@ -49,5 +48,14 @@ export default class Api {
 
   convertToJson(response) {
     return response.json();
+  }
+
+  loadImages(levels) {
+    for (const images of levels) {
+      for (const image of images) {
+        const preloadedImage = new Image();
+        preloadedImage.src = image.src;
+      }
+    }
   }
 }

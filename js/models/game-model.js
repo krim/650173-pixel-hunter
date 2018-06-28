@@ -1,12 +1,12 @@
-import {PAINTING, PHOTO, BASE_LEFT_LIVES} from '../data';
+import {ImageTypes, GameParams} from '../constants';
 import Api from '../libs/api';
 import GameThirdView from '../views/questions/question-third-view';
-import Timer, {MAX_SECONDS} from '../libs/timer';
+import Timer from '../libs/timer';
 
 const INITIAL_GAME = Object.freeze({
   level: 0,
-  leftLives: BASE_LEFT_LIVES,
-  seconds: MAX_SECONDS,
+  leftLives: GameParams.LIVES,
+  seconds: GameParams.SECONDS_FOR_ANSWER,
   givenAnswers: []
 });
 
@@ -23,7 +23,7 @@ export default class GameModel {
   }
 
   initTimer() {
-    this._timer = new Timer(MAX_SECONDS);
+    this._timer = new Timer(GameParams.SECONDS_FOR_ANSWER);
   }
 
   get secondsForAnswer() {
@@ -56,7 +56,7 @@ export default class GameModel {
   }
 
   canContinue() {
-    return this._state.leftLives > 0;
+    return this._state.leftLives >= 0;
   }
 
   getCurrentLevel() {
@@ -64,9 +64,7 @@ export default class GameModel {
   }
 
   die() {
-    const leftLives = this._state.leftLives - 1;
-
-    this._state = Object.assign({}, this._state, {leftLives});
+    this._state = Object.assign({}, this._state, {leftLives: this._state.leftLives - 1});
   }
 
   sendResults() {
@@ -95,7 +93,7 @@ export default class GameModel {
     const answerSrc = answer.getElementsByTagName(`img`)[0].src;
     const questions = this.levels[this._state.level];
     const levelsAnswer = questions.find((level) => level.src === answerSrc);
-    const questionType = GameThirdView.isPaintQuestion(questions) ? PAINTING : PHOTO;
+    const questionType = GameThirdView.isPaintQuestion(questions) ? ImageTypes.PAINTING : ImageTypes.PHOTO;
     const variant = levelsAnswer.type === questionType;
 
     this.saveAnswer(variant, seconds);

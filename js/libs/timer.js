@@ -1,5 +1,4 @@
 export const TICK_COUNT = 1;
-export const MAX_SECONDS = 30;
 
 export default class Timer {
   constructor(leftSeconds) {

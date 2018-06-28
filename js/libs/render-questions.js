@@ -2,8 +2,8 @@ import {
   gameFirstData,
   gameSecondData,
   gameThirdData,
-  QUESTIONS_TYPES
-} from '../data';
+  QuestionTypes
+} from '../constants';
 import GameFirstView from '../views/questions/question-first-view';
 import GameSecondView from '../views/questions/question-second-view';
 import GameThirdView from '../views/questions/question-third-view';
@@ -37,8 +37,9 @@ const firstQuestionType = (images, screen) => {
   const gameFirstScreen = new GameFirstView(gameFirstData, images);
 
   gameFirstScreen.onAnswersChecked = () => {
-    const checkedAnswers = document.querySelectorAll(`input:checked`);
+    gameFirstScreen.removeListener();
 
+    const checkedAnswers = document.querySelectorAll(`input:checked`);
     if (checkedAnswers.length === SECOND_QUESTION_ANSWERS_COUNT) {
       onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
     }
@@ -51,8 +52,9 @@ const secondQuestionType = (images, screen) => {
   const gameSecondScreen = new GameSecondView(gameSecondData, images);
 
   gameSecondScreen.onAnswersChecked = () => {
-    const checkedAnswers = document.querySelectorAll(`input:checked`);
+    gameSecondScreen.removeListener();
 
+    const checkedAnswers = document.querySelectorAll(`input:checked`);
     onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
   };
 
@@ -63,6 +65,8 @@ const thirdQuestionType = (images, screen) => {
   const gameThirdScreen = new GameThirdView(gameThirdData, images);
 
   gameThirdScreen.onGameOptionsClick = (object) => {
+    gameThirdScreen.removeListeners();
+
     onAnswerHandler(screen, object, screen.model.saveAnswerByElement.bind(screen.model));
   };
 
@@ -70,11 +74,11 @@ const thirdQuestionType = (images, screen) => {
 };
 
 export const levelView = (images, screen) => {
-  if (images.length === QUESTIONS_TYPES.ONE_IMAGE) {
+  if (images.length === QuestionTypes.ONE_IMAGE) {
     return secondQuestionType(images, screen);
   }
 
-  if (images.length === QUESTIONS_TYPES.TWO_IMAGES) {
+  if (images.length === QuestionTypes.TWO_IMAGES) {
     return firstQuestionType(images, screen);
   }
 

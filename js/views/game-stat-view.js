@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {BASE_LEFT_LIVES} from '../data';
+import {GameParams} from '../constants';
 
 export default class GameStatView extends AbstractView {
   constructor(leftLives) {
@@ -8,9 +8,9 @@ export default class GameStatView extends AbstractView {
   }
 
   get template() {
-    return `
+    return this._leftLives < 0 ? `` : `
       <div class="game__lives">
-      ${new Array(BASE_LEFT_LIVES - this._leftLives)
+      ${new Array(GameParams.LIVES - this._leftLives)
         .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`)
         .join(``)}
       ${new Array(this._leftLives)

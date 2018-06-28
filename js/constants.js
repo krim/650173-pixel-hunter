@@ -1,15 +1,21 @@
-export const BASE_LEFT_LIVES = 3;
-export const QUESTIONS_COUNT = 10;
-export const PAINTING = `painting`;
-export const PHOTO = `photo`;
+export const GameParams = {
+  LIVES: 3,
+  QUESTIONS_COUNT: 10,
+  SECONDS_FOR_ANSWER: 30
+};
 
-export const QUESTIONS_TYPES = {
+export const ImageTypes = {
+  PHOTO: `photo`,
+  PAINTING: `painting`
+};
+
+export const QuestionTypes = {
   ONE_IMAGE: 1,
   TWO_IMAGES: 2,
   THREE_IMAGES: 3
 };
 
-export const IMAGE_TITLES = {
+export const ImageTitles = {
   PHOTO: `Фото`,
   PAINTING: `Рисунок`
 };
@@ -63,8 +69,8 @@ export const gameSecondData = {
 
 export const gameThirdData = {
   titles: {
-    [PAINTING]: `Найдите рисунок среди изображений`,
-    [PHOTO]: `Найдите фото среди изображений`
+    [ImageTypes.PAINTING]: `Найдите рисунок среди изображений`,
+    [ImageTypes.PHOTO]: `Найдите фото среди изображений`
   }
 };
 
@@ -74,13 +80,13 @@ export const statsData = {
     lose: `Поражение!`
   },
   bonusBlocks: {
-    'fast': {
+    fast: {
       title: `Бонус за скорость:`
     },
-    'alive': {
+    alive: {
       title: `Бонус за жизни:`
     },
-    'slow': {
+    slow: {
       title: `Штраф за медлительность:`
     }
   },
