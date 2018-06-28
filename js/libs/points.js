@@ -1,17 +1,23 @@
-import {QUESTIONS_COUNT} from '../data';
+import {GameParams} from '../constants';
 
-export const LIFE_BONUS_POINTS = 50;
-export const FAST_BONUS_POINTS = 50;
-export const SLOW_PENALTY_POINTS = 50;
-export const CORRECT_ANSWER_POINTS = 100;
-export const MAX_SECONDS_FOR_FAST_ANSWER = 10;
-export const MIN_SECONDS_FOR_SLOW_ANSWER = 20;
+export const Points = {
+  LIFE_BONUS: 50,
+  FAST_BONUS: 50,
+  SLOW_PENALTY: 50,
+  CORRECT_ANSWER_BONUS: 100
+};
+
+export const SecondsForAnswer = {
+  FAST: 10,
+  SLOW: 20
+};
+
 export const GAME_FAILED = -1;
 
 const INITIAL_POINTS = Object.freeze({count: 0, points: 0});
 
-export const isFastAnswer = (seconds) => seconds < MAX_SECONDS_FOR_FAST_ANSWER;
-export const isSlowAnswer = (seconds) => seconds > MIN_SECONDS_FOR_SLOW_ANSWER;
+export const isFastAnswer = (seconds) => seconds < SecondsForAnswer.FAST;
+export const isSlowAnswer = (seconds) => seconds > SecondsForAnswer.SLOW;
 
 export const calculatePoints = (answers, leftLives) => {
   let rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
@@ -22,27 +28,27 @@ export const calculatePoints = (answers, leftLives) => {
 
   answers.forEach((answer) => {
     if (answer.variant) {
-      rightAnswerPoints.points += CORRECT_ANSWER_POINTS;
+      rightAnswerPoints.points += Points.CORRECT_ANSWER_BONUS;
       rightAnswerPoints.count++;
 
       if (isFastAnswer(answer.seconds)) {
-        fastBonusPoints.points += FAST_BONUS_POINTS;
+        fastBonusPoints.points += Points.FAST_BONUS;
         fastBonusPoints.count++;
       }
 
       if (isSlowAnswer(answer.seconds)) {
-        slowPenaltyPoints.points += SLOW_PENALTY_POINTS;
+        slowPenaltyPoints.points += Points.SLOW_PENALTY;
         slowPenaltyPoints.count++;
       }
     }
   });
 
   if (leftLives > 0) {
-    liveBonusPoints.points = leftLives * LIFE_BONUS_POINTS;
+    liveBonusPoints.points = leftLives * Points.LIFE_BONUS;
     liveBonusPoints.count = leftLives;
   }
 
-  if (answers.length < QUESTIONS_COUNT) {
+  if (answers.length < GameParams.QUESTIONS_COUNT) {
     pointsSum = GAME_FAILED;
   } else {
     pointsSum = rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;

@@ -1,5 +1,5 @@
 import {showScreen} from './util';
-import {errorModalData} from './data';
+import {errorModalData} from './constants';
 import IntroScreen from './screens/intro-screen';
 import GreetingScreen from './screens/greeting-screen';
 import RulesScreen from './screens/rules-screen';

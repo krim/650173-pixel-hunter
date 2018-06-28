@@ -1,4 +1,4 @@
-import {rulesData} from '../data';
+import {rulesData} from '../constants';
 import RulesView from '../views/rules-view';
 import Application from '../application';
 import HeaderView from '../views/header-view';

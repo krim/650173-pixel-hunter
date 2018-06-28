@@ -1,4 +1,4 @@
-import {greetingData} from '../data';
+import {greetingData} from '../constants';
 import GreetingView from '../views/greeting-view';
 import FooterView from '../views/footer-view';
 import Application from '../application';

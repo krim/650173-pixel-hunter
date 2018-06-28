@@ -1,13 +1,6 @@
-import {
-  calculatePoints,
-  LIFE_BONUS_POINTS,
-  FAST_BONUS_POINTS,
-  SLOW_PENALTY_POINTS,
-  CORRECT_ANSWER_POINTS,
-  GAME_FAILED
-} from '../libs/points';
+import {calculatePoints, Points, GAME_FAILED} from '../libs/points';
 
-import {QUESTIONS_COUNT} from '../data';
+import {GameParams} from '../constants';
 import AbstractView from './abstract-view';
 import StatBlockView from './stat-block-view';
 
@@ -47,12 +40,12 @@ export default class StatsView extends AbstractView {
       <tr>
         <td class="result__number">${index + 1}.</td>
         <td colspan="2">${statBlock.element.innerHTML}</td>
-        <td class="result__points">×&nbsp;${CORRECT_ANSWER_POINTS}</td>
+        <td class="result__points">×&nbsp;${Points.CORRECT_ANSWER_BONUS}</td>
         <td class="result__total">${calculatedPoints.rightAnswerPoints.points}</td>
       </tr>
-      ${this.bonusBlock(calculatedPoints.fastBonusPoints, FAST_BONUS_POINTS, `fast`)}
-      ${this.bonusBlock(calculatedPoints.liveBonusPoints, LIFE_BONUS_POINTS, `alive`)}
-      ${this.bonusBlock(calculatedPoints.slowPenaltyPoints, SLOW_PENALTY_POINTS, `slow`)}
+      ${this.bonusBlock(calculatedPoints.fastBonusPoints, Points.FAST_BONUS, `fast`)}
+      ${this.bonusBlock(calculatedPoints.liveBonusPoints, Points.LIFE_BONUS, `alive`)}
+      ${this.bonusBlock(calculatedPoints.slowPenaltyPoints, Points.SLOW_PENALTY, `slow`)}
       <tr>
        <td colspan="5" class="result__total  result__total--final">${calculatedPoints.pointsSum}</td>
       </tr>
@@ -88,7 +81,7 @@ export default class StatsView extends AbstractView {
   }
 
   isLose(calculatedPoints) {
-    return (this._state.givenAnswers.length < QUESTIONS_COUNT) ||
+    return (this._state.givenAnswers.length < GameParams.QUESTIONS_COUNT) ||
       (calculatedPoints && calculatedPoints.pointsSum === GAME_FAILED);
   }
 }

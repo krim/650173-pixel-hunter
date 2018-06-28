@@ -2,8 +2,8 @@ import {
   gameFirstData,
   gameSecondData,
   gameThirdData,
-  QUESTIONS_TYPES
-} from '../data';
+  QuestionTypes
+} from '../constants';
 import GameFirstView from '../views/questions/question-first-view';
 import GameSecondView from '../views/questions/question-second-view';
 import GameThirdView from '../views/questions/question-third-view';
@@ -70,11 +70,11 @@ const thirdQuestionType = (images, screen) => {
 };
 
 export const levelView = (images, screen) => {
-  if (images.length === QUESTIONS_TYPES.ONE_IMAGE) {
+  if (images.length === QuestionTypes.ONE_IMAGE) {
     return secondQuestionType(images, screen);
   }
 
-  if (images.length === QUESTIONS_TYPES.TWO_IMAGES) {
+  if (images.length === QuestionTypes.TWO_IMAGES) {
     return firstQuestionType(images, screen);
   }
 

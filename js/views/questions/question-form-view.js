@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import QuestionView from './question-view';
-import {QUESTIONS_TYPES} from '../../data';
+import {QuestionTypes} from '../../constants';
 
 export default class QuestionFormView extends AbstractView {
   constructor(questions) {
@@ -17,9 +17,9 @@ export default class QuestionFormView extends AbstractView {
 
   formClass(questions) {
     const classDictionary = {
-      [QUESTIONS_TYPES.ONE_IMAGE]: `game__content--wide`,
-      [QUESTIONS_TYPES.TWO_IMAGES]: ``,
-      [QUESTIONS_TYPES.THREE_IMAGES]: `game__content--triple`
+      [QuestionTypes.ONE_IMAGE]: `game__content--wide`,
+      [QuestionTypes.TWO_IMAGES]: ``,
+      [QuestionTypes.THREE_IMAGES]: `game__content--triple`
     };
 
     return classDictionary[questions.length];

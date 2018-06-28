@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import {QUESTIONS_TYPES, IMAGE_TITLES, PAINTING, PHOTO} from '../../data';
+import {QuestionTypes, ImageTitles, ImageTypes} from '../../constants';
 
 export default class QuestionView extends AbstractView {
   constructor(question, type, index) {
@@ -11,15 +11,15 @@ export default class QuestionView extends AbstractView {
   }
 
   get template() {
-    if (this._type === QUESTIONS_TYPES.ONE_IMAGE) {
+    if (this._type === QuestionTypes.ONE_IMAGE) {
       return this.firstTypeQuestionElement(this._question, this._index);
     }
 
-    if (this._type === QUESTIONS_TYPES.TWO_IMAGES) {
+    if (this._type === QuestionTypes.TWO_IMAGES) {
       return this.secondTypeQuestionElement(this._question, this._index);
     }
 
-    if (this._type === QUESTIONS_TYPES.THREE_IMAGES) {
+    if (this._type === QuestionTypes.THREE_IMAGES) {
       return this.thirdTypeQuestionElement(this._question, this._index);
     }
 
@@ -32,12 +32,12 @@ export default class QuestionView extends AbstractView {
         ${this.addDebugImageType(question)}
         <img src="${question.src}" alt="${question.src}" width="705" height="455">
         <label class="game__answer game__answer--photo">
-          <input name="question${index}" type="radio" value="${PHOTO}">
-          <span>${IMAGE_TITLES.PHOTO}</span>
+          <input name="question${index}" type="radio" value="${ImageTypes.PHOTO}">
+          <span>${ImageTitles.PHOTO}</span>
         </label>
         <label class="game__answer game__answer--wide  game__answer--paint">
-          <input name="question${index}" type="radio" value="${PAINTING}">
-          <span>${IMAGE_TITLES.PAINTING}</span>
+          <input name="question${index}" type="radio" value="${ImageTypes.PAINTING}">
+          <span>${ImageTitles.PAINTING}</span>
         </label>
       </div>
     `;
@@ -49,12 +49,12 @@ export default class QuestionView extends AbstractView {
         ${this.addDebugImageType(question)}
         <img src="${question.src}" alt="${question.src}" width="468" height="458">
         <label class="game__answer game__answer--photo">
-          <input name="question${index}" type="radio" value="${PHOTO}">
-          <span>${IMAGE_TITLES.PHOTO}</span>
+          <input name="question${index}" type="radio" value="${ImageTypes.PHOTO}">
+          <span>${ImageTitles.PHOTO}</span>
         </label>
         <label class="game__answer game__answer--paint">
-          <input name="question${index}" type="radio" value="${PAINTING}">
-          <span>${IMAGE_TITLES.PAINTING}</span>
+          <input name="question${index}" type="radio" value="${ImageTypes.PAINTING}">
+          <span>${ImageTitles.PAINTING}</span>
         </label>
       </div>
     `;

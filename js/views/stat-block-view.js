@@ -1,8 +1,8 @@
 import AbstractView from './abstract-view';
-import {QUESTIONS_COUNT} from '../data';
+import {GameParams} from '../constants';
 import {isFastAnswer, isSlowAnswer} from '../libs/points';
 
-const ANSWERS_STATE = {
+const AnswerStates = {
   FAST: `fast`,
   SLOW: `slow`,
   CORRECT: `correct`,
@@ -19,7 +19,7 @@ export default class StatBlockView extends AbstractView {
     return `
       <ul class="stats">
         ${this._answers.map((answer) => this.statElement(answer)).join(``)}
-        ${new Array(QUESTIONS_COUNT - this._answers.length)
+        ${new Array(GameParams.QUESTIONS_COUNT - this._answers.length)
           .fill(`<li class="stats__result stats__result--unknown"></li>`)
           .join(``)}
       </ul>
@@ -32,17 +32,17 @@ export default class StatBlockView extends AbstractView {
 
   statClass(answer) {
     if (!answer.variant) {
-      return ANSWERS_STATE.WRONG;
+      return AnswerStates.WRONG;
     }
 
     if (isFastAnswer(answer.seconds)) {
-      return ANSWERS_STATE.FAST;
+      return AnswerStates.FAST;
     }
 
     if (isSlowAnswer(answer.seconds)) {
-      return ANSWERS_STATE.SLOW;
+      return AnswerStates.SLOW;
     }
 
-    return ANSWERS_STATE.CORRECT;
+    return AnswerStates.CORRECT;
   }
 }

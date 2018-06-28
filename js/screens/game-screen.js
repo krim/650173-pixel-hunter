@@ -1,4 +1,4 @@
-import {confirmModalData} from '../data';
+import {confirmModalData} from '../constants';
 import Application from '../application';
 import GameStatView from '../views/game-stat-view';
 import BackButtonView from '../views/back-button-view';
