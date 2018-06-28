@@ -1,12 +1,12 @@
 import {ImageTypes, GameParams} from '../constants';
 import Api from '../libs/api';
 import GameThirdView from '../views/questions/question-third-view';
-import Timer, {MAX_SECONDS} from '../libs/timer';
+import Timer from '../libs/timer';
 
 const INITIAL_GAME = Object.freeze({
   level: 0,
   leftLives: GameParams.LIVES,
-  seconds: MAX_SECONDS,
+  seconds: GameParams.SECONDS_FOR_ANSWER,
   givenAnswers: []
 });
 
@@ -23,7 +23,7 @@ export default class GameModel {
   }
 
   initTimer() {
-    this._timer = new Timer(MAX_SECONDS);
+    this._timer = new Timer(GameParams.SECONDS_FOR_ANSWER);
   }
 
   get secondsForAnswer() {

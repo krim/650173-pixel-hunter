@@ -1,6 +1,7 @@
 export const GameParams = {
   LIVES: 3,
-  QUESTIONS_COUNT: 10
+  QUESTIONS_COUNT: 10,
+  SECONDS_FOR_ANSWER: 30
 };
 
 export const ImageTypes = {
