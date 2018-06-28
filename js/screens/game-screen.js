@@ -35,7 +35,6 @@ export default class GameScreen {
     };
   }
 
-
   get element() {
     return this.root;
   }

@@ -56,7 +56,7 @@ export default class GameModel {
   }
 
   canContinue() {
-    return this._state.leftLives > 0;
+    return this._state.leftLives >= 0;
   }
 
   getCurrentLevel() {
