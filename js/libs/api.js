@@ -58,7 +58,7 @@ export default class Api {
         promises.push(new Promise((resolve) => {
           const preloadedImage = new Image();
 
-          preloadedImage.onload = () => resolve();
+          preloadedImage.onload = () => resolve(preloadedImage.onload = null);
           preloadedImage.src = image.src;
         }));
       }
