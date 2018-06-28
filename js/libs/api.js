@@ -51,11 +51,19 @@ export default class Api {
   }
 
   loadImages(levels) {
+    const promises = [];
+
     for (const images of levels) {
       for (const image of images) {
-        const preloadedImage = new Image();
-        preloadedImage.src = image.src;
+        promises.push(new Promise((resolve) => {
+          const preloadedImage = new Image();
+
+          preloadedImage.onload = () => resolve(preloadedImage.onload = null);
+          preloadedImage.src = image.src;
+        }));
       }
     }
+
+    return Promise.all(promises);
   }
 }
