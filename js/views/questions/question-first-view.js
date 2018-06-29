@@ -1,6 +1,8 @@
 import QuestionFormView from './question-form-view';
 import AbstractView from '../abstract-view';
 
+const QUESTION_ANSWERS_COUNT = 2;
+
 export default class QuestionFirstView extends AbstractView {
   constructor(data, images) {
     super();
@@ -27,7 +29,11 @@ export default class QuestionFirstView extends AbstractView {
   }
 
   answersCheckedHandler() {
-    this.onAnswersChecked();
+    const checkedAnswers = document.querySelectorAll(`.game__content input:checked`);
+
+    if (checkedAnswers.length === QUESTION_ANSWERS_COUNT) {
+      this.onAnswersChecked(checkedAnswers);
+    }
   }
 
   onAnswersChecked() { }
