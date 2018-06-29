@@ -90,9 +90,8 @@ export default class GameModel {
   }
 
   saveAnswerByElement(answer, seconds) {
-    const answerSrc = answer.src;
     const questions = this.levels[this._state.level];
-    const levelsAnswer = questions.find((level) => level.src === answerSrc);
+    const levelsAnswer = questions.find((level) => level.src === answer.src);
     const questionType = GameThirdView.isPaintQuestion(questions) ? ImageTypes.PAINTING : ImageTypes.PHOTO;
     const variant = levelsAnswer.type === questionType;
 
