@@ -48,11 +48,8 @@ export const calculatePoints = (answers, leftLives) => {
     liveBonusPoints.count = leftLives;
   }
 
-  if (answers.length < GameParams.QUESTIONS_COUNT) {
-    pointsSum = GAME_FAILED;
-  } else {
-    pointsSum = rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
-  }
+  pointsSum = (answers.length < GameParams.QUESTIONS_COUNT) ?
+    GAME_FAILED : rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
 
   return {
     rightAnswerPoints,
