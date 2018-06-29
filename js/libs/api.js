@@ -6,15 +6,15 @@ const APP_ID = 6501730;
 export default class Api {
   loadLevels() {
     return fetch(`https://es.dump.academy/pixel-hunter/questions`).
-      then(this.checkOkStatus).
-      then(this.convertToJson).
+      then(Api.checkStatus).
+      then(Api.convertToJson).
       then((data) => {
         this.levels = adaptServerData(data);
       }).
       then(() => this.loadImages(this.levels));
   }
 
-  getStatisticUrl(userName) {
+  static getStatisticUrl(userName) {
     return `https://es.dump.academy/pixel-hunter/stats/${APP_ID}-${userName}`;
   }
 
@@ -27,18 +27,18 @@ export default class Api {
       method: `POST`
     };
 
-    return fetch(this.getStatisticUrl(userName), requestData).
-      then(this.checkStatus).
+    return fetch(Api.getStatisticUrl(userName), requestData).
+      then(Api.checkStatus).
       catch((error) => Application.showError(error));
   }
 
   loadResults(userName) {
-    return window.fetch(this.getStatisticUrl(userName)).
-      then(this.checkStatus).
-      then(this.convertToJson);
+    return window.fetch(Api.getStatisticUrl(userName)).
+      then(Api.checkStatus).
+      then(Api.convertToJson);
   }
 
-  checkStatus(response) {
+  static checkStatus(response) {
     if (response.ok) {
       return response;
     }
@@ -46,7 +46,7 @@ export default class Api {
     return `Статус: ${response.status}.`;
   }
 
-  convertToJson(response) {
+  static convertToJson(response) {
     return response.json();
   }
 
