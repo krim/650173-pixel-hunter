@@ -6,7 +6,7 @@ export default class QuestionFirstView extends AbstractView {
     super();
     this._data = data;
     this._questionForm = new QuestionFormView(images);
-    this._blockClass = `game`;
+    this.blockClass = `game`;
   }
 
   get template() {

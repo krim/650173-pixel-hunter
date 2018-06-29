@@ -8,7 +8,7 @@ export default class QuestionThirdView extends AbstractView {
     this._data = data;
     this._questionForm = new QuestionFormView(images);
     this._images = images;
-    this._blockClass = `game`;
+    this.blockClass = `game`;
   }
 
   get template() {

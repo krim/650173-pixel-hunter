@@ -13,7 +13,7 @@ export default class StatBlockView extends AbstractView {
   constructor(answers) {
     super();
     this._answers = answers;
-    this._blockClass = `stats`;
+    this.blockClass = `stats`;
   }
 
   get template() {

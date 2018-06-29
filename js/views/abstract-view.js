@@ -15,6 +15,10 @@ export default class AbstractView {
     }
   }
 
+  get blockClass() {
+    return this._blockClass;
+  }
+
   get template() {
     throw new Error(`Template is required`);
   }
@@ -29,8 +33,12 @@ export default class AbstractView {
     return this._element;
   }
 
+  set blockClass(value) {
+    this._blockClass = value;
+  }
+
   render() {
-    return render(this.template, this._blockClass);
+    return render(this.template, this.blockClass);
   }
 
   bind(_element) {}
