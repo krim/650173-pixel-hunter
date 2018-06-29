@@ -41,9 +41,9 @@ export default class Api {
   checkStatus(response) {
     if (response.ok) {
       return response;
-    } else {
-      return `Статус: ${response.status}.`;
     }
+
+    return `Статус: ${response.status}.`;
   }
 
   convertToJson(response) {
