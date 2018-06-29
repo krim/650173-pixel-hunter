@@ -18,11 +18,11 @@ export default class StatsScreen {
     this.root.appendChild(this._footer.element);
   }
 
-  init() {
-    this._backButton.onBackButtonClick = () => Application.showGreeting();
-  }
-
   get element() {
     return this.root;
+  }
+
+  init() {
+    this._backButton.onBackButtonClick = () => Application.showGreeting();
   }
 }

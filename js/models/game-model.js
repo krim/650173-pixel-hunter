@@ -22,10 +22,6 @@ export default class GameModel {
     return Object.freeze(this._state);
   }
 
-  initTimer() {
-    this._timer = new Timer(GameParams.SECONDS_FOR_ANSWER);
-  }
-
   get secondsForAnswer() {
     return this._timer.secondsForAnswer;
   }
@@ -34,12 +30,24 @@ export default class GameModel {
     return this._timer.leftSeconds;
   }
 
+  get isTimerFinished() {
+    return this._timer.isFinished;
+  }
+
+  initTimer() {
+    this._timer = new Timer(GameParams.SECONDS_FOR_ANSWER);
+  }
+
   tick() {
     this._timer.tick();
   }
 
-  get isTimerFinished() {
-    return this._timer.isFinished;
+  getCurrentLevel() {
+    return this.levels[this._state.level];
+  }
+
+  die() {
+    this._state = Object.assign({}, this._state, {leftLives: this._state.leftLives - 1});
   }
 
   restart() {
@@ -57,14 +65,6 @@ export default class GameModel {
 
   canContinue() {
     return this._state.leftLives >= 0;
-  }
-
-  getCurrentLevel() {
-    return this.levels[this._state.level];
-  }
-
-  die() {
-    this._state = Object.assign({}, this._state, {leftLives: this._state.leftLives - 1});
   }
 
   sendResults() {
@@ -90,7 +90,7 @@ export default class GameModel {
   }
 
   saveAnswerByElement(answer, seconds) {
-    const answerSrc = answer.getElementsByTagName(`img`)[0].src;
+    const answerSrc = answer.querySelector(`img`).src;
     const questions = this.levels[this._state.level];
     const levelsAnswer = questions.find((level) => level.src === answerSrc);
     const questionType = GameThirdView.isPaintQuestion(questions) ? ImageTypes.PAINTING : ImageTypes.PHOTO;

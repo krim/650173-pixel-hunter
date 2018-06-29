@@ -27,16 +27,16 @@ export default class GameScreen {
     this._interval = null;
   }
 
+  get element() {
+    return this.root;
+  }
+
   init() {
     this._backButton.onBackButtonClick = () => {
       this.root.appendChild(this._confirmModal.element);
       this._confirmModal.onOkButtonClick = () => Application.showGreeting();
       this._confirmModal.onCancelButtonClick = () => this.root.removeChild(this._confirmModal.element);
     };
-  }
-
-  get element() {
-    return this.root;
   }
 
   startGame() {

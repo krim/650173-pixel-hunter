@@ -12,7 +12,7 @@ export default class QuestionFirstView extends AbstractView {
   get template() {
     return `
       <p class="game__task">${this._data.title}</p>
-      ${this._questionForm.element.innerHTML}
+      ${this._questionForm.template}
     `;
   }
 
@@ -23,7 +23,7 @@ export default class QuestionFirstView extends AbstractView {
 
   removeListener() {
     const gameForm = document.querySelector(`.game__content`);
-    gameForm.removeEventListener(`change`, this.answersCheckedHandler.bind(this));
+    gameForm.removeEventListener(`change`, this.answersCheckedHandler);
   }
 
   answersCheckedHandler() {

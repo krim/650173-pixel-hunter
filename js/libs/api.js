@@ -59,6 +59,11 @@ export default class Api {
           const preloadedImage = new Image();
 
           preloadedImage.onload = () => resolve(preloadedImage.onload = null);
+          preloadedImage.onerror = () => {
+            preloadedImage.onerror = null;
+            Application.showError(`Can't load image: ${image.src}`);
+          };
+
           preloadedImage.src = image.src;
         }));
       }

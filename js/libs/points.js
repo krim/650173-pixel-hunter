@@ -20,10 +20,10 @@ export const isFastAnswer = (seconds) => seconds < SecondsForAnswer.FAST;
 export const isSlowAnswer = (seconds) => seconds > SecondsForAnswer.SLOW;
 
 export const calculatePoints = (answers, leftLives) => {
-  let rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
-  let fastBonusPoints = Object.assign({}, INITIAL_POINTS);
-  let slowPenaltyPoints = Object.assign({}, INITIAL_POINTS);
-  let liveBonusPoints = Object.assign({}, INITIAL_POINTS);
+  const rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
+  const fastBonusPoints = Object.assign({}, INITIAL_POINTS);
+  const slowPenaltyPoints = Object.assign({}, INITIAL_POINTS);
+  const liveBonusPoints = Object.assign({}, INITIAL_POINTS);
   let pointsSum;
 
   answers.forEach((answer) => {

@@ -15,6 +15,7 @@ export default class StatBlockView extends AbstractView {
     this._answers = answers;
     this._blockClass = `stats`;
   }
+
   get template() {
     return `
       <ul class="stats">

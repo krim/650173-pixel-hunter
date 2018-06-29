@@ -41,6 +41,7 @@ export default class ConfirmModalView extends AbstractView {
     button.removeEventListener(`click`, this.cancelButtonClickHandler);
     this.onCancelButtonClick();
   }
+
   onOkButtonClick() { }
   onCancelButtonClick() { }
 }
