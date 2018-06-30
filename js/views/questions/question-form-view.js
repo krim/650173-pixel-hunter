@@ -7,6 +7,7 @@ export default class QuestionFormView extends AbstractView {
     super();
     this._questions = questions;
   }
+
   get template() {
     return `
       <form class="game__content ${this.formClass(this._questions)}">

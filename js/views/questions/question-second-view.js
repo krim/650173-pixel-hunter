@@ -6,13 +6,13 @@ export default class QuestionSecondView extends AbstractView {
     super();
     this._data = data;
     this._questionForm = new QuestionFormView(images);
-    this._blockClass = `game`;
+    this.blockClass = `game`;
   }
 
   get template() {
     return `
       <p class="game__task">${this._data.title}</p>
-      ${this._questionForm.element.innerHTML}
+      ${this._questionForm.template}
     `;
   }
 
@@ -23,12 +23,12 @@ export default class QuestionSecondView extends AbstractView {
 
   removeListener() {
     const gameForm = document.querySelector(`.game__content`);
-    gameForm.removeEventListener(`change`, this.answersCheckedHandler.bind(this));
+    gameForm.removeEventListener(`change`, this.answersCheckedHandler);
   }
 
-  answersCheckedHandler() {
-    this.onAnswersChecked();
+  answersCheckedHandler(event) {
+    this.onAnswersChecked([event.target]);
   }
 
-  onAnswersChecked() { }
+  onAnswersChecked(_checkedAnswers) { }
 }

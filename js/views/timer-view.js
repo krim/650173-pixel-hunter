@@ -6,6 +6,7 @@ export default class TimerView extends AbstractView {
     super();
     this._seconds = seconds;
   }
+
   get template() {
     return `
       <h1 class="game__timer ${this.addBlinkClass()}">${this._seconds}</h1>

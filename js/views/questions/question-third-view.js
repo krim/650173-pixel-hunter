@@ -8,19 +8,19 @@ export default class QuestionThirdView extends AbstractView {
     this._data = data;
     this._questionForm = new QuestionFormView(images);
     this._images = images;
-    this._blockClass = `game`;
+    this.blockClass = `game`;
   }
 
   get template() {
     return `
       <p class="game__task">${this.questionTitle(this._images)}</p>
-      ${this._questionForm.element.innerHTML}
+      ${this._questionForm.template}
     `;
   }
 
   bind(el) {
-    const gameOptions = el.querySelectorAll(`.game__option`);
-    gameOptions.forEach((it) => it.addEventListener(`click`, this.gameOptionsClickHandler.bind(this)));
+    const gameOptionImages = el.querySelectorAll(`.game__option img`);
+    gameOptionImages.forEach((it) => it.addEventListener(`click`, this.gameOptionsClickHandler.bind(this)));
   }
 
   gameOptionsClickHandler(event) {

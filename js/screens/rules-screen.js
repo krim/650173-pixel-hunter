@@ -18,12 +18,12 @@ export default class RulesScreen {
     this.root.appendChild(this._footer.element);
   }
 
+  get element() {
+    return this.root;
+  }
+
   init() {
     this._view.onSubmitButtonClick = (userName) => Application.showGame(userName);
     this._backButton.onBackButtonClick = () => Application.showGreeting();
-  }
-
-  get element() {
-    return this.root;
   }
 }

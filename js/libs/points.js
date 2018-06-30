@@ -20,11 +20,10 @@ export const isFastAnswer = (seconds) => seconds < SecondsForAnswer.FAST;
 export const isSlowAnswer = (seconds) => seconds > SecondsForAnswer.SLOW;
 
 export const calculatePoints = (answers, leftLives) => {
-  let rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
-  let fastBonusPoints = Object.assign({}, INITIAL_POINTS);
-  let slowPenaltyPoints = Object.assign({}, INITIAL_POINTS);
-  let liveBonusPoints = Object.assign({}, INITIAL_POINTS);
-  let pointsSum;
+  const rightAnswerPoints = Object.assign({}, INITIAL_POINTS);
+  const fastBonusPoints = Object.assign({}, INITIAL_POINTS);
+  const slowPenaltyPoints = Object.assign({}, INITIAL_POINTS);
+  const liveBonusPoints = Object.assign({}, INITIAL_POINTS);
 
   answers.forEach((answer) => {
     if (answer.variant) {
@@ -48,11 +47,8 @@ export const calculatePoints = (answers, leftLives) => {
     liveBonusPoints.count = leftLives;
   }
 
-  if (answers.length < GameParams.QUESTIONS_COUNT) {
-    pointsSum = GAME_FAILED;
-  } else {
-    pointsSum = rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
-  }
+  const pointsSum = (answers.length < GameParams.QUESTIONS_COUNT) ?
+    GAME_FAILED : rightAnswerPoints.points + fastBonusPoints.points + liveBonusPoints.points - slowPenaltyPoints.points;
 
   return {
     rightAnswerPoints,

@@ -13,11 +13,11 @@ export default class GreetingScreen {
     this.root.appendChild(this._footer.element);
   }
 
-  init() {
-    this._view.onGreetingContinueClick = () => Application.showRules();
-  }
-
   get element() {
     return this.root;
+  }
+
+  init() {
+    this._view.onGreetingContinueClick = () => Application.showRules();
   }
 }

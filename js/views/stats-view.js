@@ -39,7 +39,7 @@ export default class StatsView extends AbstractView {
     return `
       <tr>
         <td class="result__number">${index + 1}.</td>
-        <td colspan="2">${statBlock.element.innerHTML}</td>
+        <td colspan="2">${statBlock.template}</td>
         <td class="result__points">×&nbsp;${Points.CORRECT_ANSWER_BONUS}</td>
         <td class="result__total">${calculatedPoints.rightAnswerPoints.points}</td>
       </tr>
@@ -58,7 +58,7 @@ export default class StatsView extends AbstractView {
     return `
       <tr>
         <td class="result__number">${index + 1}.</td>
-        <td>${statBlock.element.innerHTML}</td>
+        <td>${statBlock.template}</td>
         <td class="result__total"></td>
         <td colspan="5" class="result__total  result__total--final">${this._data.loserBlock.description}</td>
       </tr>
