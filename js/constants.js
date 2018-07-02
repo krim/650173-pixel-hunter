@@ -4,6 +4,12 @@ export const GameParams = {
   SECONDS_FOR_ANSWER: 30
 };
 
+export const Delays = {
+  FADEOUT: 2000,
+  FADEIN: 10,
+  TIMER: 1000
+};
+
 export const ImageTypes = {
   PHOTO: `photo`,
   PAINTING: `painting`

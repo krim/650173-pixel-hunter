@@ -1,5 +1,5 @@
 import {showScreen} from './util';
-import {errorModalData} from './constants';
+import {errorModalData, Delays} from './constants';
 import IntroScreen from './screens/intro-screen';
 import GreetingScreen from './screens/greeting-screen';
 import RulesScreen from './screens/rules-screen';
@@ -14,18 +14,24 @@ const api = new Api();
 export default class Application {
   static showIntro() {
     const intro = new IntroScreen();
+    const introElement = intro.element;
 
-    showScreen(intro.element);
+    showScreen(introElement);
     api.loadLevels().
-      then(() => Application.showGreeting()).
+      then(() => IntroScreen.fadeOutElement(introElement)).
+      then(() => {
+        setTimeout(() => Application.showGreeting(), Delays.FADEOUT);
+      }).
       catch((error) => Application.showError(error));
   }
 
   static showGreeting() {
     const greeting = new GreetingScreen();
     greeting.init();
+    const greetingElement = greeting.element;
 
-    showScreen(greeting.element);
+    showScreen(greetingElement);
+    setTimeout(() => GreetingScreen.fadeInElement(greetingElement), Delays.FADEIN);
   }
 
   static showRules() {
