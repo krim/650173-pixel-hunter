@@ -24,7 +24,7 @@ export default class QuestionThirdView extends AbstractView {
   }
 
   gameOptionsClickHandler(event) {
-    this.onGameOptionsClick(event.target, this.state);
+    this.onGameOptionsClick(event.target);
   }
 
   removeListeners() {
@@ -42,5 +42,5 @@ export default class QuestionThirdView extends AbstractView {
     return paintPhotosCount === 1;
   }
 
-  onGameOptionsClick(_object, _state) { }
+  onGameOptionsClick(_object) { }
 }
