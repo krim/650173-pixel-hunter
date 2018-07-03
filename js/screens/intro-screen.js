@@ -9,4 +9,8 @@ export default class IntroScreen {
   get element() {
     return this._view.element;
   }
+
+  static fadeOutElement(introElement) {
+    introElement.querySelector(`#intro`).classList.add(`fade-me`);
+  }
 }

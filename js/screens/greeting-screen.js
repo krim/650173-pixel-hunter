@@ -20,4 +20,8 @@ export default class GreetingScreen {
   init() {
     this._view.onGreetingContinueClick = () => Application.showRules();
   }
+
+  static fadeInElement(greetingElement) {
+    greetingElement.querySelector(`.greeting`).classList.add(`show-me`);
+  }
 }

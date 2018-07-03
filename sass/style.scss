@@ -54,3 +54,13 @@ a {
     transform: translateY(0);
   }
 }
+
+.fade-me {
+  opacity: 0;
+  -webkit-transition: opacity 2s linear;
+  -moz-transition: opacity 2s linear;
+  -o-transition: opacity 2s linear;
+  transition: opacity 2s linear;
+}
+
+.show-me { opacity: 1 }

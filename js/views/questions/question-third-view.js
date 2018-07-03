@@ -20,16 +20,16 @@ export default class QuestionThirdView extends AbstractView {
 
   bind(el) {
     const gameOptionImages = el.querySelectorAll(`.game__option img`);
-    gameOptionImages.forEach((it) => it.addEventListener(`click`, this.gameOptionsClickHandler.bind(this)));
+    gameOptionImages.forEach((it) => it.addEventListener(`mousedown`, this.gameOptionsClickHandler.bind(this)));
   }
 
   gameOptionsClickHandler(event) {
-    this.onGameOptionsClick(event.target, this.state);
+    this.onGameOptionsClick(event.target);
   }
 
   removeListeners() {
-    const gameOptions = document.querySelectorAll(`.game__option`);
-    gameOptions.forEach((it) => it.removeEventListener(`click`, this.gameOptionsClickHandler));
+    const gameOptions = document.querySelectorAll(`.game__option img`);
+    gameOptions.forEach((it) => it.removeEventListener(`mousedown`, this.gameOptionsClickHandler));
   }
 
   questionTitle(questions) {
@@ -42,5 +42,5 @@ export default class QuestionThirdView extends AbstractView {
     return paintPhotosCount === 1;
   }
 
-  onGameOptionsClick(_object, _state) { }
+  onGameOptionsClick(_object) { }
 }
