@@ -27,11 +27,6 @@ export default class QuestionThirdView extends AbstractView {
     this.onGameOptionsClick(event.target);
   }
 
-  removeListeners() {
-    const gameOptions = document.querySelectorAll(`.game__option img`);
-    gameOptions.forEach((it) => it.removeEventListener(`mousedown`, this.gameOptionsClickHandler));
-  }
-
   questionTitle(questions) {
     return QuestionThirdView.isPaintQuestion(questions) ? this._data.titles[ImageTypes.PAINTING] : this._data.titles[ImageTypes.PHOTO];
   }
