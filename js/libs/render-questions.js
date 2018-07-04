@@ -35,7 +35,6 @@ const firstQuestionType = (images, screen) => {
   const gameFirstScreen = new GameFirstView(gameFirstData, images);
 
   gameFirstScreen.onAnswersChecked = (checkedAnswers) => {
-    gameFirstScreen.removeListener();
     onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
   };
 
@@ -46,7 +45,6 @@ const secondQuestionType = (images, screen) => {
   const gameSecondScreen = new GameSecondView(gameSecondData, images);
 
   gameSecondScreen.onAnswersChecked = (checkedAnswers) => {
-    gameSecondScreen.removeListener();
     onAnswerHandler(screen, checkedAnswers, screen.model.saveAnswerByArray.bind(screen.model));
   };
 
@@ -57,7 +55,6 @@ const thirdQuestionType = (images, screen) => {
   const gameThirdScreen = new GameThirdView(gameThirdData, images);
 
   gameThirdScreen.onGameOptionsClick = (object) => {
-    gameThirdScreen.removeListeners();
     onAnswerHandler(screen, object, screen.model.saveAnswerByElement.bind(screen.model));
   };
 

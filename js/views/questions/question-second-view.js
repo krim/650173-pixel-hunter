@@ -21,11 +21,6 @@ export default class QuestionSecondView extends AbstractView {
     gameForm.addEventListener(`change`, this.answersCheckedHandler.bind(this));
   }
 
-  removeListener() {
-    const gameForm = document.querySelector(`.game__content`);
-    gameForm.removeEventListener(`change`, this.answersCheckedHandler);
-  }
-
   answersCheckedHandler(event) {
     this.onAnswersChecked([event.target]);
   }

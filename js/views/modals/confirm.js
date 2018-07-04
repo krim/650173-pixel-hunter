@@ -27,19 +27,9 @@ export default class ConfirmModalView extends AbstractView {
     const cancelButton = el.querySelector(`.modal-confirm__btn.cancel-btn`);
     const closeButton = el.querySelector(`.modal-confirm__close`);
 
-    okButton.addEventListener(`click`, () => this.okButtonClickHandler(okButton));
-    cancelButton.addEventListener(`click`, () => this.cancelButtonClickHandler(cancelButton));
-    closeButton.addEventListener(`click`, () => this.cancelButtonClickHandler(closeButton));
-  }
-
-  okButtonClickHandler(button) {
-    button.removeEventListener(`click`, this.okButtonClickHandler);
-    this.onOkButtonClick();
-  }
-
-  cancelButtonClickHandler(button) {
-    button.removeEventListener(`click`, this.cancelButtonClickHandler);
-    this.onCancelButtonClick();
+    okButton.addEventListener(`click`, () => this.onOkButtonClick());
+    cancelButton.addEventListener(`click`, () => this.onCancelButtonClick());
+    closeButton.addEventListener(`click`, () => this.onCancelButtonClick());
   }
 
   onOkButtonClick() { }
